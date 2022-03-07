@@ -1,0 +1,19 @@
+{
+    "id": "beach",
+    "temperature": {
+        "max": 1,
+        "min": -1
+    },
+    "humidity": {
+        "max": 1,
+        "min": -1
+    },
+    "hight_map": {
+        "max": 0,
+        "min": -0.05
+    },
+    "hight_layer": "sand_tile",
+    "blocks": {
+        "starfish": 0.05
+    }
+}

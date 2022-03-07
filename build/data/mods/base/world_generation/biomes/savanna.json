@@ -1,0 +1,19 @@
+{
+    "id": "savanna",
+    "temperature": {
+        "max": 0.8,
+        "min": 0.1
+    },
+    "humidity": {
+        "max": 0.4,
+        "min": -0.4
+    },
+    "hight_map": {
+        "max": 1,
+        "min": 0
+    },
+    "hight_layer": "moss_tile",
+    "blocks": {
+        "small_rock": 0.02
+    }
+}

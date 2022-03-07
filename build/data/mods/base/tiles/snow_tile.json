@@ -1,0 +1,11 @@
+{
+    "id": "snow_tile",
+    "solid": false,
+    "texture": {
+        "path": "data/assets/textures/snow_tile.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}

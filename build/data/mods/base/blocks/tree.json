@@ -1,0 +1,11 @@
+{
+    "id": "tree",
+    "solid": false,
+    "texture": {
+        "path": "data/assets/textures/tree.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}

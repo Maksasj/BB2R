@@ -1,0 +1,20 @@
+{
+    "id": "desert",
+    "temperature": {
+        "max": 1,
+        "min": 0.3
+    },
+    "humidity": {
+        "max": 0,
+        "min": -1
+    },
+    "hight_map": {
+        "max": 1,
+        "min": 0
+    },
+    "hight_layer": "sand_tile",
+    "blocks": {
+        "cactus": 0.05,
+        "cactus_flowers": 0.02
+    }
+}

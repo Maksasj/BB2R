@@ -1,0 +1,15 @@
+{
+      "id": "earth",
+      "fill_biome": "plains",
+      "biomes": [
+            "deep_ocean",
+            "ocean",
+            "beach",
+            "arctic",
+            "desert",
+            "jungle",
+            "plains",
+            "savanna",
+            "taiga"
+      ]
+}

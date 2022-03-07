@@ -1,0 +1,11 @@
+{
+    "id": "sunflower",
+    "solid": false,
+    "texture": {
+        "path": "data/assets/textures/sunflower.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}

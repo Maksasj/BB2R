@@ -1,0 +1,11 @@
+{
+    "id": "ice_rock",
+    "solid": false,
+    "texture": {
+        "path": "data/assets/textures/ice_rock.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}

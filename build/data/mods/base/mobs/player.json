@@ -1,0 +1,58 @@
+{
+    "id": "player",
+    "solid": false,
+    "texture": {
+        "path": "data/assets/textures/player.png",
+        "size": {
+            "width": 64,
+            "height": 80
+        },
+        "animation": {
+            "player_idle": {
+                "row": 4,
+                "collum":0,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "player_run_up": {
+                "row": 4,
+                "collum":1,
+                "speed": 24,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "player_run_down": {
+                "row": 4,
+                "collum":2,
+                "speed": 24,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "player_run_right": {
+                "row": 4,
+                "collum":3,
+                "speed": 24,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "player_run_left": {
+                "row": 4,
+                "collum":4,
+                "speed": 24,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "id": "grass_big",
+    "solid": false,
+    "texture": {
+        "path": "data/assets/textures/grass_big.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}

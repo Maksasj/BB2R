@@ -1,0 +1,11 @@
+{
+    "id": "deep_water_tile",
+    "solid": false,
+    "texture": {
+        "path": "data/assets/textures/deep_water_tile.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}

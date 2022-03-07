@@ -1,0 +1,23 @@
+{
+    "id": "plains",
+    "temperature": {
+        "max": 0.31,
+        "min": -0.3
+    },
+    "humidity": {
+        "max": 0.6,
+        "min": -0.1
+    },
+    "hight_map": {
+        "max": 1,
+        "min": 0
+    },
+    "hight_layer": "grass_tile",
+    "blocks": {
+        "rock": 0.02,
+        "tree": 0.09,
+        "small_rock": 0.05,
+        "sunflower": 0.05,
+        "tulpe": 0.02
+    }
+}

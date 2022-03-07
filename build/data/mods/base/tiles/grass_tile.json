@@ -1,0 +1,11 @@
+{
+    "id": "grass_tile",
+    "solid": false,
+    "texture": {
+        "path": "data/assets/textures/grass_tile.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}

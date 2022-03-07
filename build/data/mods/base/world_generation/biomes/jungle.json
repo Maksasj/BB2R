@@ -1,0 +1,19 @@
+{
+    "id": "jungle",
+    "temperature": {
+        "max": 1,
+        "min": 0
+    },
+    "humidity": {
+        "max": 1,
+        "min": 0.2
+    },
+    "hight_map": {
+        "max": 1,
+        "min": 0
+    },
+    "hight_layer": "moss_tile",
+    "blocks": {
+        "tree": 0.09
+    }
+}

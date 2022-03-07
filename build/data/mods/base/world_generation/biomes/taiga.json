@@ -1,0 +1,19 @@
+{
+    "id": "taiga",
+    "temperature": {
+        "max": -0.3,
+        "min": -0.5
+    },
+    "humidity": {
+        "max": 0.5,
+        "min": -0.3
+    },
+    "hight_map": {
+        "max": 1,
+        "min": 0
+    },
+    "hight_layer": "prairie_moss_tile",
+    "blocks": {
+        "rock": 0.02
+    }
+}

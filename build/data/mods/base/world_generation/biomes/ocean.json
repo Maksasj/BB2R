@@ -1,0 +1,18 @@
+{
+    "id": "ocean",
+    "temperature": {
+        "max": 1,
+        "min": -1
+    },
+    "humidity": {
+        "max": 1,
+        "min": -1
+    },
+    "hight_map": {
+        "max": -0.05,
+        "min": -0.5
+    },
+    "hight_layer": "water_tile",
+    "blocks": {
+    }
+}
