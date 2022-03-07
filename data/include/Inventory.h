@@ -19,9 +19,7 @@ struct Inventory
             size = inv_size;
 
             storage.push_back({Item("pickaxe"), 1});
-            for (int x = 1; x < inv_size; x++) {
-                  storage.push_back({Item("stone_wall"), 8});
-            }
+            storage.push_back({Item("stone_wall"), 900});
 
             SortInStacks();
       }
