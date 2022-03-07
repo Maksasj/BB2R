@@ -83,10 +83,8 @@ struct Player : public Entity
 
                   if (itemmanager->ItemData[item_id]["usage"] == "break") {
                         if(hand->TryBreakBlock(x, y)) {
-                              std::cout << "Im trying break block \n";
                               std::string drop = hand->BreakBlock(x, y);
                               inventory->AddItem(drop, 1);
-                              std::cout << "Yes u putted drop from block in your inventory \n";
                         }
                   }
             }
