@@ -3,7 +3,7 @@
     "solid": false,
     "break_drop": "stone_wall",
     "texture": {
-        "path": "data/assets/textures/rock.png",
+        "path": "assets/textures/blocks/rock.png",
         "size": {
             "width": 16,
             "height": 16

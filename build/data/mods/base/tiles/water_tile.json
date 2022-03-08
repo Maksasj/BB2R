@@ -2,7 +2,7 @@
     "id": "water_tile",
     "solid": false,
     "texture": {
-        "path": "data/assets/textures/water_tile.png",
+        "path": "assets/textures/tile/water_tile.png",
         "size": {
             "width": 16,
             "height": 16

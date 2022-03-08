@@ -2,7 +2,7 @@
     "id": "moss_tile",
     "solid": false,
     "texture": {
-        "path": "data/assets/textures/moss_tile.png",
+        "path": "assets/textures/tile/moss_tile.png",
         "size": {
             "width": 16,
             "height": 16

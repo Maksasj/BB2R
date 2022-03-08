@@ -2,7 +2,7 @@
     "id": "player",
     "solid": false,
     "texture": {
-        "path": "data/assets/textures/player.png",
+        "path": "assets/textures/mob/player.png",
         "size": {
             "width": 64,
             "height": 80

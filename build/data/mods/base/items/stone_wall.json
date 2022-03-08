@@ -3,7 +3,7 @@
     "solid": false,
     "usage": "place",
     "texture": {
-        "path": "data/assets/textures/stone_wall.png",
+        "path": "assets/textures/blocks/stone_wall.png",
         "size": {
             "width": 16,
             "height": 16

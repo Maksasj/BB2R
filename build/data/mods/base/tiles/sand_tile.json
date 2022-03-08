@@ -2,7 +2,7 @@
     "id": "sand_tile",
     "solid": false,
     "texture": {
-        "path": "data/assets/textures/sand_tile.png",
+        "path": "assets/textures/tile/sand_tile.png",
         "size": {
             "width": 16,
             "height": 16

@@ -2,7 +2,7 @@
     "id": "starfish",
     "solid": false,
     "texture": {
-        "path": "data/assets/textures/starfish.png",
+        "path": "assets/textures/blocks/starfish.png",
         "size": {
             "width": 16,
             "height": 16

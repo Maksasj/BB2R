@@ -2,7 +2,7 @@
     "id": "small_rock",
     "solid": false,
     "texture": {
-        "path": "data/assets/textures/small_rock.png",
+        "path": "assets/textures/blocks/small_rock.png",
         "size": {
             "width": 16,
             "height": 16

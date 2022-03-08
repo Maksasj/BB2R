@@ -2,7 +2,7 @@
     "id": "cactus",
     "solid": false,
     "texture": {
-        "path": "data/assets/textures/cactus.png",
+        "path": "assets/textures/blocks/cactus.png",
         "size": {
             "width": 16,
             "height": 16
