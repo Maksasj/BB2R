@@ -1,0 +1,15 @@
+{
+    "id": "stone",
+    "solid": false,
+    "usage": {
+        "type": "place",
+        "place_result": "stone_wall"
+    },
+    "texture": {
+        "path": "assets/textures/items/rock.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}

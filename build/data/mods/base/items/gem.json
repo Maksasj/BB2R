@@ -1,0 +1,11 @@
+{
+    "id": "gem",
+    "solid": false,
+    "texture": {
+        "path": "assets/textures/items/gem.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}
