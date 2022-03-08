@@ -60,30 +60,31 @@ struct Player : public Entity
             camera.x = x + 32.0 - (HALF_SCREEN_WIDTH); //+ lxO;
             camera.y = y + 32.0 - (HALF_SCREEN_HEIGHT); //+ lyO;
 
-            TryUseItem();
+            //Try use item
+            if (itemmanager->ItemData[inventory->storage[a_hotbar].item.id].contains("usage")) { TryUseItem(); }
       }
 
       void TryUseItem() {
             if(IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) {
-                  std::string item_id = inventory->storage[a_hotbar].item.id;
-                  int item_count = inventory->storage[a_hotbar].count;
+            std::string item_id = inventory->storage[a_hotbar].item.id;
+            int item_count = inventory->storage[a_hotbar].count;
 
-                  if (itemmanager->ItemData[item_id]["usage"] == "place") {
-                        if(item_count > 0 && hand->TryPlaceBlock(x, y, item_id)) {
-                              hand->PlaceBlock(x, y, item_id);
-                              inventory->storage[a_hotbar].count -= 1;
-                        }
-                  } else if (itemmanager->ItemData[item_id]["usage"] == "use") {
-                        //Try use item
+            if (itemmanager->ItemData[item_id]["usage"]["type"] == "place") {
+                  if(item_count > 0 && hand->TryPlaceBlock(x, y, item_id)) {
+                        hand->PlaceBlock(x, y, item_id);
+                        inventory->storage[a_hotbar].count -= 1;
                   }
+            } else if (itemmanager->ItemData[item_id]["usage"]["type"] == "use") {
+                  //Try use item
+            }
 
             } else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
                   std::string item_id = inventory->storage[a_hotbar].item.id;
 
-                  if (itemmanager->ItemData[item_id]["usage"] == "break") {
+                  if (itemmanager->ItemData[item_id]["usage"]["type"] == "break") {
                         if(hand->TryBreakBlock(x, y)) {
-                              std::string drop = hand->BreakBlock(x, y);
-                              inventory->AddItem(drop, 1);
+                              Drop tmp_drop = hand->BreakBlock(x, y);
+                              if (tmp_drop.item_id != "nothing") { inventory->AddItem(tmp_drop.item_id, tmp_drop.count); }
                         }
                   }
             }

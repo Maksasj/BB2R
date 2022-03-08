@@ -1,7 +1,14 @@
 {
     "id": "rock",
     "solid": false,
-    "break_drop": "stone_wall",
+    "minable":  {
+        "hardness": 1,
+        "mining_time": 1,
+        "result": {
+            "item": "stone_wall",
+            "count": 5
+        }
+    },
     "texture": {
         "path": "assets/textures/block/rock.png",
         "size": {

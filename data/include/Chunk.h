@@ -29,13 +29,6 @@ struct Chunk
         for(int x = 0; x < 16; x++) {   
             for(int y = 0; y < 16; y++) {
 
-                
-                if( (X == 0) && (Y == 0) && (x == 0) && (y == 0) ) {
-                    std::cout << "Creating Marker \n";
-                    block_exist[x][y] = true; 
-                    blocks[x][y] = CreateBlock(texturemanager, "stone_wall", CHUNK_SIZE*X + x*TILE_SIZE, CHUNK_SIZE*Y + y*TILE_SIZE);
-                }
-
                 //Noises
                 double hight =  noise->GetNoise((float)(x + X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(y + Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) +                   noise->GetNoise((float)(5*x + 5*X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(5*y + 5*Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) * 0.5;
                 double temp  =  noise->GetNoise((float)(x + X*CHUNK_TILE_WIDTH + 816516)*biomemanager->noise_size , (float)(y + Y*CHUNK_TILE_WIDTH + 1161)*biomemanager->noise_size) +  noise->GetNoise((float)(5*x + 5*X*CHUNK_TILE_WIDTH + 98146)*biomemanager->noise_size , (float)(5*y + 5*Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) * 0.5;

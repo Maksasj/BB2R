@@ -14,12 +14,12 @@ typedef struct ItemCell {
 struct Inventory
 {     
       std::vector<ItemCell> storage; 
-      int size;
+      int max_size;
       Inventory(int inv_size) {
-            size = inv_size;
+            max_size = inv_size;
 
             storage.push_back({Item("pickaxe"), 1});
-            storage.push_back({Item("stone_wall"), 900});
+            storage.push_back({Item("stone_wall"), 1});
 
             SortInStacks();
       }
@@ -43,7 +43,7 @@ struct Inventory
             storage.clear();
 
             for (auto itemcell : tmp_inv) {
-                  storage.push_back({Item(itemcell.first), itemcell.second});
+                  if (itemcell.second > 0) { storage.push_back({Item(itemcell.first), itemcell.second}); }
             }
       }
 };

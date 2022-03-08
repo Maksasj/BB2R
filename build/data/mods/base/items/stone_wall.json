@@ -1,7 +1,10 @@
 {
     "id": "stone_wall",
     "solid": false,
-    "usage": "place",
+    "usage": {
+        "type": "place",
+        "place_result": "stone_wall"
+    },
     "texture": {
         "path": "assets/textures/blocks/stone_wall.png",
         "size": {

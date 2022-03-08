@@ -1,7 +1,11 @@
 {
     "id": "pickaxe",
     "solid": false,
-    "usage": "break",
+    "usage": {
+        "type": "break",
+        "mining_strength": 5,
+        "mining_speed": 1
+    },
     "texture": {
         "path": "assets/textures/blocks/stone_wall.png",
         "size": {
