@@ -40,8 +40,7 @@ struct InventoryList : public GuiElement
                   mouse_wheel_offset += mouseW;
             }
 
-            //if(MauseClickInRect( {rect.width, rect.height}, pos)) { hover = true; } else { hover = false; }
-            for(int y = 0; y < inventory->size; y++) {
+            for(int y = 0; y < static_cast<int>(inventory->storage.size()); y++) {
                   float x_pos = pos.x + offset.x;
                   float y_pos = pos.y + offset.y + y * 56 + mouse_wheel_offset;
                   if(MauseClickInRect( {150, 50}, {x_pos, y_pos})) { hovered_element = y; break; }
@@ -53,7 +52,7 @@ struct InventoryList : public GuiElement
       
             DrawRectangleV({pos.x + offset.x, pos.y + offset.y}, {rect.width, rect.height}, {150, 150, 150, 150});
             
-            for(int y = 0; y < inventory->storage.size(); y++) {
+            for(int y = 0; y < static_cast<int>(inventory->storage.size()); y++) {
                   float x_pos = pos.x + offset.x;
                   float y_pos = pos.y + offset.y + y * 56 + mouse_wheel_offset;
 

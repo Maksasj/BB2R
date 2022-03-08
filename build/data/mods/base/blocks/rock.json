@@ -5,7 +5,7 @@
         "hardness": 1,
         "mining_time": 1,
         "result": {
-            "item": "stone_wall",
+            "item": "stone",
             "count": 5
         }
     },

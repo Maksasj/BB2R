@@ -24,7 +24,7 @@ struct Hand
             world = _world; modloader = _modloader;
       }
 
-      bool TryPlaceBlock(float Player_X, float Player_Y, std::string _block_id) {
+      bool TryPlaceBlock(float Player_X, float Player_Y, std::string _item_id) {
             int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
             int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
 
@@ -34,7 +34,10 @@ struct Hand
             int px = abs((ox - CHUNK_SIZE*X)/TILE_SIZE);
             int py = abs((oy - CHUNK_SIZE*Y)/TILE_SIZE);
             
-            return !world->_World[{X,Y}]->block_exist[px][py];
+            if(modloader->mods["base"]->ItemData[_item_id]["usage"].contains("place_result")) {
+                  return !world->_World[{X,Y}]->block_exist[px][py];
+            }
+            return false;
       }
 
       bool TryBreakBlock(float Player_X, float Player_Y) {
@@ -82,7 +85,7 @@ struct Hand
             return {item_id, count};
       }
 
-      void PlaceBlock(float Player_X, float Player_Y, std::string _block_id) {
+      void PlaceBlock(float Player_X, float Player_Y, std::string _item_id) {
             int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
             int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
 
@@ -91,6 +94,12 @@ struct Hand
 
             int px = abs((ox - CHUNK_SIZE*X)/TILE_SIZE);
             int py = abs((oy - CHUNK_SIZE*Y)/TILE_SIZE);
+
+            std::string _block_id;
+
+            if(modloader->mods["base"]->ItemData[_item_id]["usage"].contains("place_result")) {
+                  _block_id = modloader->mods["base"]->ItemData[_item_id]["usage"]["place_result"];
+            }
 
             if(world->_World[{X,Y}]->block_exist[px][py] == false) {
                   world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);

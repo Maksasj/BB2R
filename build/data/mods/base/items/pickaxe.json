@@ -7,7 +7,7 @@
         "mining_speed": 1
     },
     "texture": {
-        "path": "assets/textures/blocks/stone_wall.png",
+        "path": "assets/textures/items/pickaxe.png",
         "size": {
             "width": 16,
             "height": 16

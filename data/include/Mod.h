@@ -21,7 +21,7 @@ struct Mod
     std::vector<nlohmann::json> TileData;
     std::map<std::string, nlohmann::json> BlockData;
     std::vector<nlohmann::json> MobData;
-    std::vector<nlohmann::json> ItemData;
+    std::map<std::string, nlohmann::json> ItemData;
 
     std::vector<std::string> tile_file_array;
     std::vector<std::string> block_file_array;
@@ -75,7 +75,7 @@ struct Mod
             for (auto item_path : item_file_array) {
                   std::ifstream ifs("data/mods/"+mod_id+"/items/" + item_path);
                   nlohmann::json ItemData_tmp = nlohmann::json::parse(ifs);
-                  ItemData.push_back(ItemData_tmp);
+                  ItemData[ItemData_tmp["id"]] = ItemData_tmp;
                   ifs.close();
             }
 

@@ -73,6 +73,7 @@ struct Player : public Entity
                   if(item_count > 0 && hand->TryPlaceBlock(x, y, item_id)) {
                         hand->PlaceBlock(x, y, item_id);
                         inventory->storage[a_hotbar].count -= 1;
+                        inventory->SortInStacks();
                   }
             } else if (itemmanager->ItemData[item_id]["usage"]["type"] == "use") {
                   //Try use item

@@ -19,7 +19,6 @@ struct Inventory
             max_size = inv_size;
 
             storage.push_back({Item("pickaxe"), 1});
-            storage.push_back({Item("stone_wall"), 1});
 
             SortInStacks();
       }
