@@ -18,7 +18,7 @@ struct Mod
 {   
     std::string mod_id;
 
-    std::vector<nlohmann::json> TileData;
+    std::map<std::string, nlohmann::json> TileData;
     std::map<std::string, nlohmann::json> BlockData;
     std::vector<nlohmann::json> MobData;
     std::map<std::string, nlohmann::json> ItemData;
@@ -51,7 +51,7 @@ struct Mod
             for (auto tile_path : tile_file_array) {
                   std::ifstream ifs("data/mods/"+mod_id+"/tiles/" + tile_path);
                   nlohmann::json TileData_tmp = nlohmann::json::parse(ifs);
-                  TileData.push_back(TileData_tmp);
+                  TileData[TileData_tmp["id"]] = TileData_tmp;
                   ifs.close();
             }
 
@@ -99,12 +99,12 @@ struct Mod
       void LoadTextures(std::map<std::string, game::Texture*> &Textures, AnimationManager* animationmanager) {
             //Tile
             for (auto tile : TileData) {
-                  std::string _path = tile["texture"]["path"];
-                  Textures[tile["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, tile["texture"]["size"]["width"], tile["texture"]["size"]["height"]);
+                  std::string _path = tile.second["texture"]["path"];
+                  Textures[tile.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, tile.second["texture"]["size"]["width"], tile.second["texture"]["size"]["height"]);
                   
-                  if(tile["texture"].contains("animation")) {
-                        for (auto& animation : tile["texture"]["animation"].items()) {
-                              animationmanager->AddAnimation(animation.key(), Textures[tile["id"]], tile["texture"]["animation"][animation.key()]["row"], tile["texture"]["animation"][animation.key()]["collum"], tile["texture"]["animation"][animation.key()]["speed"], tile["texture"]["animation"][animation.key()]["frame_size"]["width"], tile["texture"]["animation"][animation.key()]["frame_size"]["height"]);
+                  if(tile.second["texture"].contains("animation")) {
+                        for (auto& animation : tile.second["texture"]["animation"].items()) {
+                              animationmanager->AddAnimation(animation.key(), Textures[tile.second["id"]], tile.second["texture"]["animation"][animation.key()]["row"], tile.second["texture"]["animation"][animation.key()]["collum"], tile.second["texture"]["animation"][animation.key()]["speed"], tile.second["texture"]["animation"][animation.key()]["frame_size"]["width"], tile.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
                         }
                   }
                   

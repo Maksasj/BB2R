@@ -1,6 +1,5 @@
 {
     "id": "rock",
-    "solid": false,
     "minable":  {
         "hardness": 1,
         "mining_time": 1,

@@ -1,6 +1,5 @@
 {
     "id": "small_rock",
-    "solid": false,
     "texture": {
         "path": "assets/textures/block/small_rock.png",
         "size": {

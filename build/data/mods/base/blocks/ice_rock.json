@@ -1,6 +1,5 @@
 {
     "id": "ice_rock",
-    "solid": false,
     "texture": {
         "path": "assets/textures/block/ice_rock.png",
         "size": {

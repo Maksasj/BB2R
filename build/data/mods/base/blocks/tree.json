@@ -1,6 +1,5 @@
 {
     "id": "tree",
-    "solid": false,
     "texture": {
         "path": "assets/textures/block/tree.png",
         "size": {

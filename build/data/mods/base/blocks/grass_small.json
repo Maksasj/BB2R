@@ -1,6 +1,5 @@
 {
     "id": "grass_small",
-    "solid": false,
     "texture": {
         "path": "assets/textures/block/grass_small.png",
         "size": {

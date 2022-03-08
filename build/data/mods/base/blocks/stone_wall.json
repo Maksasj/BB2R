@@ -1,6 +1,11 @@
 {
     "id": "stone_wall",
-    "solid": false,
+    "solid": {
+        "collision_box":{
+            "width": 64,
+            "height": 64
+        }
+    },
     "texture": {
         "path": "assets/textures/block/stone_wall.png",
         "size": {

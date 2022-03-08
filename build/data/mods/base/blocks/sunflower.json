@@ -1,6 +1,5 @@
 {
     "id": "sunflower",
-    "solid": false,
     "texture": {
         "path": "assets/textures/block/sunflower.png",
         "size": {

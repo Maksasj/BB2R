@@ -1,6 +1,5 @@
 {
     "id": "starfish",
-    "solid": false,
     "texture": {
         "path": "assets/textures/block/starfish.png",
         "size": {

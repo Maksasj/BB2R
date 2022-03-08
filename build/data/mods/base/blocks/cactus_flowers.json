@@ -1,6 +1,5 @@
 {
     "id": "cactus_flowers",
-    "solid": false,
     "texture": {
         "path": "assets/textures/block/cactus_flowers.png",
         "size": {

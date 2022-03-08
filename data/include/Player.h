@@ -7,6 +7,8 @@
 #include <stdlib.h> 
 #include <raylib.h> 
 
+#include "utilities/vector.h"
+
 #include "ItemManager.h"
 #include "Hand.h"
 #include "Chunk.h"
@@ -25,11 +27,16 @@ struct Player : public Entity
       Hand *hand;
       ItemManager *itemmanager;
 
+      vec2 acceleration;
+
+
       Player (TextureManager *texturemanager, float X, float Y) : Entity(texturemanager, "player", X, Y) {
             EntityState = "player_idle";
             velocity = 1.5;
-            speed = 640.0;
+            speed = 20.0;
             a_hotbar = 0;
+
+            acceleration = {0, 0};
 
             inventory = new Inventory(5);
       }
@@ -43,11 +50,20 @@ struct Player : public Entity
       }
 
       void Update() {
-            if(IsKeyDown(KEY_W)) { y -= speed*timer.deltaTime; EntityState = "player_run_up"; }
-            if(IsKeyDown(KEY_S)) { y += speed*timer.deltaTime; EntityState = "player_run_down";} 
-            if(IsKeyDown(KEY_A)) { x -= speed*timer.deltaTime; EntityState = "player_run_left"; }
-            if(IsKeyDown(KEY_D)) { x += speed*timer.deltaTime; EntityState = "player_run_right"; }
+            if(IsKeyDown(KEY_W)) {  acceleration.y -= speed*timer.deltaTime; EntityState = "player_run_up"; }
+            if(IsKeyDown(KEY_S)) {  acceleration.y += speed*timer.deltaTime; EntityState = "player_run_down"; } 
+            if(IsKeyDown(KEY_A)) {  acceleration.x -= speed*timer.deltaTime; EntityState = "player_run_left"; }
+            if(IsKeyDown(KEY_D)) {  acceleration.x += speed*timer.deltaTime;  EntityState = "player_run_right"; }
             if(!IsKeyDown(KEY_W) && !IsKeyDown(KEY_S) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)) { EntityState = "player_idle"; }
+
+            //Add acceleration to cords, sure with checking collision
+            if (hand->TryWalk( {x + acceleration.x, y} )) { x += acceleration.x; }
+            if (hand->TryWalk( {x, y + acceleration.y} )) { y += acceleration.y; }
+
+            //Slow down acceleration
+            float slipp = hand->GetSlipp(x, y);
+            acceleration.x *= slipp;
+            acceleration.y *= slipp;
 
             /* Mouse camera
             float lxO = GetMousePosition().x - (SCREEN_WIDTH/2.0);

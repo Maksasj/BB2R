@@ -6,14 +6,38 @@
 #define HAND_CLASS_H
 
 #include "World.h"
+#include "utilities/vector.h"
 #include "ModLoader.h"
 #include <raylib.h>
 #include <string>
+#include <cmath>
 
 typedef struct Drop {
       std::string item_id;
       int count;
 } Drop;
+
+typedef struct BlockRect {
+      float x;
+      float y;
+      float w;
+      float h;
+} BlockRect;
+
+float distance(vec2 p1, vec2 p2)
+{
+    return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) * 1.0);
+}
+
+bool collis(BlockRect rect1, BlockRect rect2) {
+       if ( rect1.x <= rect2.x + rect2.w &&
+            rect1.x + rect1.w >= rect2.x &&
+            rect1.y <= rect2.y + rect2.h &&
+            rect1.h + rect1.y >= rect2.y) {
+              return true;
+      }
+      return false;
+}
 
 struct Hand
 {     
@@ -22,6 +46,20 @@ struct Hand
 
       Hand(World *_world, ModLoader *_modloader) {
             world = _world; modloader = _modloader;
+      }
+
+      float GetSlipp(float Player_X, float Player_Y) {
+            int X = floor((Player_X + 32) / CHUNK_SIZE);
+            int Y = floor((Player_Y + 32) / CHUNK_SIZE);
+
+            int px = abs(((Player_X + 32) - CHUNK_SIZE*X)/TILE_SIZE);
+            int py = abs(((Player_Y + 32) - CHUNK_SIZE*Y)/TILE_SIZE);
+
+            if(modloader->mods["base"]->TileData[world->_World[{X,Y}]->tiles[px][py]->EntityID].contains("slipperiness")) {
+                  return modloader->mods["base"]->TileData[world->_World[{X,Y}]->tiles[px][py]->EntityID]["slipperiness"];
+            }
+
+            return 0.95;
       }
 
       bool TryPlaceBlock(float Player_X, float Player_Y, std::string _item_id) {
@@ -106,6 +144,28 @@ struct Hand
                   world->_World[{X,Y}]->block_exist[px][py] = true;
                   world->Chunks[{X,Y}] = world->_World[{X,Y}];    
             }
+      }
+
+      //TODO: Implement checking for neighbor chunks
+      bool TryWalk(vec2 player_cords) {
+            int X = floor((player_cords.x + 32) / CHUNK_SIZE); int Y = floor((player_cords.y + 32) / CHUNK_SIZE);
+
+            //Iterate each block in chunk , and if it solid check collision
+            //TODO: maybe change iterator, mauybe something like from start from player location
+            for (int x = 0; x < 16; x++) {
+                  for (int y = 0; y < 16; y++) {
+                        if (world->_World[{X,Y}]->block_exist[x][y]) {
+                              vec2 block_cords = {(float)(X*CHUNK_SIZE + x*TILE_SIZE), (float)(Y*CHUNK_SIZE + y*TILE_SIZE)};
+                              if (distance(block_cords, player_cords) < 80.0) { // Check if block in 70p radius
+                                    if(modloader->mods["base"]->BlockData[ world->_World[{X,Y}]->blocks[x][y]->EntityID].contains("solid")) {
+                                          BlockRect block_rect = { block_cords.x, block_cords.y, modloader->mods["base"]->BlockData[ world->_World[{X,Y}]->blocks[x][y]->EntityID]["solid"]["collision_box"]["height"], modloader->mods["base"]->BlockData[ world->_World[{X,Y}]->blocks[x][y]->EntityID]["solid"]["collision_box"]["height"] };
+                                          if (collis(block_rect, { player_cords.x, player_cords.y, 64, 64 })) { return false; }
+                                    }
+                              }
+                        }
+                  } 
+            }
+            return true;
       }
 };
 

@@ -1,6 +1,5 @@
 {
     "id": "tulpe",
-    "solid": false,
     "texture": {
         "path": "assets/textures/block/tulpe.png",
         "size": {

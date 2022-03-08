@@ -1,6 +1,7 @@
 {
     "id": "snow_tile",
     "solid": false,
+    "slipperiness": 0.98,
     "texture": {
         "path": "assets/textures/tile/snow_tile.png",
         "size": {
