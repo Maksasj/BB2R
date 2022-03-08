@@ -2,7 +2,7 @@
     "id": "tree",
     "solid": false,
     "texture": {
-        "path": "assets/textures/blocks/tree.png",
+        "path": "assets/textures/block/tree.png",
         "size": {
             "width": 16,
             "height": 16

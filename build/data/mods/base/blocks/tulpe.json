@@ -2,7 +2,7 @@
     "id": "tulpe",
     "solid": false,
     "texture": {
-        "path": "assets/textures/blocks/tulpe.png",
+        "path": "assets/textures/block/tulpe.png",
         "size": {
             "width": 16,
             "height": 16

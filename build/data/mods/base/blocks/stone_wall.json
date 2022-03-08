@@ -2,7 +2,7 @@
     "id": "stone_wall",
     "solid": false,
     "texture": {
-        "path": "assets/textures/blocks/stone_wall.png",
+        "path": "assets/textures/block/stone_wall.png",
         "size": {
             "width": 16,
             "height": 16

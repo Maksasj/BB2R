@@ -2,7 +2,7 @@
     "id": "ice_rock",
     "solid": false,
     "texture": {
-        "path": "assets/textures/blocks/ice_rock.png",
+        "path": "assets/textures/block/ice_rock.png",
         "size": {
             "width": 16,
             "height": 16

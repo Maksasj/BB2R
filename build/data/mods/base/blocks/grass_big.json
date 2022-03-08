@@ -2,7 +2,7 @@
     "id": "grass_big",
     "solid": false,
     "texture": {
-        "path": "assets/textures/blocks/grass_big.png",
+        "path": "assets/textures/block/grass_big.png",
         "size": {
             "width": 16,
             "height": 16

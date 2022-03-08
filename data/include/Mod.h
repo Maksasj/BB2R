@@ -2,6 +2,7 @@
 #define MOD_CLASS_H
 
 #include <iostream>
+#include <string>
 #include <fstream>
 #include <stdio.h>
 #include <json.h>
@@ -98,7 +99,8 @@ struct Mod
       void LoadTextures(std::map<std::string, game::Texture*> &Textures, AnimationManager* animationmanager) {
             //Tile
             for (auto tile : TileData) {
-                  Textures[tile["id"]] = new game::Texture(tile["texture"]["path"], tile["texture"]["size"]["width"], tile["texture"]["size"]["height"]);
+                  std::string _path = tile["texture"]["path"];
+                  Textures[tile["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, tile["texture"]["size"]["width"], tile["texture"]["size"]["height"]);
                   
                   if(tile["texture"].contains("animation")) {
                         for (auto& animation : tile["texture"]["animation"].items()) {
@@ -110,7 +112,8 @@ struct Mod
             
             //Blocks
             for (auto block : BlockData) {
-                  Textures[block["id"]] = new game::Texture(block["texture"]["path"], block["texture"]["size"]["width"], block["texture"]["size"]["height"]);
+                  std::string _path = block["texture"]["path"];
+                  Textures[block["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, block["texture"]["size"]["width"], block["texture"]["size"]["height"]);
                   
                   if(block["texture"].contains("animation")) {
                         for (auto& animation : block["texture"]["animation"].items()) {
@@ -121,7 +124,8 @@ struct Mod
 
             //Mobs
             for (auto mob : MobData) {
-                  Textures[mob["id"]] = new game::Texture(mob["texture"]["path"], mob["texture"]["size"]["width"], mob["texture"]["size"]["height"]);
+                  std::string _path = mob["texture"]["path"];
+                  Textures[mob["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, mob["texture"]["size"]["width"], mob["texture"]["size"]["height"]);
                   
                   if(mob["texture"].contains("animation")) {
                         for (auto& animation : mob["texture"]["animation"].items()) {

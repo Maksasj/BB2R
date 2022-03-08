@@ -2,7 +2,7 @@
     "id": "grass_small",
     "solid": false,
     "texture": {
-        "path": "assets/textures/blocks/grass_small.png",
+        "path": "assets/textures/block/grass_small.png",
         "size": {
             "width": 16,
             "height": 16

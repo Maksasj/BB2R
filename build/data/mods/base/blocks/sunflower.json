@@ -2,7 +2,7 @@
     "id": "sunflower",
     "solid": false,
     "texture": {
-        "path": "assets/textures/blocks/sunflower.png",
+        "path": "assets/textures/block/sunflower.png",
         "size": {
             "width": 16,
             "height": 16
