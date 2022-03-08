@@ -133,6 +133,18 @@ struct Mod
                         }
                   }
             }
+
+            //Items
+            for (auto item : ItemData) {
+                  std::string _path = item.second["texture"]["path"];
+                  Textures[item.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, item.second["texture"]["size"]["width"], item.second["texture"]["size"]["height"]);
+                  
+                  if(item.second["texture"].contains("animation")) {
+                        for (auto& animation : item.second["texture"]["animation"].items()) {
+                              animationmanager->AddAnimation(animation.key(), Textures[item.second["id"]], item.second["texture"]["animation"][animation.key()]["row"], item.second["texture"]["animation"][animation.key()]["collum"], item.second["texture"]["animation"][animation.key()]["speed"], item.second["texture"]["animation"][animation.key()]["frame_size"]["width"], item.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
+                        }
+                  }
+            }
       }
 };
 
