@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h> 
-#include <raylib.h>
+#include <raylib.h> 
 
 #include "ItemManager.h"
 #include "Hand.h"
@@ -56,21 +57,19 @@ struct Player : public Entity
             lyO *= 0.3;
             */
 
-            camera.x = x + 32.0 - (SCREEN_WIDTH/2.0); //+ lxO;
-            camera.y = y + 32.0 - (SCREEN_HEIGHT/2.0); //+ lyO;
+            camera.x = x + 32.0 - (HALF_SCREEN_WIDTH); //+ lxO;
+            camera.y = y + 32.0 - (HALF_SCREEN_HEIGHT); //+ lyO;
 
             TryUseItem();
       }
 
       void TryUseItem() {
-            
             if(IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) {
                   std::string item_id = inventory->storage[a_hotbar].item.id;
                   int item_count = inventory->storage[a_hotbar].count;
 
                   if (itemmanager->ItemData[item_id]["usage"] == "place") {
                         if(item_count > 0 && hand->TryPlaceBlock(x, y, item_id)) {
-                              //DrawText((std::to_string(a_hotbar)+" "+inventory->storage[a_hotbar].item.id+" "+std::to_string(inventory->storage[a_hotbar].count)).c_str(), 100, 300, 36, WHITE);  
                               hand->PlaceBlock(x, y, item_id);
                               inventory->storage[a_hotbar].count -= 1;
                         }

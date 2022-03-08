@@ -20,40 +20,40 @@ struct Hand
       }
 
       bool TryPlaceBlock(float Player_X, float Player_Y, std::string _block_id) {
-            int x = Player_X + (GetMousePosition().x - SCREEN_WIDTH/2) + 32;
-            int y = Player_Y + (GetMousePosition().y - SCREEN_HEIGHT/2) + 32;
+            int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
+            int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
 
-            int X = floor(x / CHUNK_SIZE);
-            int Y = floor(y / CHUNK_SIZE);
+            int X = floor(ox / CHUNK_SIZE); if (ox < 0) { X--; }
+            int Y = floor(oy / CHUNK_SIZE); if (oy < 0) { Y--; }
 
-            int px = abs((x - CHUNK_SIZE*X)/64);
-            int py = abs((y - CHUNK_SIZE*Y)/64);
-
+            int px = abs((ox - CHUNK_SIZE*X)/TILE_SIZE);
+            int py = abs((oy - CHUNK_SIZE*Y)/TILE_SIZE);
+            
             return !world->_World[{X,Y}]->block_exist[px][py];
       }
 
       bool TryBreakBlock(float Player_X, float Player_Y) {
-            int x = Player_X + (GetMousePosition().x - SCREEN_WIDTH/2) + 32;
-            int y = Player_Y + (GetMousePosition().y - SCREEN_HEIGHT/2) + 32;
+            int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
+            int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
 
-            int X = floor(x / CHUNK_SIZE);
-            int Y = floor(y / CHUNK_SIZE);
+            int X = floor(ox / CHUNK_SIZE); if (ox < 0) { X--; }
+            int Y = floor(oy / CHUNK_SIZE); if (oy < 0) { Y--; }
 
-            int px = abs((x - CHUNK_SIZE*X)/64);
-            int py = abs((y - CHUNK_SIZE*Y)/64);
+            int px = abs((ox - CHUNK_SIZE*X)/TILE_SIZE);
+            int py = abs((oy - CHUNK_SIZE*Y)/TILE_SIZE);
 
             return world->_World[{X,Y}]->block_exist[px][py];
       }
 
       std::string BreakBlock(float Player_X, float Player_Y) {
-            int x = Player_X + (GetMousePosition().x - SCREEN_WIDTH/2) + 32;
-            int y = Player_Y + (GetMousePosition().y - SCREEN_HEIGHT/2) + 32;
+            int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
+            int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
 
-            int X = floor(x / CHUNK_SIZE);
-            int Y = floor(y / CHUNK_SIZE);
+            int X = floor(ox / CHUNK_SIZE); if (ox < 0) { X--; }
+            int Y = floor(oy / CHUNK_SIZE); if (oy < 0) { Y--; }
 
-            int px = abs((x - CHUNK_SIZE*X)/64);
-            int py = abs((y - CHUNK_SIZE*Y)/64);
+            int px = abs((ox - CHUNK_SIZE*X)/TILE_SIZE);
+            int py = abs((oy - CHUNK_SIZE*Y)/TILE_SIZE);;
  
             std::string drop = "stone_wall"; //TODO FIX DROP SYSTEM
 
@@ -65,14 +65,14 @@ struct Hand
       }
 
       void PlaceBlock(float Player_X, float Player_Y, std::string _block_id) {
-            int x = Player_X + (GetMousePosition().x - SCREEN_WIDTH/2) + 32;
-            int y = Player_Y + (GetMousePosition().y - SCREEN_HEIGHT/2) + 32;
+            int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
+            int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
 
-            int X = floor(x / CHUNK_SIZE);
-            int Y = floor(y / CHUNK_SIZE);
+            int X = floor(ox / CHUNK_SIZE); if (ox < 0) { X--; }
+            int Y = floor(oy / CHUNK_SIZE); if (oy < 0) { Y--; }
 
-            int px = abs((x - CHUNK_SIZE*X)/64);
-            int py = abs((y - CHUNK_SIZE*Y)/64); 
+            int px = abs((ox - CHUNK_SIZE*X)/TILE_SIZE);
+            int py = abs((oy - CHUNK_SIZE*Y)/TILE_SIZE);
 
             if(world->_World[{X,Y}]->block_exist[px][py] == false) {
                   world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
