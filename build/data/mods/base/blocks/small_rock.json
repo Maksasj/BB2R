@@ -1,5 +1,13 @@
 {
     "id": "small_rock",
+    "minable":  {
+        "hardness": 1,
+        "mining_time": 1,
+        "result": {
+            "item": "stone",
+            "count": 2
+        }
+    },
     "texture": {
         "path": "assets/textures/block/small_rock.png",
         "size": {

@@ -1,5 +1,13 @@
 {
-    "id": "starfish",
+    "id": "block_starfish",
+    "minable":  {
+        "hardness": 1,
+        "mining_time": 1,
+        "result": {
+            "item": "starfish",
+            "count": 1
+        }
+    },
     "texture": {
         "path": "assets/textures/block/starfish.png",
         "size": {

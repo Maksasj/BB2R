@@ -1,5 +1,13 @@
 {
     "id": "tree",
+    "minable":  {
+        "hardness": 1,
+        "mining_time": 1,
+        "result": {
+            "item": "log",
+            "count": 1
+        }
+    },
     "texture": {
         "path": "assets/textures/block/tree.png",
         "size": {

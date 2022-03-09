@@ -1,6 +1,5 @@
 {
     "id": "stone",
-    "solid": false,
     "usage": {
         "type": "place",
         "place_result": "stone_wall"

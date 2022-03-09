@@ -1,6 +1,5 @@
 {
     "id": "pickaxe",
-    "solid": false,
     "usage": {
         "type": "break",
         "mining_strength": 5,

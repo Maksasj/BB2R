@@ -1,6 +1,5 @@
 {
     "id": "gem",
-    "solid": false,
     "texture": {
         "path": "assets/textures/items/gem.png",
         "size": {
