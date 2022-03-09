@@ -1,5 +1,6 @@
 {
     "id": "starfish",
+    "stack_size": 50,
     "texture": {
         "path": "assets/textures/items/starfish.png",
         "size": {

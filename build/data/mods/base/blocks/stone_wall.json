@@ -1,5 +1,13 @@
 {
     "id": "stone_wall",
+    "minable":  {
+        "hardness": 1,
+        "mining_time": 1,
+        "result": {
+            "item": "stone",
+            "count": 1
+        }
+    },
     "solid": {
         "collision_box":{
             "width": 64,

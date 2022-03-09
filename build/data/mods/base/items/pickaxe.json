@@ -1,5 +1,6 @@
 {
     "id": "pickaxe",
+    "stack_size": 1,
     "usage": {
         "type": "break",
         "mining_strength": 5,

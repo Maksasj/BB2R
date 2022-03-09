@@ -1,5 +1,6 @@
 {
     "id": "stone",
+    "stack_size": 50,
     "usage": {
         "type": "place",
         "place_result": "stone_wall"

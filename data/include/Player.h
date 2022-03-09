@@ -21,22 +21,21 @@
 
 struct Player : public Entity
 {   
-      float velocity, speed;
+      float velocity, speed; vec2 acceleration;
       bool w_pressed, s_pressed, a_pressed, d_pressed;
+
       int a_hotbar;
+
       Hand *hand;
       ItemManager *itemmanager;
-
-      vec2 acceleration;
-
 
       Player (TextureManager *texturemanager, float X, float Y) : Entity(texturemanager, "player", X, Y) {
             EntityState = "player_idle";
             velocity = 1.5;
             speed = 20.0;
-            a_hotbar = 0;
-
             acceleration = {0, 0};
+
+            a_hotbar = 0;
 
             inventory = new Inventory(5);
       }
@@ -47,6 +46,7 @@ struct Player : public Entity
 
       void SetUpNEU(ItemManager *_itemmanager) { // Like this NEU mod from minecraft :)
             itemmanager = _itemmanager;
+            inventory->SetUpNEU(_itemmanager);
       }
 
       void Update() {
@@ -83,13 +83,12 @@ struct Player : public Entity
       void TryUseItem() {
             if(IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) {
             std::string item_id = inventory->storage[a_hotbar].item.id;
-            int item_count = inventory->storage[a_hotbar].count;
+            int item_count = inventory->GetItemCount(item_id);
 
             if (itemmanager->ItemData[item_id]["usage"]["type"] == "place") {
                   if(item_count > 0 && hand->TryPlaceBlock(x, y, item_id)) {
                         hand->PlaceBlock(x, y, item_id);
-                        inventory->storage[a_hotbar].count -= 1;
-                        inventory->SortInStacks();
+                        inventory->SubtractItem(item_id, 1);
                   }
             } else if (itemmanager->ItemData[item_id]["usage"]["type"] == "use") {
                   //Try use item

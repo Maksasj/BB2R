@@ -1,5 +1,6 @@
 {
     "id": "gem",
+    "stack_size": 50,
     "texture": {
         "path": "assets/textures/items/gem.png",
         "size": {

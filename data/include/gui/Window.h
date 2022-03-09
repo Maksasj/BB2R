@@ -28,16 +28,14 @@ struct Window : public Field
 
       bool hover;
       bool visible;
+      int closing_key;
 
       Window(Rect _rect, vec2 _pos) : Field(_rect,  _pos, D_GREY) {
-            draggable = title = drag = hover = visible = false;
+            draggable = title = drag = hover = visible = false; closing_key = 0;
       }
 
-      void setDraggable(Rect _rect) { 
-            dzr = _rect;
-            dzc.x = pos.x; dzc.y = pos.y;
-            draggable = true; 
-      }
+      void setDraggable(Rect _rect) {  dzr = _rect; dzc.x = pos.x; dzc.y = pos.y; draggable = true; }
+      void SetKey(KeyboardKey key) { closing_key = (int)key; }
       
       void setTitle(std::string _title , game::font* _font) { 
             title_size = MeasureTextEx(*_font->Rfont, _title.c_str(), 16, 0); 
@@ -45,12 +43,15 @@ struct Window : public Field
             title = true;
       }
 
+
       void addElement(GuiElement *element, vec2 _offset) { 
             element->offset = _offset; element->pos = pos;
             GuiElements.emplace_back(element); 
       }
 
       void Update() {
+            if (IsKeyPressed(closing_key)) {  if (visible) { visible = false; } else { visible = true; }  }
+      
             if (visible) {
                   if(draggable && drag) {
                         pos = {GetMousePosition().x - drag_offset.x, GetMousePosition().y - drag_offset.y};

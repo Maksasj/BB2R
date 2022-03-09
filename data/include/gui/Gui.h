@@ -18,9 +18,9 @@ struct Gui
       Gui() {
       }
 
-      void addElement(GuiElement *element, float of_x, float of_y) {
-            element->offset.x = of_x; element->offset.y = of_y;
-            GuiElements.emplace_back(element);
+      void addElement(GuiElement *element, vec2 _offset) { 
+            element->offset = {0, 0}; element->pos = _offset;
+            GuiElements.emplace_back(element); 
       }
 
       void Update() {

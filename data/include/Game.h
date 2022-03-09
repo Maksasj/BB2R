@@ -51,7 +51,7 @@ struct Game
       World *world;
       Player *player;
       game::font *Gfont;
-      Window *window;
+      Gui *gui;
             
       Game() {
             game_running = true;
@@ -75,16 +75,21 @@ struct Game
 
             Gfont = new game::font("data/assets/fonts/font.ttf");
 
-            window = new Window({450, 600}, {100, 100});
+            gui = new Gui();
+            
+            Window *window = new Window({450, 600}, {100, 100});
             window->setDraggable({450, 15});
+            window->SetKey(KEY_E);
             window->setTitle("Inventory", Gfont);
             window->color = {180, 180, 180, 150};
-            Hotbar *hotbar = new Hotbar(player, 6);
-            hotbar->SetUpTextureManager(texturemanager);
-            window->addElement(hotbar, {0, 0});
             window->addElement(new InventoryList(player, {150, 580}, {100, 100}, Gfont), {5, 17});
             window->addElement(new Text("Test Item", Gfont, 30, {100, 100}), {155, 25});
             window->addElement(new Text("Lorem ipsum dolor sit amet, consectetur \n adipiscing elit. Aliquam consequat arcu \n lacus, at tincidunt mi molestie a. Aliquam\n interdum ex in libero faucibus rhoncus. \n Integer pharetra leo vitae ex ultricies \n pharetra. Suspendisse vitae maximus felis. \n In euismod erat a leo fermentum, ut \n euismod tellus malesuada.", Gfont, 16, {100, 100}), {155, 80});
+            gui->addElement(window, {100, 100});
+
+            Hotbar *hotbar = new Hotbar(player, 6);
+            hotbar->SetUpTextureManager(texturemanager);
+            gui->addElement(hotbar, {0, 0});
       }
 
       void CloseGame() {
@@ -98,21 +103,20 @@ struct Game
 
       void GameLoop() {
             if (IsKeyDown(KEY_F2)) { ScreenShot(); }
-            if (IsKeyPressed(KEY_E)) { if(window->visible == false) { window->visible = true; } else { window->visible = false; }}
-
+            
             BeginDrawing();
             ClearBackground(RAYWHITE);
 
             world->Render(player->x , player->y);
             player->Update();
-            window->Update();
+            gui->Update();
 
             texturemanager->UpdateAnimations();
 
             player->Render();
 
             DrawFPS(0, 0); 
-            window->Render();
+            gui->Render();
 
             EndDrawing();
             timer.Update();
