@@ -1,0 +1,10 @@
+{
+    "id": "starfish",
+    "texture": {
+        "path": "assets/textures/items/starfish.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}
