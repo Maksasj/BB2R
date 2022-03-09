@@ -7,12 +7,7 @@
 #include <raylib.h>
 
 #include "Defines.h"
-
-template <typename T, typename Key>
-bool key_exists(const T& container, const Key& key)
-{
-    return (container.find(key) != std::end(container));
-}
+#include "utilities/key_exist.h"
 
 namespace game
 {

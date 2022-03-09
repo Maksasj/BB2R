@@ -2,12 +2,14 @@
 #define PLAYER_CLASS_H
 
 #include <iostream>
+#include <map>
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h> 
 #include <raylib.h> 
 
 #include "utilities/vector.h"
+#include "utilities/key_exist.h"
 
 #include "ItemManager.h"
 #include "Hand.h"
@@ -24,7 +26,8 @@ struct Player : public Entity
       float velocity, speed; vec2 acceleration;
       bool w_pressed, s_pressed, a_pressed, d_pressed;
 
-      int a_hotbar;
+      std::string hotbar_item_id;
+      std::vector<std::string> hotbar_item_list;
 
       Hand *hand;
       ItemManager *itemmanager;
@@ -35,9 +38,14 @@ struct Player : public Entity
             speed = 20.0;
             acceleration = {0, 0};
 
-            a_hotbar = 0;
+            hotbar_item_id = "pickaxe";
 
             inventory = new Inventory(5);
+
+
+            for (float x = 0; x < 6; x++) {
+                  hotbar_item_list.push_back("nothing");
+            }
       }
 
       void SetUpHand(Hand *_hand) {
@@ -77,27 +85,30 @@ struct Player : public Entity
             camera.y = y + 32.0 - (HALF_SCREEN_HEIGHT); //+ lyO;
 
             //Try use item
-            if (itemmanager->ItemData[inventory->storage[a_hotbar].item.id].contains("usage")) { TryUseItem(); }
+            if (key_exists(itemmanager->ItemData, hotbar_item_id)) { 
+                  if (itemmanager->ItemData[hotbar_item_id].contains("usage")) { 
+                        TryUseItem(); 
+                  }
+            }
+
+            
       }
 
       void TryUseItem() {
             if(IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) {
-            std::string item_id = inventory->storage[a_hotbar].item.id;
-            int item_count = inventory->GetItemCount(item_id);
+            int item_count = inventory->GetItemCount(hotbar_item_id);
 
-            if (itemmanager->ItemData[item_id]["usage"]["type"] == "place") {
-                  if(item_count > 0 && hand->TryPlaceBlock(x, y, item_id)) {
-                        hand->PlaceBlock(x, y, item_id);
-                        inventory->SubtractItem(item_id, 1);
+            if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "place") {
+                  if(item_count > 0 && hand->TryPlaceBlock(x, y, hotbar_item_id)) {
+                        hand->PlaceBlock(x, y, hotbar_item_id);
+                        inventory->SubtractItem(hotbar_item_id, 1);
                   }
-            } else if (itemmanager->ItemData[item_id]["usage"]["type"] == "use") {
+            } else if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "use") {
                   //Try use item
             }
 
             } else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-                  std::string item_id = inventory->storage[a_hotbar].item.id;
-
-                  if (itemmanager->ItemData[item_id]["usage"]["type"] == "break") {
+                  if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "break") {
                         if(hand->TryBreakBlock(x, y)) {
                               Drop tmp_drop = hand->BreakBlock(x, y);
                               if (tmp_drop.item_id != "nothing") { inventory->AddItem(tmp_drop.item_id, tmp_drop.count); }

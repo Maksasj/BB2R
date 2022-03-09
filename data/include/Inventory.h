@@ -41,6 +41,16 @@ struct Inventory
             return tmp_inv[_id];
       }
 
+      std::vector<std::string> GetItemVector() {
+            std::vector<std::string> tpm_vector;
+            std::map<std::string, int> tmp_inv;
+
+            for (auto itemcell : storage) { tmp_inv[itemcell.item.id] += itemcell.count; }
+            for (auto item : tmp_inv) { tpm_vector.push_back(item.first); }
+
+            return tpm_vector;
+      }
+
       void AddItem(std::string _id, int _count) {
             for (auto &itemcell : storage) {
                   if (itemcell.item.id == _id && _count > 0) {

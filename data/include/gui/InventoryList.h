@@ -26,6 +26,7 @@ struct InventoryList : public GuiElement
 
       int hovered_element;
 
+
       InventoryList(Entity *link_entity, Rect _rect, vec2 _pos, game::font* _font) : GuiElement(_pos) {
             rect = {0, 0, _rect.w, _rect.h};
             inventory = link_entity->inventory;
@@ -36,6 +37,7 @@ struct InventoryList : public GuiElement
 
       void Update() {
             float mouseW = 15*GetMouseWheelMove();
+
             if (mouse_wheel_offset + mouseW <= 0) {
                   mouse_wheel_offset += mouseW;
             }
