@@ -8,6 +8,13 @@
             "count": 2
         }
     },
+    "solid": {
+        "origin_point": [16, 16],
+        "collision_box":{
+            "width": 32,
+            "height": 32
+        }
+    },
     "texture": {
         "path": "assets/textures/block/small_rock.png",
         "size": {

@@ -1,6 +1,12 @@
 {
     "id": "player",
-    "solid": false,
+    "solid": {
+        "origin_point": [16, 16],
+        "collision_box":{
+            "width": 32,
+            "height": 32
+        }
+    },
     "texture": {
         "path": "assets/textures/mob/player.png",
         "size": {

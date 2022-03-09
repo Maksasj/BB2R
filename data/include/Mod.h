@@ -20,7 +20,7 @@ struct Mod
 
     std::map<std::string, nlohmann::json> TileData;
     std::map<std::string, nlohmann::json> BlockData;
-    std::vector<nlohmann::json> MobData;
+    std::map<std::string, nlohmann::json> MobData;
     std::map<std::string, nlohmann::json> ItemData;
 
     std::vector<std::string> tile_file_array;
@@ -67,7 +67,7 @@ struct Mod
             for (auto mobs_path : mob_file_array) {
                   std::ifstream ifs("data/mods/"+mod_id+"/mobs/" + mobs_path);
                   nlohmann::json MobData_tmp = nlohmann::json::parse(ifs);
-                  MobData.push_back(MobData_tmp);
+                  MobData[MobData_tmp["id"]] = MobData_tmp;
                   ifs.close();
             }
 
@@ -124,12 +124,12 @@ struct Mod
 
             //Mobs
             for (auto mob : MobData) {
-                  std::string _path = mob["texture"]["path"];
-                  Textures[mob["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, mob["texture"]["size"]["width"], mob["texture"]["size"]["height"]);
+                  std::string _path = mob.second["texture"]["path"];
+                  Textures[mob.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, mob.second["texture"]["size"]["width"], mob.second["texture"]["size"]["height"]);
                   
-                  if(mob["texture"].contains("animation")) {
-                        for (auto& animation : mob["texture"]["animation"].items()) {
-                              animationmanager->AddAnimation(animation.key(), Textures[mob["id"]], mob["texture"]["animation"][animation.key()]["row"], mob["texture"]["animation"][animation.key()]["collum"], mob["texture"]["animation"][animation.key()]["speed"], mob["texture"]["animation"][animation.key()]["frame_size"]["width"], mob["texture"]["animation"][animation.key()]["frame_size"]["height"]);
+                  if(mob.second["texture"].contains("animation")) {
+                        for (auto& animation : mob.second["texture"]["animation"].items()) {
+                              animationmanager->AddAnimation(animation.key(), Textures[mob.second["id"]], mob.second["texture"]["animation"][animation.key()]["row"], mob.second["texture"]["animation"][animation.key()]["collum"], mob.second["texture"]["animation"][animation.key()]["speed"], mob.second["texture"]["animation"][animation.key()]["frame_size"]["width"], mob.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
                         }
                   }
             }

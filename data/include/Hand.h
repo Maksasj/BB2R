@@ -150,6 +150,10 @@ struct Hand
       bool TryWalk(vec2 player_cords) {
             int X = floor((player_cords.x + 32) / CHUNK_SIZE); int Y = floor((player_cords.y + 32) / CHUNK_SIZE);
 
+            //Player origin point
+            vec2 player_origin_point = {};
+            if (modloader->mods["base"]->MobData["player"]["solid"].contains("origin_point")) { player_origin_point = {modloader->mods["base"]->MobData["player"]["solid"]["origin_point"][0], modloader->mods["base"]->MobData["player"]["solid"]["origin_point"][1]}; }
+                                          
             //Iterate each block in chunk , and if it solid check collision
             //TODO: maybe change iterator, mauybe something like from start from player location
             for (int x = 0; x < 16; x++) {
@@ -158,8 +162,13 @@ struct Hand
                               vec2 block_cords = {(float)(X*CHUNK_SIZE + x*TILE_SIZE), (float)(Y*CHUNK_SIZE + y*TILE_SIZE)};
                               if (distance(block_cords, player_cords) < 80.0) { // Check if block in 70p radius
                                     if(modloader->mods["base"]->BlockData[ world->_World[{X,Y}]->blocks[x][y]->EntityID].contains("solid")) {
+                                          
+                                          //Block origin point and rectangle
+                                          vec2 block_origin_point = {0, 0};
+                                          if (modloader->mods["base"]->BlockData[ world->_World[{X,Y}]->blocks[x][y]->EntityID]["solid"].contains("origin_point")) { block_origin_point = {modloader->mods["base"]->BlockData[ world->_World[{X,Y}]->blocks[x][y]->EntityID]["solid"]["origin_point"][0], modloader->mods["base"]->BlockData[ world->_World[{X,Y}]->blocks[x][y]->EntityID]["solid"]["origin_point"][1]}; }
                                           BlockRect block_rect = { block_cords.x, block_cords.y, modloader->mods["base"]->BlockData[ world->_World[{X,Y}]->blocks[x][y]->EntityID]["solid"]["collision_box"]["height"], modloader->mods["base"]->BlockData[ world->_World[{X,Y}]->blocks[x][y]->EntityID]["solid"]["collision_box"]["height"] };
-                                          if (collis(block_rect, { player_cords.x, player_cords.y, 64, 64 })) { return false; }
+
+                                          if (collis(block_rect, { player_cords.x + player_origin_point.x, player_cords.y + player_origin_point.y, modloader->mods["base"]->MobData["player"]["solid"]["collision_box"]["width"], modloader->mods["base"]->MobData["player"]["solid"]["collision_box"]["height"] })) { return false; }
                                     }
                               }
                         }
