@@ -27,6 +27,7 @@ struct Player : public Entity
       bool w_pressed, s_pressed, a_pressed, d_pressed;
 
       std::string hotbar_item_id;
+      int hotbar_active_cell;
       std::vector<std::string> hotbar_item_list;
 
       Hand *hand;
@@ -39,6 +40,7 @@ struct Player : public Entity
             acceleration = {0, 0};
 
             hotbar_item_id = "pickaxe";
+            hotbar_active_cell = 0;
 
             inventory = new Inventory(5);
 

@@ -1,6 +1,10 @@
 {
     "id": "starfish",
     "stack_size": 50,
+    "tags": {
+        "type": "raw_resource",
+        "description": ""
+    },
     "texture": {
         "path": "assets/textures/items/starfish.png",
         "size": {

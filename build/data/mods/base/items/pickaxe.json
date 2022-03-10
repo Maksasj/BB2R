@@ -1,6 +1,10 @@
 {
     "id": "pickaxe",
     "stack_size": 1,
+    "tags": {
+        "type": "tool",
+        "description": "Pickaxe allows you to \n break blocks, collect some items. \n This is a basic pickaxe , but still \n very useful"
+    },
     "usage": {
         "type": "break",
         "mining_strength": 5,

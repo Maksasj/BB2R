@@ -22,6 +22,7 @@
 #include "gui/GuiElement.h"
 #include "gui/Gui.h"
 #include "gui/InventoryList.h"
+#include "gui/PlayerInventory.h"
 
 void ScreenShot() {
       std::string path = "screenshots/";
@@ -77,14 +78,8 @@ struct Game
 
             gui = new Gui();
             
-            Window *window = new Window({450, 600}, {100, 100});
-            window->setDraggable({450, 15});
-            window->SetKey(KEY_E);
-            window->setTitle("Inventory", Gfont);
-            window->color = {180, 180, 180, 150};
-            window->addElement(new InventoryList(player, {150, 580}, {100, 100}, Gfont), {5, 17});
-            window->addElement(new Text("Test Item", Gfont, 30, {100, 100}), {155, 25});
-            window->addElement(new Text("Lorem ipsum dolor sit amet, consectetur \n adipiscing elit. Aliquam consequat arcu \n lacus, at tincidunt mi molestie a. Aliquam\n interdum ex in libero faucibus rhoncus. \n Integer pharetra leo vitae ex ultricies \n pharetra. Suspendisse vitae maximus felis. \n In euismod erat a leo fermentum, ut \n euismod tellus malesuada.", Gfont, 16, {100, 100}), {155, 80});
+            PlayerInventory *window = new PlayerInventory(player, {100, 100}, Gfont);
+            window->SetUpItemManager(itemmanager);
             gui->addElement(window, {100, 100});
 
             Hotbar *hotbar = new Hotbar(player, 6);

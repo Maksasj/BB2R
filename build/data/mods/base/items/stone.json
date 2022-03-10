@@ -1,6 +1,10 @@
 {
     "id": "stone",
     "stack_size": 50,
+    "tags": {
+        "type": "raw_resource",
+        "description": ""
+    },
     "usage": {
         "type": "place",
         "place_result": "stone_wall"

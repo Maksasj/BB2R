@@ -38,11 +38,22 @@ struct Hotbar : public GuiElement
             item_id = linked_player->hotbar_item_list;
 
             for (float x = 0; x < n_cell; x++) {
+                  if (linked_player->inventory->GetItemCount(item_id[x]) <= 0) {
+                        item_id[x] = "nothing";
+                        linked_player->hotbar_item_list[x] = "nothing";
+                  } 
+
+
                   if(MauseClickInRect({65, 65}, {100 * x + SCREEN_WIDTH/2 - (50 * n_cell), SCREEN_HEIGHT * 0.9})) {
                         hover = x;
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) { 
-                              a_cell = x; 
+                              a_cell = x;
+                              linked_player->hotbar_active_cell = a_cell;
                               linked_player->hotbar_item_id = item_id[x];
+                        } else if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) { 
+                              linked_player->hotbar_item_id = "nothing";
+                              linked_player->hotbar_item_list[x] = "nothing";
+                              item_id[x] = "nothing";
                         }
                   }
             }
