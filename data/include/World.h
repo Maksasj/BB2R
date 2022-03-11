@@ -50,7 +50,6 @@ struct World
 
     void LoadChunk(int x, int y) {
         if (worldloader->CheckChunk(x, y)) {
-            std::cout << "Generating Chunk !" << std::endl;
             _World[{x, y}] =  worldgenerator->GenerateChunk(x, y);
             Chunks[{x, y}] = _World[{x, y}]; 
         } else {

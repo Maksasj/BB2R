@@ -11,6 +11,7 @@
 
 struct BiomeManager 
 {
+      ModLoader *modloader;
       std::vector<Biome*> Biomes;
       std::string fill_biome;
       float noise_size;
@@ -20,6 +21,8 @@ struct BiomeManager
       }
 
       void LoadBiomes(ModLoader *_modloader, std::string planet_type) {
+            modloader = _modloader;
+
             for (auto planet_t : _modloader->mods["base"]->PlanetTypeData) {
                   if (planet_t.second["id"] == planet_type) {
                         fill_biome = planet_t.second["fill_biome"];
