@@ -1,8 +1,13 @@
 {
     "id": "log",
+    "title": "Oak log",
     "stack_size": 50,
     "tags": {
-        "type": "raw_resource",
+        "type": {
+            "id" :"raw_resource",
+            "title": "Raw resource",
+            "color": [193, 193, 193]
+        },
         "description": ""
     },
     "texture": {

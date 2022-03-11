@@ -20,9 +20,9 @@ struct Field : public GuiElement
       }
 
       void Render() {
-            DrawRectangleV({pos.x + offset.x, pos.y + offset.y}, {rect.width, rect.height}, D_GREY);
+            DrawRectangleV({pos.x + offset.x, pos.y + offset.y}, {rect.width, rect.height}, color);
+            
             //DrawRectangleLinesEx({pos.x, pos.y, rect.width, rect.height}, 2, D_LIGHTGREY);
-
             //DrawRectangleRounded({pos.x, pos.y, rect.width, rect.height}, 25, 8, BLACK); 
       }
 };

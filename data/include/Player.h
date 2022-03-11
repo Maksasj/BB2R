@@ -45,7 +45,8 @@ struct Player : public Entity
             inventory = new Inventory(5);
 
 
-            for (float x = 0; x < 6; x++) {
+            hotbar_item_list.push_back("pickaxe");
+            for (float x = 1; x < 6; x++) {
                   hotbar_item_list.push_back("nothing");
             }
       }

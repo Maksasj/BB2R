@@ -38,8 +38,8 @@ struct Window : public Field
       void SetKey(KeyboardKey key) { closing_key = (int)key; }
       
       void setTitle(std::string _title , game::font* _font) { 
-            title_size = MeasureTextEx(*_font->Rfont, _title.c_str(), 16, 0); 
-            title_text = new Text(_title, _font, 15, vec2{(dzc.x + dzr.w/2 - title_size.x/2) , (dzc.y + dzr.h/2 - title_size.y/2)});
+            title_size = MeasureTextEx(*_font->Rfont, _title.c_str(), 20, 0); 
+            title_text = new Text(_title, _font, 20, vec2{(dzc.x + dzr.w/2 - title_size.x/2) , (dzc.y + dzr.h/2 - title_size.y/2)});
             title = true;
       }
 

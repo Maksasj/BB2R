@@ -11,6 +11,7 @@
 struct Text : public GuiElement
 {   
       game::font *Gfont;
+      Color color;
       std::string actext;
       float font_size;
 
@@ -18,10 +19,12 @@ struct Text : public GuiElement
             Gfont = _font;
             actext = _text;
             font_size = _font_size;
+            color = RAYWHITE;
       }
 
+      
       void Render() {
-            DrawTextEx(*Gfont->Rfont, actext.c_str(), {pos.x + offset.x, pos.y + offset.y} , font_size, 0, RAYWHITE); 
+            DrawTextEx(*Gfont->Rfont, actext.c_str(), {pos.x + offset.x, pos.y + offset.y} , font_size, 0, color); 
       }
 };
 

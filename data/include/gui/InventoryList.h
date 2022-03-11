@@ -76,9 +76,25 @@ struct InventoryList : public GuiElement
                         DrawRectangle(x_pos, y_pos, 150, 50, D_LIGHTGREY);
                   }
 
-                  DrawTextEx(*main_font->Rfont, inventory->storage[y].item.id.c_str(), {x_pos, y_pos} , 24, 0, RAYWHITE); 
-                  //DrawTextEx(*main_font->Rfont, inventory->storage[y].item.type.c_str(), {x_pos, y_pos + 20} , 15, 0, BLUE); 
-                  DrawTextEx(*main_font->Rfont, std::to_string(inventory->storage[y].count).c_str(), {x_pos + 130, y_pos} , 24, 0, RAYWHITE); 
+                  DrawTextEx(*main_font->Rfont, ((std::string)inventory->itemmanager->ItemData[inventory->storage[y].item.id]["title"]).c_str(), {x_pos + 2, y_pos} , 24, 0, RAYWHITE); 
+                  
+                  if (inventory->itemmanager->ItemData[inventory->storage[y].item.id]["tags"]["type"].contains("title")) {
+                        std::string _tmp_text = inventory->itemmanager->ItemData[inventory->storage[y].item.id]["tags"]["type"]["title"];
+                        Color _color = {255, 255, 255, 255};
+
+                        //Check if item have color value for type
+                        if(inventory->itemmanager->ItemData[inventory->storage[y].item.id]["tags"]["type"].contains("color")) {  _color = { inventory->itemmanager->ItemData[inventory->storage[y].item.id]["tags"]["type"]["color"][0], inventory->itemmanager->ItemData[inventory->storage[y].item.id]["tags"]["type"]["color"][1], inventory->itemmanager->ItemData[inventory->storage[y].item.id]["tags"]["type"]["color"][2], 255 }; }
+                        
+                        Vector2 title_size = MeasureTextEx(*main_font->Rfont, _tmp_text.c_str(), 20, 0); 
+                        DrawTextEx(*main_font->Rfont, _tmp_text.c_str(), {x_pos + 2, y_pos + 50 - title_size.y} , 20, 0, _color); 
+                  }
+
+                  Vector2 count_text_size = MeasureTextEx(*main_font->Rfont, std::to_string(inventory->storage[y].count).c_str(), 24, 0); 
+                  DrawTextEx(*main_font->Rfont, std::to_string(inventory->storage[y].count).c_str(), {x_pos + 150 - count_text_size.x - 3, y_pos} , 24, 0, RAYWHITE); 
+                  
+                  Vector2 max_stack_text_size = MeasureTextEx(*main_font->Rfont, std::to_string((int)inventory->itemmanager->ItemData[inventory->storage[y].item.id]["stack_size"]).c_str(), 24, 0); 
+                  DrawTextEx(*main_font->Rfont, std::to_string((int)inventory->itemmanager->ItemData[inventory->storage[y].item.id]["stack_size"]).c_str(), {x_pos + 150 - max_stack_text_size.x - 3, y_pos + 50 - max_stack_text_size.y} , 24, 0, {153, 153, 153, 255}); 
+            
             }
             EndScissorMode();
       }

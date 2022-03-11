@@ -1,9 +1,14 @@
 {
     "id": "pickaxe",
+    "title": "Pickaxe",
     "stack_size": 1,
     "tags": {
-        "type": "tool",
-        "description": "Pickaxe allows you to \n break blocks, collect some items. \n This is a basic pickaxe , but still \n very useful"
+        "type": {
+            "id" :"tool",
+            "title": "Tool",
+            "color": [255, 77, 77]
+        },
+        "description": "Pickaxe allows you to \nbreak blocks, collect some items. \nThis is a basic pickaxe , but still \nvery useful"
     },
     "usage": {
         "type": "break",
