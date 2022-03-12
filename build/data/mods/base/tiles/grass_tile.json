@@ -5,7 +5,102 @@
         "path": "assets/textures/tile/grass_tile.png",
         "size": {
             "width": 16,
-            "height": 16
+            "height": 160
+        },
+        "transition_animations": [
+            "sand_tile"
+        ],
+        "animation": {
+            "grass_tile_sand_tile_center": {
+                "row": 1,
+                "collum":0,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_sand_tile_down": {
+                "row": 1,
+                "collum":1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_sand_tile_left_down": {
+                "row": 1,
+                "collum":2,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_sand_tile_left": {
+                "row": 1,
+                "collum":3,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_sand_tile_left_up": {
+                "row": 1,
+                "collum":4,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_sand_tile_up": {
+                "row": 1,
+                "collum":5,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_sand_tile_right_up": {
+                "row": 1,
+                "collum":6,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_sand_tile_right": {
+                "row": 1,
+                "collum":7,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_sand_tile_right_down": {
+                "row": 1,
+                "collum":8,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_sand_tile_around": {
+                "row": 1,
+                "collum":9,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            }
         }
     }
 }

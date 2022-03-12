@@ -57,14 +57,14 @@ struct Chunk
 
                 if(biomemanager->modloader->mods["base"]->TileData[c]["texture"].contains("transition_animations")) {
                     for (std::string w : biomemanager->modloader->mods["base"]->TileData[c]["texture"]["transition_animations"]) {
-                        if (x_yp1 == w && x_ym1 == c && xp1_y == c && xm1_y == c) { tiles[x][y]->EntityState = c+"_"+w+"_down"; }
-                        if (x_yp1 == w && x_ym1 == c && xp1_y == c && xm1_y == w) { tiles[x][y]->EntityState = c+"_"+w+"_left_down"; }
-                        if (x_yp1 == c && x_ym1 == c && xp1_y == c && xm1_y == w) { tiles[x][y]->EntityState = c+"_"+w+"_left"; }
-                        if (x_yp1 == c && x_ym1 == w && xp1_y == c && xm1_y == w) { tiles[x][y]->EntityState = c+"_"+w+"_left_up"; }
-                        if (x_yp1 == c && x_ym1 == w && xp1_y == c && xm1_y == c) { tiles[x][y]->EntityState = c+"_"+w+"_up"; }
-                        if (x_yp1 == c && x_ym1 == w && xp1_y == w && xm1_y == c) { tiles[x][y]->EntityState = c+"_"+w+"_right_up"; }
-                        if (x_yp1 == c && x_ym1 == c && xp1_y == w && xm1_y == c) { tiles[x][y]->EntityState = c+"_"+w+"_right"; }
-                        if (x_yp1 == w && x_ym1 == c && xp1_y == w && xm1_y == c) { tiles[x][y]->EntityState = c+"_"+w+"_right_down"; }
+                        if (xp1_y == w) { tiles[x][y]->EntityState = c+"_"+w+"_right"; }
+                        if ( xm1_y == w) { tiles[x][y]->EntityState = c+"_"+w+"_left"; }
+                        if (x_yp1 == w) { tiles[x][y]->EntityState = c+"_"+w+"_down"; }
+                        if (x_yp1 == w && xm1_y == w) { tiles[x][y]->EntityState = c+"_"+w+"_left_down"; }
+                        if (x_yp1 == w && xp1_y == w) { tiles[x][y]->EntityState = c+"_"+w+"_right_down"; }
+                        if (x_ym1 == w) { tiles[x][y]->EntityState = c+"_"+w+"_up"; }
+                        if (x_ym1 == w && xm1_y == w) { tiles[x][y]->EntityState = c+"_"+w+"_left_up"; }
+                        if (x_ym1 == w && xp1_y == w) { tiles[x][y]->EntityState = c+"_"+w+"_right_up"; }
                     }
                 }
             }
