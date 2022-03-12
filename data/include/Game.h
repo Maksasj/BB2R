@@ -103,12 +103,15 @@ struct Game
             ClearBackground(RAYWHITE);
 
             world->Render(player->x , player->y);
+            world->Update(player->x , player->y);
+            
             player->Update();
             gui->Update();
 
             texturemanager->UpdateAnimations();
 
             player->Render();
+
 
             DrawFPS(0, 0); 
             gui->Render();

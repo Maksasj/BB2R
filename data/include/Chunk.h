@@ -32,6 +32,19 @@ struct Chunk
         X = x; Y = y;  
     }
 
+    void Update() {
+        for (auto item : items) {
+            int x = (item->x - X*CHUNK_SIZE) / TILE_SIZE;
+            int y = (item->y - X*CHUNK_SIZE) / TILE_SIZE;
+
+            if (block_exist[x][y]) {
+                if (blocks[x][y]->EntityID == "conveyor_block") {
+                    item->x += 1;
+                }
+            }
+        }
+    }
+
     std::string GetTile(BiomeManager *biomemanager, FastNoiseLite *noise , int x, int y) {
         double hight =  noise->GetNoise((float)(x + X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(y + Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) +                   noise->GetNoise((float)(5*x + 5*X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(5*y + 5*Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) * 0.5;
         double temp  =  noise->GetNoise((float)(x + X*CHUNK_TILE_WIDTH + 816516)*biomemanager->noise_size , (float)(y + Y*CHUNK_TILE_WIDTH + 1161)*biomemanager->noise_size) +  noise->GetNoise((float)(5*x + 5*X*CHUNK_TILE_WIDTH + 98146)*biomemanager->noise_size , (float)(5*y + 5*Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) * 0.5;
@@ -136,7 +149,7 @@ struct Chunk
         for (auto item : items) {
             item->Render();
         }
-        
+
     }
 
 };

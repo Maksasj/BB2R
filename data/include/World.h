@@ -59,6 +59,21 @@ struct World
         }
     }
 
+    void Update(float x, float y) {
+        int X = floor(x / CHUNK_SIZE);
+        int Y = floor(y / CHUNK_SIZE);
+
+        Chunks[{X,Y}]->Update();
+        Chunks[{X + 1, Y}]->Update();
+        Chunks[{X + 1, Y +1}]->Update();
+        Chunks[{X - 1,Y}]->Update();
+        Chunks[{X - 1,Y - 1}]->Update();
+        Chunks[{X + 1,Y - 1}]->Update();
+        Chunks[{X - 1,Y + 1}]->Update();
+        Chunks[{X,Y + 1}]->Update();
+        Chunks[{X,Y - 1}]->Update();
+    }
+
     void Render(float x, float y) {
         int X = floor(x / CHUNK_SIZE);
         int Y = floor(y / CHUNK_SIZE);

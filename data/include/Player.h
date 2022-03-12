@@ -43,7 +43,7 @@ struct Player : public Entity
             hotbar_active_cell = 0;
 
             inventory = new Inventory(5);
-
+            inventory->AddItem("conveyor", 50);
 
             hotbar_item_list.push_back("pickaxe");
             for (float x = 1; x < 6; x++) {
