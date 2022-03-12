@@ -113,10 +113,14 @@ struct Player : public Entity
             } else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
                   if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "break") {
                         if(hand->TryBreakBlock(x, y)) {
-                              Drop tmp_drop = hand->BreakBlock(x, y);
-                              if (tmp_drop.item_id != "nothing") { inventory->AddItem(tmp_drop.item_id, tmp_drop.count); }
+                              hand->BreakBlock(x, y);
                         }
                   }
+            }
+
+            if(IsKeyDown(KEY_F)) {
+                  Drop tmp_drop = hand->TryPickUpItem(x, y);
+                  if (tmp_drop.item_id != "nothing") { inventory->AddItem(tmp_drop.item_id, tmp_drop.count); }
             }
       }
 

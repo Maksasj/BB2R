@@ -7,6 +7,9 @@
 
 #include "Tile.h"
 #include "Block.h"
+#include "MobEntity.h"
+#include "ItemEntity.h"
+
 #include "Defines.h"
 #include "PerlinNoise/FastNoiseLite.h"
 #include "BiomeManager.h"
@@ -14,6 +17,9 @@
 struct Chunk
 {
     Tile* tiles[16][16]; Block* blocks[16][16];
+    std::vector<MobEntity*>  mobs;
+    std::vector<ItemEntity*> items;
+
     bool block_exist[16][16]; bool tile_exist[16][16];
     int X, Y;
 
@@ -126,6 +132,11 @@ struct Chunk
                 if (block_exist[x][y]) {    blocks[x][y]->Render(); }
             }
         }
+
+        for (auto item : items) {
+            item->Render();
+        }
+        
     }
 
 };

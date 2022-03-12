@@ -97,7 +97,33 @@ struct Hand
             return false;
       }
 
-      Drop BreakBlock(float Player_X, float Player_Y) {
+      Drop TryPickUpItem(float Player_X, float Player_Y) {
+            std::string item_id = "nothing"; int count = 0;
+
+            int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
+            int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
+
+            int X = floor(ox / CHUNK_SIZE); if (ox < 0) { X--; }
+            int Y = floor(oy / CHUNK_SIZE); if (oy < 0) { Y--; }
+
+            auto item = world->_World[{X,Y}]->items.begin();
+            while(item != world->_World[{X,Y}]->items.end()) {
+                  if( distance({Player_X, Player_Y}, {(*item)->x, (*item)->y}) < 70.0) {
+                        item_id = (*item)->EntityID;
+                        count = (*item)->count;
+
+                        item = world->_World[{X,Y}]->items.erase(item);
+                  } else { item++; }
+            }
+
+            return {item_id, count};
+      }
+      
+      void DropItem(std::string _item_id, int count, int X, int Y, int px, int py) {
+            world->_World[{X,Y}]->items.push_back(CreateItemEntity(world->worldgenerator->texturemanager, _item_id, count, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE));
+      }
+
+      void BreakBlock(float Player_X, float Player_Y) {
             int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
             int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
 
@@ -116,11 +142,13 @@ struct Hand
                   }
             }
 
+            if (item_id != "nothing") {
+                  DropItem(item_id, count, X, Y, px, py);
+            }
+
             delete world->_World[{X,Y}]->blocks[px][py];
             world->_World[{X,Y}]->block_exist[px][py] = false;
             world->Chunks[{X,Y}] = world->_World[{X,Y}];
-
-            return {item_id, count};
       }
 
       void PlaceBlock(float Player_X, float Player_Y, std::string _item_id) {

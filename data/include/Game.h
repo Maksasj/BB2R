@@ -100,7 +100,6 @@ struct Game
             if (IsKeyDown(KEY_F2)) { ScreenShot(); }
             
             BeginDrawing();
-
             ClearBackground(RAYWHITE);
 
             world->Render(player->x , player->y);
