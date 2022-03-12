@@ -53,7 +53,7 @@ struct Game
       Player *player;
       game::font *Gfont;
       Gui *gui;
-            
+
       Game() {
             game_running = true;
             state = "main_menu";
@@ -100,6 +100,7 @@ struct Game
             if (IsKeyDown(KEY_F2)) { ScreenShot(); }
             
             BeginDrawing();
+
             ClearBackground(RAYWHITE);
 
             world->Render(player->x , player->y);
@@ -112,7 +113,7 @@ struct Game
 
             DrawFPS(0, 0); 
             gui->Render();
-
+  
             EndDrawing();
             timer.Update();
       }

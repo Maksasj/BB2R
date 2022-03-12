@@ -14,6 +14,7 @@
             "sand_tile_water_tile_center": {
                 "row": 1,
                 "collum":0,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -23,6 +24,7 @@
             "sand_tile_water_tile_down": {
                 "row": 1,
                 "collum":1,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -32,6 +34,7 @@
             "sand_tile_water_tile_left_down": {
                 "row": 1,
                 "collum":2,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -41,6 +44,7 @@
             "sand_tile_water_tile_left": {
                 "row": 1,
                 "collum":3,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -50,6 +54,7 @@
             "sand_tile_water_tile_left_up": {
                 "row": 1,
                 "collum":4,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -59,6 +64,7 @@
             "sand_tile_water_tile_up": {
                 "row": 1,
                 "collum":5,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -68,6 +74,7 @@
             "sand_tile_water_tile_right_up": {
                 "row": 1,
                 "collum":6,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -77,6 +84,7 @@
             "sand_tile_water_tile_right": {
                 "row": 1,
                 "collum":7,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -86,6 +94,7 @@
             "sand_tile_water_tile_right_down": {
                 "row": 1,
                 "collum":8,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -95,6 +104,7 @@
             "sand_tile_water_tile_around": {
                 "row": 1,
                 "collum":9,
+                "frame_count": 1,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,

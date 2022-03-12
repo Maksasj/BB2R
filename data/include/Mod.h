@@ -101,10 +101,18 @@ struct Mod
             for (auto tile : TileData) {
                   std::string _path = tile.second["texture"]["path"];
                   Textures[tile.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, tile.second["texture"]["size"]["width"], tile.second["texture"]["size"]["height"]);
-                  
+                                                                              
                   if(tile.second["texture"].contains("animation")) {
                         for (auto& animation : tile.second["texture"]["animation"].items()) {
-                              animationmanager->AddAnimation(animation.key(), Textures[tile.second["id"]], tile.second["texture"]["animation"][animation.key()]["row"], tile.second["texture"]["animation"][animation.key()]["collum"], tile.second["texture"]["animation"][animation.key()]["speed"], tile.second["texture"]["animation"][animation.key()]["frame_size"]["width"], tile.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
+                              animationmanager->AddAnimation(
+                                    animation.key(), 
+                                    Textures[tile.second["id"]], 
+                                    tile.second["texture"]["animation"][animation.key()]["frame_count"], 
+                                    tile.second["texture"]["animation"][animation.key()]["row"], 
+                                    tile.second["texture"]["animation"][animation.key()]["collum"], 
+                                    tile.second["texture"]["animation"][animation.key()]["speed"], 
+                                    tile.second["texture"]["animation"][animation.key()]["frame_size"]["width"], 
+                                    tile.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
                         }
                   }
                   
@@ -117,7 +125,7 @@ struct Mod
                   
                   if(block.second["texture"].contains("animation")) {
                         for (auto& animation : block.second["texture"]["animation"].items()) {
-                              animationmanager->AddAnimation(animation.key(), Textures[block.second["id"]], block.second["texture"]["animation"][animation.key()]["row"], block.second["texture"]["animation"][animation.key()]["collum"], block.second["texture"]["animation"][animation.key()]["speed"], block.second["texture"]["animation"][animation.key()]["frame_size"]["width"], block.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
+                              animationmanager->AddAnimation(animation.key(), Textures[block.second["id"]], block.second["texture"]["animation"][animation.key()]["frame_count"], block.second["texture"]["animation"][animation.key()]["row"], block.second["texture"]["animation"][animation.key()]["collum"], block.second["texture"]["animation"][animation.key()]["speed"], block.second["texture"]["animation"][animation.key()]["frame_size"]["width"], block.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
                         }
                   }
             }
@@ -129,7 +137,7 @@ struct Mod
                   
                   if(mob.second["texture"].contains("animation")) {
                         for (auto& animation : mob.second["texture"]["animation"].items()) {
-                              animationmanager->AddAnimation(animation.key(), Textures[mob.second["id"]], mob.second["texture"]["animation"][animation.key()]["row"], mob.second["texture"]["animation"][animation.key()]["collum"], mob.second["texture"]["animation"][animation.key()]["speed"], mob.second["texture"]["animation"][animation.key()]["frame_size"]["width"], mob.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
+                              animationmanager->AddAnimation(animation.key(), Textures[mob.second["id"]], mob.second["texture"]["animation"][animation.key()]["frame_count"], mob.second["texture"]["animation"][animation.key()]["row"], mob.second["texture"]["animation"][animation.key()]["collum"], mob.second["texture"]["animation"][animation.key()]["speed"], mob.second["texture"]["animation"][animation.key()]["frame_size"]["width"], mob.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
                         }
                   }
             }
@@ -141,7 +149,7 @@ struct Mod
                   
                   if(item.second["texture"].contains("animation")) {
                         for (auto& animation : item.second["texture"]["animation"].items()) {
-                              animationmanager->AddAnimation(animation.key(), Textures[item.second["id"]], item.second["texture"]["animation"][animation.key()]["row"], item.second["texture"]["animation"][animation.key()]["collum"], item.second["texture"]["animation"][animation.key()]["speed"], item.second["texture"]["animation"][animation.key()]["frame_size"]["width"], item.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
+                              animationmanager->AddAnimation(animation.key(), Textures[item.second["id"]], item.second["texture"]["animation"][animation.key()]["frame_count"], item.second["texture"]["animation"][animation.key()]["row"], item.second["texture"]["animation"][animation.key()]["collum"], item.second["texture"]["animation"][animation.key()]["speed"], item.second["texture"]["animation"][animation.key()]["frame_size"]["width"], item.second["texture"]["animation"][animation.key()]["frame_size"]["height"]);
                         }
                   }
             }

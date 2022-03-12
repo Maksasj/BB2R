@@ -15,8 +15,9 @@
         },
         "animation": {
             "player_idle": {
-                "row": 4,
+                "row": 0,
                 "collum":0,
+                "frame_count": 4,
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
@@ -24,8 +25,9 @@
                 }
             },
             "player_run_up": {
-                "row": 4,
+                "row": 0,
                 "collum":1,
+                "frame_count": 4,
                 "speed": 24,
                 "frame_size": {
                     "width": 64,
@@ -33,8 +35,9 @@
                 }
             },
             "player_run_down": {
-                "row": 4,
+                "row": 0,
                 "collum":2,
+                "frame_count": 4,
                 "speed": 24,
                 "frame_size": {
                     "width": 64,
@@ -42,8 +45,9 @@
                 }
             },
             "player_run_right": {
-                "row": 4,
+                "row": 0,
                 "collum":3,
+                "frame_count": 4,
                 "speed": 24,
                 "frame_size": {
                     "width": 64,
@@ -51,8 +55,9 @@
                 }
             },
             "player_run_left": {
-                "row": 4,
+                "row": 0,
                 "collum":4,
+                "frame_count": 4,
                 "speed": 24,
                 "frame_size": {
                     "width": 64,
