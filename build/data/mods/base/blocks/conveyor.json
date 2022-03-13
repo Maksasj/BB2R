@@ -1,0 +1,10 @@
+{
+    "id": "conveyor_block",
+    "texture": {
+        "path": "assets/textures/block/conveyor.png",
+        "size": {
+            "width": 16,
+            "height": 16
+        }
+    }
+}
