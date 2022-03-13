@@ -7,6 +7,7 @@
 #include <map>
 #include <cmath>
 
+#include "ConveyorSystem.h"
 #include "Chunk.h"
 #include "Defines.h"
 #include "TextureManager.h"
@@ -20,6 +21,7 @@ struct World
 {
     std::map<std::pair<int, int> , Chunk*> _World;
     std::map<std::pair<int, int> , Chunk*> Chunks;
+    std::vector<ConveyorSystem> ConveyorSystems;
 
     WorldGenerator* worldgenerator;
     WorldLoader* worldloader;
@@ -62,6 +64,10 @@ struct World
     void Update(float x, float y) {
         int X = floor(x / CHUNK_SIZE);
         int Y = floor(y / CHUNK_SIZE);
+
+        for (auto con_sys : ConveyorSystems) {
+            con_sys.Update();
+        }
 
         Chunks[{X,Y}]->Update();
         Chunks[{X + 1, Y}]->Update();

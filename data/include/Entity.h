@@ -31,7 +31,9 @@ struct Entity
             x = X; y = Y;
       }
       
-      void Render() {
+      virtual ~Entity(){}
+
+      virtual void Render() {
             tex->Render(EntityState, x - camera.x, y - camera.y);
       }
 };

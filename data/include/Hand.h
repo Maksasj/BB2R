@@ -39,6 +39,163 @@ bool collis(BlockRect rect1, BlockRect rect2) {
       return false;
 }
 
+std::string GetBlock(World* world, int x, int y) {
+      int X = floor(x / 16); if (x < 0) { X--; }
+      int Y = floor(y / 16); if (y < 0) { Y--; }
+      
+      std::string block = "nothing";
+
+      int px = abs(X*16 - x);
+      int py = abs(Y*16 - y);
+
+      if (world->_World[{X,Y}]->block_exist[px][py]) {
+            block = world->_World[{X,Y}]->blocks[px][py]->EntityID;
+      }
+
+      return block;
+}
+
+int GetConv_Sys(World* world, int x, int y) {
+      int X = floor(x / 16); if (x < 0) { X--; }
+      int Y = floor(y / 16); if (y < 0) { Y--; }
+      
+      int ret = 0;
+
+      int px = abs(X*16 - x);
+      int py = abs(Y*16 - y);
+      
+      if (world->_World[{X,Y}]->block_exist[px][py]) {
+            ret = world->_World[{X,Y}]->blocks[px][py]->Get("conv_syst");
+      }
+
+      return ret;
+}
+
+int GetDirection(World* world, int x, int y) {
+      int X = floor(x / 16); if (x < 0) { X--; }
+      int Y = floor(y / 16); if (y < 0) { Y--; }
+      
+      int ret = 0;
+
+      int px = abs(X*16 - x);
+      int py = abs(Y*16 - y);
+      
+      if (world->_World[{X,Y}]->block_exist[px][py]) {
+            ret = world->_World[{X,Y}]->blocks[px][py]->direction;
+      }
+
+      return ret;
+}
+
+void PlacePrototype(World* world, std::string _block_id, int X, int Y, int px, int py) {
+      if(_block_id == "conveyor_block") {
+
+            std::string x_yp1 = GetBlock(world, X*16 + px, Y*16 + py + 1); //Down
+            std::string x_ym1 = GetBlock(world, X*16 + px, Y*16 + py - 1); //Up
+            std::string xp1_y = GetBlock(world, X*16 + px + 1, Y*16 + py); //Right
+            std::string xm1_y = GetBlock(world, X*16 + px - 1, Y*16 + py); //Left 
+
+            if (x_yp1 != "conveyor_block" && x_ym1 != "conveyor_block" && xp1_y != "conveyor_block" && xm1_y != "conveyor_block") {
+                  ConveyorSystem conv_sys;
+                  ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                  tmp_conv->conv_syst = world->ConveyorSystems.size();
+                  tmp_conv->direction = 1;  
+                  world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+
+                  conv_sys.addConveyorBelt(tmp_conv);
+                  world->ConveyorSystems.push_back(conv_sys);
+
+            } else if (x_yp1 == "conveyor_block") { //UP
+                  int conv_sys = GetConv_Sys(world, X*16 + px, Y*16 + py + 1);
+                  int direction = GetDirection(world, X*16 + px, Y*16 + py + 1);
+
+                  if (direction == 1) {
+                        ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                        tmp_conv->conv_syst = conv_sys; 
+                        tmp_conv->direction = 1;
+                        world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+                        world->ConveyorSystems[conv_sys].addConveyorBelt(tmp_conv);
+                  } else {
+                        ConveyorSystem conv_sys;
+                        ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                        tmp_conv->conv_syst = world->ConveyorSystems.size();
+                        tmp_conv->direction = GetRandomValue(1, 4);         
+                        world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+
+                        conv_sys.addConveyorBelt(tmp_conv);
+                        world->ConveyorSystems.push_back(conv_sys);
+                  }
+
+            } else if (x_ym1 == "conveyor_block") { //DOWN
+                  int conv_sys = GetConv_Sys(world, X*16 + px, Y*16 + py - 1);
+                  int direction = GetDirection(world, X*16 + px, Y*16 + py - 1);
+
+                  if (direction == 2) {
+                        ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                        tmp_conv->conv_syst = conv_sys;
+                        tmp_conv->direction = 2;
+                        world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+                        world->ConveyorSystems[conv_sys].addConveyorBelt(tmp_conv);
+                  } else {
+                        ConveyorSystem conv_sys;
+                        ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                        tmp_conv->conv_syst = world->ConveyorSystems.size();
+                        tmp_conv->direction = GetRandomValue(1, 4);         
+                        world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+
+                        conv_sys.addConveyorBelt(tmp_conv);
+                        world->ConveyorSystems.push_back(conv_sys);
+                  }
+
+            } else if (xp1_y == "conveyor_block") { //LEFT
+                  int conv_sys = GetConv_Sys(world, X*16 + px + 1, Y*16 + py);
+                  int direction = GetDirection(world, X*16 + px + 1, Y*16 + py);
+
+                  if (direction == 3) {
+                        ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                        tmp_conv->conv_syst = conv_sys; 
+                        tmp_conv->direction = 3;
+                        world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+                        world->ConveyorSystems[conv_sys].addConveyorBelt(tmp_conv);
+                  } else {
+                        ConveyorSystem conv_sys;
+                        ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                        tmp_conv->conv_syst = world->ConveyorSystems.size();
+                        tmp_conv->direction = GetRandomValue(1, 4);         
+                        world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+
+                        conv_sys.addConveyorBelt(tmp_conv);
+                        world->ConveyorSystems.push_back(conv_sys);
+                  }
+
+            } else if (xm1_y == "conveyor_block") { //RIGHT
+                  int conv_sys = GetConv_Sys(world, X*16 + px - 1, Y*16 + py);
+                  int direction = GetDirection(world, X*16 + px - 1, Y*16 + py);
+
+                  if (direction == 4) {
+                        ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                        tmp_conv->conv_syst = conv_sys; 
+                        tmp_conv->direction = 4;
+                        world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+                        world->ConveyorSystems[conv_sys].addConveyorBelt(tmp_conv);
+                  } else {
+                        ConveyorSystem conv_sys;
+                        ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                        tmp_conv->conv_syst = world->ConveyorSystems.size();
+                        tmp_conv->direction = GetRandomValue(1, 4);         
+                        world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+
+                        conv_sys.addConveyorBelt(tmp_conv);
+                        world->ConveyorSystems.push_back(conv_sys);
+                  }
+            }
+
+            
+      } else {
+            world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+      }
+}
+
 struct Hand
 {     
       World *world;
@@ -113,6 +270,7 @@ struct Hand
                         count = (*item)->count;
 
                         item = world->_World[{X,Y}]->items.erase(item);
+                        return {item_id, count};
                   } else { item++; }
             }
 
@@ -120,7 +278,29 @@ struct Hand
       }
       
       void DropItem(std::string _item_id, int count, int X, int Y, int px, int py) {
-            world->_World[{X,Y}]->items.push_back(CreateItemEntity(world->worldgenerator->texturemanager, _item_id, count, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE));
+            ItemEntity* tmp_item_entity = CreateItemEntity(world->worldgenerator->texturemanager, _item_id, count, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+            
+            if (world->_World[{X,Y}]->block_exist[px][py]) {
+                  if (world->_World[{X,Y}]->blocks[px][py]->EntityID == "conveyor_block") {
+                        world->_World[{X,Y}]->blocks[px][py]->PickUpItem(tmp_item_entity);
+                        world->_World[{X,Y}]->blocks[px][py]->locked = true;
+                  }
+            } else {
+                  world->_World[{X,Y}]->items.push_back(tmp_item_entity);
+            }
+      }
+
+      void TryDropItem(float Player_X, float Player_Y) {
+            int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
+            int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
+
+            int X = floor(ox / CHUNK_SIZE); if (ox < 0) { X--; }
+            int Y = floor(oy / CHUNK_SIZE); if (oy < 0) { Y--; }
+
+            int px = abs((ox - CHUNK_SIZE*X)/TILE_SIZE);
+            int py = abs((oy - CHUNK_SIZE*Y)/TILE_SIZE);
+
+            DropItem("gem", 1, X, Y, px, py);
       }
 
       void BreakBlock(float Player_X, float Player_Y) {
@@ -168,7 +348,9 @@ struct Hand
             }
 
             if(world->_World[{X,Y}]->block_exist[px][py] == false) {
-                  world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                  
+                  PlacePrototype(world, _block_id, X, Y, px, py);
+                  
                   world->_World[{X,Y}]->block_exist[px][py] = true;
                   world->Chunks[{X,Y}] = world->_World[{X,Y}];    
             }

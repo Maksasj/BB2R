@@ -43,7 +43,7 @@ struct Player : public Entity
             hotbar_active_cell = 0;
 
             inventory = new Inventory(5);
-            inventory->AddItem("conveyor", 50);
+            inventory->AddItem("conveyor", 500);
 
             hotbar_item_list.push_back("pickaxe");
             for (float x = 1; x < 6; x++) {
@@ -121,6 +121,13 @@ struct Player : public Entity
             if(IsKeyDown(KEY_F)) {
                   Drop tmp_drop = hand->TryPickUpItem(x, y);
                   if (tmp_drop.item_id != "nothing") { inventory->AddItem(tmp_drop.item_id, tmp_drop.count); }
+            }
+
+            if(IsKeyPressed(KEY_Q)) {
+                  if (hotbar_item_id != "nothing") {
+                        hand->TryDropItem(x, y);
+                        //inventory->SubtractItem(hotbar_item_id, 1);
+                  }
             }
       }
 

@@ -33,13 +33,10 @@ struct Chunk
     }
 
     void Update() {
-        for (auto item : items) {
-            int x = (item->x - X*CHUNK_SIZE) / TILE_SIZE;
-            int y = (item->y - X*CHUNK_SIZE) / TILE_SIZE;
-
-            if (block_exist[x][y]) {
-                if (blocks[x][y]->EntityID == "conveyor_block") {
-                    item->x += 1;
+        for(int x = 0; x < 16; x++) {   
+            for(int y = 0; y < 16; y++) {
+                if (block_exist[x][y] == true) {
+                    blocks[x][y]->Update();    
                 }
             }
         }
@@ -146,10 +143,11 @@ struct Chunk
             }
         }
 
+        /*
         for (auto item : items) {
             item->Render();
         }
-
+        */
     }
 
 };
