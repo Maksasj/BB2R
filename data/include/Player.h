@@ -33,6 +33,8 @@ struct Player : public Entity
       Hand *hand;
       ItemManager *itemmanager;
 
+      int place_direction;
+
       Player (TextureManager *texturemanager, float X, float Y) : Entity(texturemanager, "player", X, Y) {
             EntityState = "player_idle";
             velocity = 1.5;
@@ -41,6 +43,8 @@ struct Player : public Entity
 
             hotbar_item_id = "pickaxe";
             hotbar_active_cell = 0;
+
+            place_direction = 1;
 
             inventory = new Inventory(5);
             inventory->AddItem("conveyor", 500);
@@ -83,7 +87,7 @@ struct Player : public Entity
             lxO *= 0.3;
             lyO *= 0.3;
             */
-
+           
             camera.x = x + 32.0 - (HALF_SCREEN_WIDTH); //+ lxO;
             camera.y = y + 32.0 - (HALF_SCREEN_HEIGHT); //+ lyO;
 
@@ -103,6 +107,7 @@ struct Player : public Entity
 
             if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "place") {
                   if(item_count > 0 && hand->TryPlaceBlock(x, y, hotbar_item_id)) {
+                        hand->place_direction = place_direction;
                         hand->PlaceBlock(x, y, hotbar_item_id);
                         inventory->SubtractItem(hotbar_item_id, 1);
                   }
@@ -123,6 +128,14 @@ struct Player : public Entity
                   if (tmp_drop.item_id != "nothing") { inventory->AddItem(tmp_drop.item_id, tmp_drop.count); }
             }
 
+            if(IsKeyPressed(KEY_R)) {
+                  if (place_direction + 1 <= 4) {
+                        place_direction++;
+                  } else {
+                        place_direction = 0;
+                  }
+            }
+
             if(IsKeyPressed(KEY_Q)) {
                   if (hotbar_item_id != "nothing") {
                         hand->TryDropItem(x, y);
@@ -132,6 +145,17 @@ struct Player : public Entity
       }
 
       void Render() {
+            // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
+            if(place_direction == 1) {
+                  DrawText("UP", 100, 100, 50, WHITE);  
+            } else if(place_direction == 2) {
+                  DrawText("DOWN", 100, 100, 50, WHITE);  
+            } else if(place_direction == 3) {
+                  DrawText("LEFT", 100, 100, 50, WHITE);  
+            } else if(place_direction == 4) {
+                  DrawText("RIGHT", 100, 100, 50, WHITE);  
+            }
+
             tex->Render(EntityState, x - camera.x, y - camera.y);
       }
 };
