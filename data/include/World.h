@@ -13,6 +13,8 @@
 #include "TextureManager.h"
 #include "ModLoader.h"
 
+#include "ConveyorSystemManager.h"
+
 #include "WorldGenerator.h"
 #include "WorldLoader.h"
 #include "BiomeManager.h"
@@ -21,7 +23,7 @@ struct World
 {
     std::map<std::pair<int, int> , Chunk*> _World;
     std::map<std::pair<int, int> , Chunk*> Chunks;
-    std::vector<ConveyorSystem> ConveyorSystems;
+    ConveyorSystemManager conveyorsystemmanager;
 
     WorldGenerator* worldgenerator;
     WorldLoader* worldloader;
@@ -65,9 +67,8 @@ struct World
         int X = floor(x / CHUNK_SIZE);
         int Y = floor(y / CHUNK_SIZE);
 
-        for (auto con_sys : ConveyorSystems) {
-            con_sys.Update();
-        }
+        conveyorsystemmanager.Update();
+
 
         Chunks[{X,Y}]->Update();
         Chunks[{X + 1, Y}]->Update();

@@ -13,8 +13,10 @@ struct ConveyorBelt : public Block
 
     int conv_syst;
 
-    ConveyorBelt (TextureManager *texturemanager, std::string EntityID, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
+    ConveyorBelt(TextureManager *texturemanager, std::string EntityID, int _conv_syst, int _place_direction, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
         locked = false;
+        conv_syst = _conv_syst;
+        direction = _place_direction;
     }
 
     void Update() {
@@ -29,6 +31,7 @@ struct ConveyorBelt : public Block
         if (id == "conv_syst") { 
             return conv_syst;
         }
+        return -1;
     };
 
     void Render() {
@@ -55,8 +58,8 @@ struct ConveyorBelt : public Block
     }
 };
 
-ConveyorBelt* CreateConveyorBelt(TextureManager *texturemanager, std::string EntityID, float X, float Y) {
-    ConveyorBelt* belt = new ConveyorBelt(texturemanager, EntityID, X, Y);
+ConveyorBelt* CreateConveyorBelt(TextureManager *texturemanager, std::string EntityID, int _conv_syst, int _place_direction, float X, float Y) {
+    ConveyorBelt* belt = new ConveyorBelt(texturemanager, EntityID, _conv_syst, _place_direction, X, Y);
     return belt;
 }
 

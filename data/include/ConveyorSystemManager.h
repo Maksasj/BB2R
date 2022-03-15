@@ -14,6 +14,18 @@ struct ConveyorSystemManager
       ConveyorSystemManager() {
 
       }
+
+      void Update() {
+            for (auto con_sys : ConveyorSystems) {
+                  con_sys.Update();
+            }
+      }
+
+      int CreateSystem() {
+            ConveyorSystem conv_sys;
+            ConveyorSystems.push_back(conv_sys);
+            return ConveyorSystems.size() - 1;
+      }
 };
 
 #endif
