@@ -89,7 +89,6 @@ int GetDirection(World* world, int x, int y) {
 
 void PlacePrototype(World* world, std::string _block_id, int place_direction, int X, int Y, int px, int py) {
       if(_block_id == "conveyor_block") {
-
             std::string x_yp1 = GetBlock(world, X*16 + px, Y*16 + py + 1); //Down
             std::string x_ym1 = GetBlock(world, X*16 + px, Y*16 + py - 1); //Up
             std::string xp1_y = GetBlock(world, X*16 + px + 1, Y*16 + py); //Right

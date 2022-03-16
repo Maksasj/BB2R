@@ -12,7 +12,6 @@ struct ConveyorSystemManager
       std::vector<ConveyorSystem> ConveyorSystems;
 
       ConveyorSystemManager() {
-
       }
 
       void Update() {

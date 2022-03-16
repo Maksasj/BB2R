@@ -5,14 +5,16 @@
 #include <deque>
 
 #include "Timer.h"
+#include "World.h"
 #include "prototype/Conveyor_Belt.h"
 
 struct ConveyorSystem
 {   
       std::deque<ConveyorBelt*> Conveyor_Belts;
+      World *world;
 
       ConveyorSystem() {
-
+            world = _world;
       }
 
       void addConveyorBelt(ConveyorBelt* conv) {
@@ -31,6 +33,17 @@ struct ConveyorSystem
                                           Conveyor_Belts[i + 1]->item->x = Conveyor_Belts[i + 1]->x;
                                           Conveyor_Belts[i + 1]->item->y = Conveyor_Belts[i + 1]->y;
                                     }
+                              }
+                        } else {
+                              // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
+                              if(Conveyor_Belts[i]->direction == 1) {
+                                    
+                              } else if(Conveyor_Belts[i]->direction == 2) {
+                                    
+                              } else if(Conveyor_Belts[i]->direction == 3) {
+                                    
+                              } else if(Conveyor_Belts[i]->direction == 4) {
+                                    
                               }
                         }
                   }

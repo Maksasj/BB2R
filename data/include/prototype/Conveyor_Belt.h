@@ -22,7 +22,7 @@ struct ConveyorBelt : public Block
     void Update() {
 
     }
-
+    
     void PickUpItem(ItemEntity *_item) {
         item = _item;
     };
@@ -37,10 +37,10 @@ struct ConveyorBelt : public Block
     void Render() {
         tex->Render(EntityState, x - camera.x, y - camera.y);
         if (locked) {
-            DrawRectangleV({x - camera.x, y - camera.y}, {64, 64}, {255, 0, 0, 100});
+            DrawRectangleV({x - camera.x, y - camera.y}, {64, 64}, {255, 0, 0, 50});
             item->Render();
         } else {
-            DrawRectangleV({x - camera.x, y - camera.y}, {64, 64}, {0, 255, 0, 100});
+            DrawRectangleV({x - camera.x, y - camera.y}, {64, 64}, {0, 255, 0, 50});
         }
 
         DrawRectangleV({x - camera.x, y - camera.y}, {16, 16}, {static_cast<unsigned char>(50*conv_syst), static_cast<unsigned char>(50*conv_syst), 0, 255});
