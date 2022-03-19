@@ -5,7 +5,11 @@
         "path": "assets/textures/tile/sand_tile.png",
         "size": {
             "width": 16,
-            "height": 160
+            "height": 160,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
         },
         "transition_animations": [
             "water_tile"

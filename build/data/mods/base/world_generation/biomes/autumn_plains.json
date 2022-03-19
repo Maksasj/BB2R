@@ -1,5 +1,5 @@
 {
-    "id": "plains",
+    "id": "autumn_plains",
     "temperature": {
         "max": 0.31,
         "min": -0.3
@@ -12,12 +12,9 @@
         "max": 1,
         "min": 0
     },
-    "hight_layer": "grass_tile",
+    "hight_layer": "autumn_grass_tile",
     "blocks": {
-        "rock": 0.02,
-        "birch": 0.09,
-        "small_rock": 0.05,
-        "sunflower": 0.05,
-        "tulpe": 0.02
+        "birch": 0.12,
+        "small_rock": 0.05
     }
 }

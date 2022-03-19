@@ -43,8 +43,15 @@ bool collis(BlockRect rect1, BlockRect rect2) {
 
 void PlacePrototype(World* world, std::string _block_id, int place_direction, int X, int Y, int px, int py) {
       if(_block_id == "conveyor_block") {
+            
             ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
             tmp_conv->SetupWorld(world);
+
+            if (place_direction == 1) { tmp_conv->EntityState = "conveyor_block_up"; } else 
+            if (place_direction == 2) { tmp_conv->EntityState = "conveyor_block_down"; } else 
+            if (place_direction == 3) { tmp_conv->EntityState = "conveyor_block_left"; } else 
+            if (place_direction == 4) { tmp_conv->EntityState = "conveyor_block_right"; }
+
             world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
       } else {
             world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);

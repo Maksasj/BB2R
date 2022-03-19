@@ -1,8 +1,8 @@
 {
-    "id": "grass_tile",
+    "id": "autumn_grass_tile",
     "solid": false,
     "texture": {
-        "path": "assets/textures/tile/grass_tile.png",
+        "path": "assets/textures/tile/autumn_grass_tile.png",
         "size": {
             "width": 64,
             "height": 160,
@@ -18,7 +18,7 @@
             "snow_tile"
         ],
         "animation": {
-            "grass_tile_sand_tile_center": {
+            "autumn_grass_tile_sand_tile_center": {
                 "row": 0,
                 "collum":0,
                 "frame_count": 1,
@@ -28,7 +28,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_sand_tile_down": {
+            "autumn_grass_tile_sand_tile_down": {
                 "row": 0,
                 "collum":1,
                 "frame_count": 1,
@@ -38,7 +38,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_sand_tile_left_down": {
+            "autumn_grass_tile_sand_tile_left_down": {
                 "row": 0,
                 "collum":2,
                 "frame_count": 1,
@@ -48,7 +48,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_sand_tile_left": {
+            "autumn_grass_tile_sand_tile_left": {
                 "row": 0,
                 "collum":3,
                 "frame_count": 1,
@@ -58,7 +58,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_sand_tile_left_up": {
+            "autumn_grass_tile_sand_tile_left_up": {
                 "row": 0,
                 "collum":4,
                 "frame_count": 1,
@@ -68,7 +68,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_sand_tile_up": {
+            "autumn_grass_tile_sand_tile_up": {
                 "row": 0,
                 "collum":5,
                 "frame_count": 1,
@@ -78,7 +78,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_sand_tile_right_up": {
+            "autumn_grass_tile_sand_tile_right_up": {
                 "row": 0,
                 "collum":6,
                 "frame_count": 1,
@@ -88,7 +88,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_sand_tile_right": {
+            "autumn_grass_tile_sand_tile_right": {
                 "row": 0,
                 "collum":7,
                 "frame_count": 1,
@@ -98,7 +98,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_sand_tile_right_down": {
+            "autumn_grass_tile_sand_tile_right_down": {
                 "row": 0,
                 "collum":8,
                 "frame_count": 1,
@@ -108,7 +108,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_sand_tile_around": {
+            "autumn_grass_tile_sand_tile_around": {
                 "row": 0,
                 "collum":9,
                 "frame_count": 1,
@@ -118,7 +118,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_center": {
+            "autumn_grass_tile_moss_tile_center": {
                 "row": 1,
                 "collum":0,
                 "frame_count": 1,
@@ -128,7 +128,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_down": {
+            "autumn_grass_tile_moss_tile_down": {
                 "row": 1,
                 "collum":1,
                 "frame_count": 1,
@@ -138,7 +138,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_left_down": {
+            "autumn_grass_tile_moss_tile_left_down": {
                 "row": 1,
                 "collum":2,
                 "frame_count": 1,
@@ -148,7 +148,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_left": {
+            "autumn_grass_tile_moss_tile_left": {
                 "row": 1,
                 "collum":3,
                 "frame_count": 1,
@@ -158,7 +158,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_left_up": {
+            "autumn_grass_tile_moss_tile_left_up": {
                 "row": 1,
                 "collum":4,
                 "frame_count": 1,
@@ -168,7 +168,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_up": {
+            "autumn_grass_tile_moss_tile_up": {
                 "row": 1,
                 "collum":5,
                 "frame_count": 1,
@@ -178,7 +178,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_right_up": {
+            "autumn_grass_tile_moss_tile_right_up": {
                 "row": 1,
                 "collum":6,
                 "frame_count": 1,
@@ -188,7 +188,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_right": {
+            "autumn_grass_tile_moss_tile_right": {
                 "row": 1,
                 "collum":7,
                 "frame_count": 1,
@@ -198,7 +198,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_right_down": {
+            "autumn_grass_tile_moss_tile_right_down": {
                 "row": 1,
                 "collum":8,
                 "frame_count": 1,
@@ -208,7 +208,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_moss_tile_around": {
+            "autumn_grass_tile_moss_tile_around": {
                 "row": 1,
                 "collum":9,
                 "frame_count": 1,
@@ -218,7 +218,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_center": {
+            "autumn_grass_tile_prairie_moss_tile_center": {
                 "row": 2,
                 "collum":0,
                 "frame_count": 1,
@@ -228,7 +228,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_down": {
+            "autumn_grass_tile_prairie_moss_tile_down": {
                 "row": 2,
                 "collum":1,
                 "frame_count": 1,
@@ -238,7 +238,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_left_down": {
+            "autumn_grass_tile_prairie_moss_tile_left_down": {
                 "row": 2,
                 "collum":2,
                 "frame_count": 1,
@@ -248,7 +248,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_left": {
+            "autumn_grass_tile_prairie_moss_tile_left": {
                 "row": 2,
                 "collum":3,
                 "frame_count": 1,
@@ -258,7 +258,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_left_up": {
+            "autumn_grass_tile_prairie_moss_tile_left_up": {
                 "row": 2,
                 "collum":4,
                 "frame_count": 1,
@@ -268,7 +268,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_up": {
+            "autumn_grass_tile_prairie_moss_tile_up": {
                 "row": 2,
                 "collum":5,
                 "frame_count": 1,
@@ -278,7 +278,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_right_up": {
+            "autumn_grass_tile_prairie_moss_tile_right_up": {
                 "row": 2,
                 "collum":6,
                 "frame_count": 1,
@@ -288,7 +288,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_right": {
+            "autumn_grass_tile_prairie_moss_tile_right": {
                 "row": 2,
                 "collum":7,
                 "frame_count": 1,
@@ -298,7 +298,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_right_down": {
+            "autumn_grass_tile_prairie_moss_tile_right_down": {
                 "row": 2,
                 "collum":8,
                 "frame_count": 1,
@@ -308,7 +308,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_prairie_moss_tile_around": {
+            "autumn_grass_tile_prairie_moss_tile_around": {
                 "row": 2,
                 "collum":9,
                 "frame_count": 1,
@@ -318,7 +318,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_center": {
+            "autumn_grass_tile_snow_tile_center": {
                 "row": 3,
                 "collum":0,
                 "frame_count": 1,
@@ -328,7 +328,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_down": {
+            "autumn_grass_tile_snow_tile_down": {
                 "row": 3,
                 "collum":1,
                 "frame_count": 1,
@@ -338,7 +338,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_left_down": {
+            "autumn_grass_tile_snow_tile_left_down": {
                 "row": 3,
                 "collum":2,
                 "frame_count": 1,
@@ -348,7 +348,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_left": {
+            "autumn_grass_tile_snow_tile_left": {
                 "row": 3,
                 "collum":3,
                 "frame_count": 1,
@@ -358,7 +358,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_left_up": {
+            "autumn_grass_tile_snow_tile_left_up": {
                 "row": 3,
                 "collum":4,
                 "frame_count": 1,
@@ -368,7 +368,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_up": {
+            "autumn_grass_tile_snow_tile_up": {
                 "row": 3,
                 "collum":5,
                 "frame_count": 1,
@@ -378,7 +378,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_right_up": {
+            "autumn_grass_tile_snow_tile_right_up": {
                 "row": 3,
                 "collum":6,
                 "frame_count": 1,
@@ -388,7 +388,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_right": {
+            "autumn_grass_tile_snow_tile_right": {
                 "row": 3,
                 "collum":7,
                 "frame_count": 1,
@@ -398,7 +398,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_right_down": {
+            "autumn_grass_tile_snow_tile_right_down": {
                 "row": 3,
                 "collum":8,
                 "frame_count": 1,
@@ -408,7 +408,7 @@
                     "height": 64
                 }
             },
-            "grass_tile_snow_tile_around": {
+            "autumn_grass_tile_snow_tile_around": {
                 "row": 3,
                 "collum":9,
                 "frame_count": 1,

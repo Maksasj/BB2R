@@ -11,7 +11,11 @@
         "path": "assets/textures/mob/player.png",
         "size": {
             "width": 64,
-            "height": 80
+            "height": 80,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
         },
         "animation": {
             "player_idle": {

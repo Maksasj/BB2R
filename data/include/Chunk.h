@@ -15,14 +15,6 @@
 #include "PerlinNoise/FastNoiseLite.h"
 #include "BiomeManager.h"
 
-bool isValid(int i, int j)
-{
-    if (i < 0 || i >= 16
-        || j >= 16 || j < 0)
-        return false;
-    return true;
-}
-
 struct Chunk
 {
     Tile* tiles[16][16]; Block* blocks[16][16];
@@ -149,15 +141,15 @@ struct Chunk
         for(int x = 0; x < 16; x++) {
             for(int y = 0; y < 16; y++) {
                 if (tile_exist[x][y])  {    tiles[x][y]->Render();  }
+            }
+        }
+
+        for(int x = 0; x < 16; x++) {
+            for(int y = 0; y < 16; y++) {
                 if (block_exist[x][y]) {    blocks[x][y]->Render(); }
             }
         }
 
-        /*
-        for (auto item : items) {
-            item->Render();
-        }
-        */
     }
 
 };

@@ -100,7 +100,7 @@ struct Mod
             //Tile
             for (auto tile : TileData) {
                   std::string _path = tile.second["texture"]["path"];
-                  Textures[tile.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, tile.second["texture"]["size"]["width"], tile.second["texture"]["size"]["height"]);
+                  Textures[tile.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, tile.second["texture"]["size"]["width"], tile.second["texture"]["size"]["height"], tile.second["texture"]["size"]["frame_size"]["width"], tile.second["texture"]["size"]["frame_size"]["height"]);
                                                                               
                   if(tile.second["texture"].contains("animation")) {
                         for (auto& animation : tile.second["texture"]["animation"].items()) {
@@ -121,7 +121,7 @@ struct Mod
             //Blocks
             for (auto block : BlockData) {
                   std::string _path = block.second["texture"]["path"];
-                  Textures[block.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, block.second["texture"]["size"]["width"], block.second["texture"]["size"]["height"]);
+                  Textures[block.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, block.second["texture"]["size"]["width"], block.second["texture"]["size"]["height"], block.second["texture"]["size"]["frame_size"]["width"], block.second["texture"]["size"]["frame_size"]["height"]);
                   
                   if(block.second["texture"].contains("animation")) {
                         for (auto& animation : block.second["texture"]["animation"].items()) {
@@ -133,7 +133,7 @@ struct Mod
             //Mobs
             for (auto mob : MobData) {
                   std::string _path = mob.second["texture"]["path"];
-                  Textures[mob.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, mob.second["texture"]["size"]["width"], mob.second["texture"]["size"]["height"]);
+                  Textures[mob.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, mob.second["texture"]["size"]["width"], mob.second["texture"]["size"]["height"], mob.second["texture"]["size"]["frame_size"]["width"], mob.second["texture"]["size"]["frame_size"]["height"]);
                   
                   if(mob.second["texture"].contains("animation")) {
                         for (auto& animation : mob.second["texture"]["animation"].items()) {
@@ -145,7 +145,7 @@ struct Mod
             //Items
             for (auto item : ItemData) {
                   std::string _path = item.second["texture"]["path"];
-                  Textures[item.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, item.second["texture"]["size"]["width"], item.second["texture"]["size"]["height"]);
+                  Textures[item.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, item.second["texture"]["size"]["width"], item.second["texture"]["size"]["height"], item.second["texture"]["size"]["frame_size"]["width"], item.second["texture"]["size"]["frame_size"]["height"]);
                   
                   if(item.second["texture"].contains("animation")) {
                         for (auto& animation : item.second["texture"]["animation"].items()) {

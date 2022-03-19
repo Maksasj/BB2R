@@ -14,7 +14,11 @@
         "path": "assets/textures/items/starfish.png",
         "size": {
             "width": 16,
-            "height": 16
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
         }
     }
 }

@@ -1,0 +1,10 @@
+{
+      "id": "autumn",
+      "fill_biome": "autumn_plains",
+      "biomes": [
+            "deep_ocean",
+            "ocean",
+            "beach",
+            "autumn_plains"
+      ]
+}

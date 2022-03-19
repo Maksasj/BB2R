@@ -19,12 +19,12 @@ namespace game
         Rectangle static_rect;
         int size_w, size_h; int image_w, image_h;
 
-        Texture(std::string img_path, int _size_w, int _size_h) {
+        Texture(std::string img_path, int _size_w, int _size_h, float frame_width, float frame_height) {
             img = LoadImage(img_path.c_str());
             ImageResizeNN(&img, _size_w*4, _size_h*4);
             image_w = img.width; image_h = img.height;
             
-            static_rect = {0, 0, 64, 64};
+            static_rect = {0, 0, frame_width*4, frame_height*4};
 
             texture = LoadTextureFromImage(img);  
 
