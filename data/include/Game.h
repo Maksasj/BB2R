@@ -70,10 +70,11 @@ struct Game
             itemmanager->LoadFromMod(modloader->mods["base"]->ItemData);
 
             world = new World(texturemanager, modloader, "earth");
+
             player = new Player(texturemanager, 0, 0);
             player->SetUpHand(new Hand(world, modloader)); 
             player->SetUpNEU(itemmanager);
-
+      
             Gfont = new game::font("data/assets/fonts/font.ttf");
 
             gui = new Gui();

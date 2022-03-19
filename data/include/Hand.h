@@ -5,12 +5,14 @@
 #ifndef HAND_CLASS_H
 #define HAND_CLASS_H
 
-#include "World.h"
-#include "utilities/vector.h"
-#include "ModLoader.h"
 #include <raylib.h>
 #include <string>
 #include <cmath>
+
+#include "prototype/Conveyor_Belt.h"
+#include "World.h"
+#include "utilities/vector.h"
+#include "ModLoader.h"
 
 typedef struct Drop {
       std::string item_id;
@@ -39,106 +41,11 @@ bool collis(BlockRect rect1, BlockRect rect2) {
       return false;
 }
 
-std::string GetBlock(World* world, int x, int y) {
-      int X = floor(x / 16); if (x < 0) { X--; }
-      int Y = floor(y / 16); if (y < 0) { Y--; }
-      
-      std::string block = "nothing";
-
-      int px = abs(X*16 - x);
-      int py = abs(Y*16 - y);
-
-      if (world->_World[{X,Y}]->block_exist[px][py]) {
-            block = world->_World[{X,Y}]->blocks[px][py]->EntityID;
-      }
-
-      return block;
-}
-
-int GetConv_Sys(World* world, int x, int y) {
-      int X = floor(x / 16); if (x < 0) { X--; }
-      int Y = floor(y / 16); if (y < 0) { Y--; }
-      
-      int ret = 0;
-
-      int px = abs(X*16 - x);
-      int py = abs(Y*16 - y);
-      
-      if (world->_World[{X,Y}]->block_exist[px][py]) {
-            ret = world->_World[{X,Y}]->blocks[px][py]->Get("conv_syst");
-      }
-
-      return ret;
-}
-
-int GetDirection(World* world, int x, int y) {
-      int X = floor(x / 16); if (x < 0) { X--; }
-      int Y = floor(y / 16); if (y < 0) { Y--; }
-      
-      int ret = 0;
-
-      int px = abs(X*16 - x);
-      int py = abs(Y*16 - y);
-      
-      if (world->_World[{X,Y}]->block_exist[px][py]) {
-            ret = world->_World[{X,Y}]->blocks[px][py]->direction;
-      }
-
-      return ret;
-}
-
 void PlacePrototype(World* world, std::string _block_id, int place_direction, int X, int Y, int px, int py) {
       if(_block_id == "conveyor_block") {
-            std::string x_yp1 = GetBlock(world, X*16 + px, Y*16 + py + 1); //Down
-            std::string x_ym1 = GetBlock(world, X*16 + px, Y*16 + py - 1); //Up
-            std::string xp1_y = GetBlock(world, X*16 + px + 1, Y*16 + py); //Right
-            std::string xm1_y = GetBlock(world, X*16 + px - 1, Y*16 + py); //Left 
-
-            if (x_yp1 != "conveyor_block" && x_ym1 != "conveyor_block" && xp1_y != "conveyor_block" && xm1_y != "conveyor_block") {
-                  //Create Conveyor system
-                  int conv_syst = world->conveyorsystemmanager.CreateSystem();
-
-                  //Create conveyor
-                  ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, conv_syst, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-                  world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
-                  world->conveyorsystemmanager.ConveyorSystems[conv_syst].addConveyorBelt(tmp_conv);
-
-            } else {
-                  bool create_new_conv_sys = false;
-                  // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
-                  if(place_direction == 1 || place_direction == 2) {
-                        if (x_yp1 == "conveyor_block" || x_ym1 == "conveyor_block" ) {
-
-                              int conv_sys = GetConv_Sys(world, X*16 + px, Y*16 + py + 1);
-                              if (conv_sys == 0) { conv_sys = GetConv_Sys(world, X*16 + px, Y*16 + py - 1); }
-                                    
-                              ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, conv_sys, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-                              world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
-                              world->conveyorsystemmanager.ConveyorSystems[conv_sys].addConveyorBelt(tmp_conv);
-                              
-                        } else { create_new_conv_sys = true; }
-                  } else if(place_direction == 3 || place_direction == 4) {
-                        if (xp1_y == "conveyor_block" || xm1_y == "conveyor_block") {
-                              int conv_sys = GetConv_Sys(world, X*16 + px + 1, Y*16 + py);
-                              if (conv_sys == 0) { conv_sys = GetConv_Sys(world, X*16 + px - 1, Y*16 + py); }
-
-                              ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, conv_sys, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-                              world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
-                              world->conveyorsystemmanager.ConveyorSystems[conv_sys].addConveyorBelt(tmp_conv);
-                        } else { create_new_conv_sys = true; }
-                  }
-
-                  //Create new conveyor system if not exist
-                  if (create_new_conv_sys == true) {
-                        //Create Conveyor system
-                        int conv_syst = world->conveyorsystemmanager.CreateSystem();
-
-                        //Create conveyor
-                        ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, conv_syst, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-                        world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
-                        world->conveyorsystemmanager.ConveyorSystems[conv_syst].addConveyorBelt(tmp_conv);
-                  }
-            }  
+            ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+            tmp_conv->SetupWorld(world);
+            world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
       } else {
             world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
       }
@@ -150,9 +57,7 @@ struct Hand
       ModLoader *modloader;
       int place_direction;
 
-      Hand(World *_world, ModLoader *_modloader) {
-            world = _world; modloader = _modloader;
-      }
+      Hand(World *_world, ModLoader *_modloader) { world = _world; modloader = _modloader; }
 
       float GetSlipp(float Player_X, float Player_Y) {
             int X = floor((Player_X + 32) / CHUNK_SIZE);

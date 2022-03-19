@@ -17,9 +17,8 @@ struct Block : public Entity
         //yes
     }
 
-    void Update() { }
+    virtual void Update() { }
     virtual void PickUpItem(ItemEntity* item) {};
-    virtual int Get(std::string id) {};
     void Update(std::vector<ItemEntity*> items) { }
 };
 

@@ -2,6 +2,7 @@
 #define CHUNK_CLASS_H
 
 #include <iostream>
+#include <vector>
 #include <raylib.h>
 #include <stdio.h>
 
@@ -13,6 +14,14 @@
 #include "Defines.h"
 #include "PerlinNoise/FastNoiseLite.h"
 #include "BiomeManager.h"
+
+bool isValid(int i, int j)
+{
+    if (i < 0 || i >= 16
+        || j >= 16 || j < 0)
+        return false;
+    return true;
+}
 
 struct Chunk
 {
@@ -31,7 +40,7 @@ struct Chunk
         }
         X = x; Y = y;  
     }
-
+    
     void Update() {
         for(int x = 0; x < 16; x++) {   
             for(int y = 0; y < 16; y++) {
@@ -41,6 +50,7 @@ struct Chunk
             }
         }
     }
+    
 
     std::string GetTile(BiomeManager *biomemanager, FastNoiseLite *noise , int x, int y) {
         double hight =  noise->GetNoise((float)(x + X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(y + Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) +                   noise->GetNoise((float)(5*x + 5*X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(5*y + 5*Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) * 0.5;

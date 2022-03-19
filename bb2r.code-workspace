@@ -58,7 +58,9 @@
 			"codecvt": "cpp",
 			"optional": "cpp",
 			"ratio": "cpp",
-			"variant": "cpp"
+			"variant": "cpp",
+			"charconv": "cpp",
+			"list": "cpp"
 		}
 	}
 }
