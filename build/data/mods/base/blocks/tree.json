@@ -19,10 +19,10 @@
         "path": "assets/textures/block/tree.png",
         "size": {
             "width": 16,
-            "height": 16,
+            "height": 32,
             "frame_size": {
                 "width": 16,
-                "height": 16
+                "height": 32
             }
         }
     }
