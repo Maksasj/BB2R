@@ -14,6 +14,8 @@ struct ConveyorBelt : public Block
     World *world;
     bool trans_cd;
 
+    std::string item_holding = "nothing";
+    float item_float = 0;
 
     ConveyorBelt(TextureManager *texturemanager, std::string EntityID, int _place_direction, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
         locked = false;
@@ -34,7 +36,7 @@ struct ConveyorBelt : public Block
                         Block *tmp_block = world->getBlock(x, y - 64);
                         if (tmp_block->EntityID == "conveyor_block" && tmp_block->locked == false) {
                             ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
-                            tmp_conv->locked = true; tmp_conv->trans_cd = true;
+                            tmp_conv->locked = true; tmp_conv->trans_cd = true; tmp_conv->item_holding = item_holding;
                             locked = false;
                         }
                     }
@@ -43,7 +45,7 @@ struct ConveyorBelt : public Block
                         Block *tmp_block = world->getBlock(x, y + 64);
                         if (tmp_block->EntityID == "conveyor_block" && tmp_block->locked == false) {
                             ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
-                            tmp_conv->trans_cd = true; tmp_conv->locked = true;
+                            tmp_conv->trans_cd = true; tmp_conv->locked = true; tmp_conv->item_holding = item_holding;
                             locked = false;
                         }
                     }
@@ -52,7 +54,7 @@ struct ConveyorBelt : public Block
                         Block *tmp_block = world->getBlock(x - 64, y);
                         if (tmp_block->EntityID == "conveyor_block" && tmp_block->locked == false) {
                             ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
-                            tmp_conv->locked = true; tmp_conv->trans_cd = true;
+                            tmp_conv->locked = true; tmp_conv->trans_cd = true; tmp_conv->item_holding = item_holding;
                             locked = false;
                         }
                     }
@@ -61,7 +63,7 @@ struct ConveyorBelt : public Block
                         Block *tmp_block = world->getBlock(x + 64, y);
                         if (tmp_block->EntityID == "conveyor_block" && tmp_block->locked == false) {
                             ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
-                            tmp_conv->locked = true; tmp_conv->trans_cd = true;
+                            tmp_conv->locked = true; tmp_conv->trans_cd = true; tmp_conv->item_holding = item_holding;
                             locked = false;
                         }
                     }
@@ -72,15 +74,11 @@ struct ConveyorBelt : public Block
         trans_cd = false;
     }
     
-    void PickUpItem(ItemEntity *_item) {
-        //item = _item;
-    };
-
     void Render() {
         tex->Render(EntityState, x - camera.x, y - camera.y);
         if (locked) {
             DrawRectangleV({x - camera.x, y - camera.y}, {64, 64}, {255, 0, 0, 50});
-            //item->Render();
+            texturemanager->Textures[item_holding]->Render("idle", x - camera.x, y - camera.y);
         } else {
             DrawRectangleV({x - camera.x, y - camera.y}, {64, 64}, {0, 255, 0, 50});
         }

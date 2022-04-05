@@ -18,7 +18,6 @@ struct Block : public Entity
     }
 
     virtual void Update() { }
-    virtual void PickUpItem(ItemEntity* item) {};
     void Update(std::vector<ItemEntity*> items) { }
 };
 

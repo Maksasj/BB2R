@@ -10,6 +10,7 @@
 #include <cmath>
 
 #include "prototype/Conveyor_Belt.h"
+#include "prototype/Lamp.h"
 #include "World.h"
 #include "utilities/vector.h"
 #include "ModLoader.h"
@@ -26,10 +27,7 @@ typedef struct BlockRect {
       float h;
 } BlockRect;
 
-float distance(vec2 p1, vec2 p2)
-{
-    return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) * 1.0);
-}
+float distance(vec2 p1, vec2 p2) { return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) * 1.0); }
 
 bool collis(BlockRect rect1, BlockRect rect2) {
        if ( rect1.x <= rect2.x + rect2.w &&
@@ -53,6 +51,11 @@ void PlacePrototype(World* world, std::string _block_id, int place_direction, in
             if (place_direction == 4) { tmp_conv->EntityState = "conveyor_block_right"; }
 
             world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+
+      } else if(_block_id == "lamp_block") {
+            std::cout << "Placed Lamp ! \n";
+            Lamp* tmp_lamp = CreateLamp(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+            world->_World[{X,Y}]->blocks[px][py] = tmp_lamp;
       } else {
             world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
       }
@@ -139,19 +142,30 @@ struct Hand
       }
       
       void DropItem(std::string _item_id, int count, int X, int Y, int px, int py) {
-            ItemEntity* tmp_item_entity = CreateItemEntity(world->worldgenerator->texturemanager, _item_id, count, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-            
             if (world->_World[{X,Y}]->block_exist[px][py]) {
-                  if (world->_World[{X,Y}]->blocks[px][py]->EntityID == "conveyor_block") {
-                        world->_World[{X,Y}]->blocks[px][py]->PickUpItem(tmp_item_entity);
-                        world->_World[{X,Y}]->blocks[px][py]->locked = true;
+                  Block *tmp_block = world->_World[{X,Y}]->blocks[px][py];
+                  if (tmp_block->EntityID == "conveyor_block") {
+                        ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
+                        if (tmp_conv->locked == false) {
+                              tmp_conv->locked = true;
+                              tmp_conv->item_holding = _item_id;
+                        }
+
+                  } else if (tmp_block->EntityID == "chest") {
+                        //Something like drop in chest
+                  } else {
+                        ItemEntity* tmp_item_entity = CreateItemEntity(world->worldgenerator->texturemanager, _item_id, count, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                        world->_World[{X,Y}]->items.push_back(tmp_item_entity);
+                        world->Chunks[{X,Y}] = world->_World[{X,Y}];
                   }
             } else {
+                  ItemEntity* tmp_item_entity = CreateItemEntity(world->worldgenerator->texturemanager, _item_id, count, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
                   world->_World[{X,Y}]->items.push_back(tmp_item_entity);
+                  world->Chunks[{X,Y}] = world->_World[{X,Y}];
             }
       }
 
-      void TryDropItem(float Player_X, float Player_Y) {
+      void TryDropItem(std::string item_id, float Player_X, float Player_Y) {
             int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
             int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
 
@@ -161,7 +175,7 @@ struct Hand
             int px = abs((ox - CHUNK_SIZE*X)/TILE_SIZE);
             int py = abs((oy - CHUNK_SIZE*Y)/TILE_SIZE);
 
-            DropItem("gem", 1, X, Y, px, py);
+            DropItem(item_id, 1, X, Y, px, py);
       }
 
       void BreakBlock(float Player_X, float Player_Y) {

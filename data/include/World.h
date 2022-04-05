@@ -7,6 +7,7 @@
 #include <map>
 #include <cmath>
 
+#include "Shader.h"
 #include "Chunk.h"
 #include "Defines.h"
 #include "TextureManager.h"
@@ -79,50 +80,81 @@ struct World
         int X = floor(x / CHUNK_SIZE);
         int Y = floor(y / CHUNK_SIZE);
 
-        //conveyorsystemmanager.Update();
+        if(Chunks[{X,Y}]) {
+            Chunks[{X,Y}]->Update();
+        } else { LoadChunk(X, Y); } 
+        if(Chunks[{X + 1,Y}]) {
+            Chunks[{X + 1, Y}]->Update();
+        } else { LoadChunk(X + 1, Y); }
+        if(Chunks[{X + 1,Y + 1}]) {
+            Chunks[{X + 1, Y +1}]->Update();
+        } else { LoadChunk(X + 1, Y + 1); }
+        if(Chunks[{X - 1,Y}]) {
+            Chunks[{X - 1,Y}]->Update();
+        } else { LoadChunk(X - 1, Y); }
+        if(Chunks[{X - 1,Y - 1}]) {
+            Chunks[{X - 1,Y - 1}]->Update();
+        } else { LoadChunk(X - 1, Y - 1); }
+        if(Chunks[{X + 1,Y - 1}]) {
+            Chunks[{X + 1,Y - 1}]->Update();
+        } else { LoadChunk(X + 1, Y - 1);  }
+        if(Chunks[{X - 1,Y + 1}]) {
+            Chunks[{X - 1,Y + 1}]->Update();
+        } else { LoadChunk(X - 1, Y + 1); }
+        if(Chunks[{X,Y + 1}]) {
+            Chunks[{X,Y + 1}]->Update();
+        } else { LoadChunk(X, Y + 1); }
+        if(Chunks[{X,Y - 1}]) {
+            Chunks[{X,Y - 1}]->Update();
+        } else { LoadChunk(X, Y - 1); }
 
-
-        Chunks[{X,Y}]->Update();
-        Chunks[{X + 1, Y}]->Update();
-        Chunks[{X + 1, Y +1}]->Update();
-        Chunks[{X - 1,Y}]->Update();
-        Chunks[{X - 1,Y - 1}]->Update();
-        Chunks[{X + 1,Y - 1}]->Update();
-        Chunks[{X - 1,Y + 1}]->Update();
-        Chunks[{X,Y + 1}]->Update();
-        Chunks[{X,Y - 1}]->Update();
     }
 
-    void Render(float x, float y) {
+    void GetLight(LightSystem *lightsystem, float x, float y) {
+        int X = floor(x / CHUNK_SIZE);
+        int Y = floor(y / CHUNK_SIZE);
+
+        Chunks[{X,Y}]->GetLight(lightsystem);
+        Chunks[{X + 1, Y}]->GetLight(lightsystem);
+        Chunks[{X + 1, Y +1}]->GetLight(lightsystem);
+        Chunks[{X - 1,Y}]->GetLight(lightsystem);
+        Chunks[{X - 1,Y - 1}]->GetLight(lightsystem);
+        Chunks[{X + 1,Y - 1}]->GetLight(lightsystem);
+        Chunks[{X - 1,Y + 1}]->GetLight(lightsystem);
+        Chunks[{X,Y + 1}]->GetLight(lightsystem);
+        Chunks[{X,Y - 1}]->GetLight(lightsystem);
+    }
+
+    void Render(Shader shader, float x, float y) {
         int X = floor(x / CHUNK_SIZE);
         int Y = floor(y / CHUNK_SIZE);
 
         if(Chunks[{X,Y}]) {
-            Chunks[{X,Y}]->Render();
+            Chunks[{X,Y}]->Render(shader);
         } else { LoadChunk(X, Y); } 
         if(Chunks[{X + 1,Y}]) {
-            Chunks[{X + 1, Y}]->Render();
+            Chunks[{X + 1, Y}]->Render(shader);
         } else { LoadChunk(X + 1, Y); }
         if(Chunks[{X + 1,Y + 1}]) {
-            Chunks[{X + 1, Y +1}]->Render();
+            Chunks[{X + 1, Y +1}]->Render(shader);
         } else { LoadChunk(X + 1, Y + 1); }
         if(Chunks[{X - 1,Y}]) {
-            Chunks[{X - 1,Y}]->Render();
+            Chunks[{X - 1,Y}]->Render(shader);
         } else { LoadChunk(X - 1, Y); }
         if(Chunks[{X - 1,Y - 1}]) {
-            Chunks[{X - 1,Y - 1}]->Render();
+            Chunks[{X - 1,Y - 1}]->Render(shader);
         } else { LoadChunk(X - 1, Y - 1); }
         if(Chunks[{X + 1,Y - 1}]) {
-            Chunks[{X + 1,Y - 1}]->Render();
+            Chunks[{X + 1,Y - 1}]->Render(shader);
         } else { LoadChunk(X + 1, Y - 1);  }
         if(Chunks[{X - 1,Y + 1}]) {
-            Chunks[{X - 1,Y + 1}]->Render();
+            Chunks[{X - 1,Y + 1}]->Render(shader);
         } else { LoadChunk(X - 1, Y + 1); }
         if(Chunks[{X,Y + 1}]) {
-            Chunks[{X,Y + 1}]->Render();
+            Chunks[{X,Y + 1}]->Render(shader);
         } else { LoadChunk(X, Y + 1); }
         if(Chunks[{X,Y - 1}]) {
-            Chunks[{X,Y - 1}]->Render();
+            Chunks[{X,Y - 1}]->Render(shader);
         } else { LoadChunk(X, Y - 1); }
     }
 };

@@ -1,26 +1,42 @@
 #version 330
 
-// Input vertex attributes (from vertex shader)
 in vec2 fragTexCoord;
 in vec4 fragColor;
 
-// Input uniform values
-uniform sampler2D texture0;
-uniform vec4 colDiffuse;
-
-// Output fragment color
 out vec4 finalColor;
 
-// NOTE: Add here your custom variables
+struct Spot {
+    vec2 pos; 
+    float inner;
+    float radius;
+};
+
+#define MAX_SPOTS 50
+
+uniform int light_count;
+uniform Spot spots[MAX_SPOTS];
+uniform float ambient_light;
+
+float cut(float x) {
+    if (x > 1.0) { return 1.0; }
+    if (x < 0.0) { return 0.0; }
+    return x;
+}
 
 void main()
 {
-    // Texel color fetching from texture sampler
-    vec4 texelColor = texture(texture0, fragTexCoord)*colDiffuse*fragColor;
+    float alpha = 1.0*(1 - ambient_light);
+    vec2 resolution = vec2(1366, 768);
+    vec2 uv = (gl_FragCoord.xy - 0.5 *resolution.xy) / resolution.y;
 
-    // Convert texel color to grayscale using NTSC conversion weights
-    float gray = dot(texelColor.rgb, vec3(0.299, 0.587, 0.114));
+    float light_intensity = 0.0;
+    
+    for (int x = 0; x < light_count; x++) {
+        if (light_intensity >= 1.0) { break; }
+        light_intensity += cut(1 - 10*(length(vec2(uv - spots[x].pos)) - 0.1));
+    }
 
-    // Calculate final fragment color
-    finalColor = vec4(gray, gray, gray, texelColor.a);
+    alpha -= light_intensity;
+
+    finalColor = vec4(0.0, 0.0, 0.0, alpha);
 }

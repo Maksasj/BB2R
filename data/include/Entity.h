@@ -2,13 +2,17 @@
 #define ENTITY_CLASS_H
 
 #include <iostream>
+#include <raylib.h>
 #include <stdio.h>
+
+#include "Shader.h"
 
 #include "TextureManager.h"
 #include "Texture.h"
 #include "Defines.h"
 #include "Camera.h"
 #include "Inventory.h"
+#include "LightSystem.h"
 
 struct Entity
 {   
@@ -26,14 +30,16 @@ struct Entity
 
       Entity(TextureManager *_texturemanager, std::string _EntityID, float X, float Y) {
             EntityID = _EntityID;
-            tex = _texturemanager->Textures[EntityID];         
+            tex = _texturemanager->Textures[EntityID]; 
+            texturemanager = _texturemanager;  
             EntityState = "idle";
             x = X; y = Y;
       }
       
       virtual ~Entity(){}
 
-      virtual void Render() {
+      virtual void GetLight(LightSystem *lightsystem) {};
+      virtual void Render(Shader shader) {
             tex->Render(EntityState, x - camera.x, y - camera.y);
       }
 };

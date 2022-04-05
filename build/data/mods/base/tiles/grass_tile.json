@@ -4,7 +4,7 @@
     "texture": {
         "path": "assets/textures/tile/grass_tile.png",
         "size": {
-            "width": 64,
+            "width": 80,
             "height": 160,
             "frame_size": {
                 "width": 16,
@@ -15,7 +15,8 @@
             "sand_tile",
             "moss_tile",
             "prairie_moss_tile",
-            "snow_tile"
+            "snow_tile",
+            "water_tile"
         ],
         "animation": {
             "grass_tile_sand_tile_center": {
@@ -410,6 +411,106 @@
             },
             "grass_tile_snow_tile_around": {
                 "row": 3,
+                "collum":9,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_center": {
+                "row": 4,
+                "collum":0,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_down": {
+                "row": 4,
+                "collum":1,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_left_down": {
+                "row": 4,
+                "collum":2,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_left": {
+                "row": 4,
+                "collum":3,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_left_up": {
+                "row": 4,
+                "collum":4,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_up": {
+                "row": 4,
+                "collum":5,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_right_up": {
+                "row": 4,
+                "collum":6,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_right": {
+                "row": 4,
+                "collum":7,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_right_down": {
+                "row": 4,
+                "collum":8,
+                "frame_count": 1,
+                "speed": 240,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "grass_tile_water_tile_around": {
+                "row": 4,
                 "collum":9,
                 "frame_count": 1,
                 "speed": 240,

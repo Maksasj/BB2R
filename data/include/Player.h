@@ -2,19 +2,20 @@
 #define PLAYER_CLASS_H
 
 #include <iostream>
+#include <raylib.h>
 #include <map>
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h> 
 #include <raylib.h> 
 
+#include "Shader.h"
 #include "utilities/vector.h"
 #include "utilities/key_exist.h"
 
 #include "ItemManager.h"
 #include "Hand.h"
 #include "Chunk.h"
-#include "Block.h"
 #include "Entity.h"
 #include "Timer.h"
 #include "Camera.h"
@@ -48,6 +49,7 @@ struct Player : public Entity
 
             inventory = new Inventory(5);
             inventory->AddItem("conveyor", 500);
+            inventory->AddItem("lamp", 500);
 
             hotbar_item_list.push_back("pickaxe");
             for (float x = 1; x < 6; x++) {
@@ -98,23 +100,27 @@ struct Player : public Entity
                   }
             }
 
-            
+            if(IsKeyPressed(KEY_Q)) {
+                  if (hotbar_item_id != "nothing") {
+                        hand->TryDropItem(hotbar_item_id, x, y);
+                        //inventory->SubtractItem(hotbar_item_id, 1);
+                  }
+            }
       }
 
       void TryUseItem() {
             if(IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) {
-            int item_count = inventory->GetItemCount(hotbar_item_id);
+                  int item_count = inventory->GetItemCount(hotbar_item_id);
 
-            if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "place") {
-                  if(item_count > 0 && hand->TryPlaceBlock(x, y, hotbar_item_id)) {
-                        hand->place_direction = place_direction;
-                        hand->PlaceBlock(x, y, hotbar_item_id);
-                        inventory->SubtractItem(hotbar_item_id, 1);
+                  if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "place") {
+                        if(item_count > 0 && hand->TryPlaceBlock(x, y, hotbar_item_id)) {
+                              hand->place_direction = place_direction;
+                              hand->PlaceBlock(x, y, hotbar_item_id);
+                              inventory->SubtractItem(hotbar_item_id, 1);
+                        }
+                  } else if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "use") {
+                        //Try use item
                   }
-            } else if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "use") {
-                  //Try use item
-            }
-
             } else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
                   if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "break") {
                         if(hand->TryBreakBlock(x, y)) {
@@ -135,16 +141,9 @@ struct Player : public Entity
                         place_direction = 0;
                   }
             }
-
-            if(IsKeyPressed(KEY_Q)) {
-                  if (hotbar_item_id != "nothing") {
-                        hand->TryDropItem(x, y);
-                        //inventory->SubtractItem(hotbar_item_id, 1);
-                  }
-            }
       }
 
-      void Render() {
+      void Render(Shader shader) {
             // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
             if(place_direction == 1) {
                   DrawText("UP", 100, 100, 50, WHITE);  

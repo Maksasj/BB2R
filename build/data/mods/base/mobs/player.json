@@ -1,7 +1,7 @@
 {
     "id": "player",
     "solid": {
-        "origin_point": [16, 16],
+        "origin_point": [16, 0],
         "collision_box":{
             "width": 32,
             "height": 32
@@ -10,11 +10,11 @@
     "texture": {
         "path": "assets/textures/mob/player.png",
         "size": {
-            "width": 64,
-            "height": 80,
+            "width": 112,
+            "height": 160,
             "frame_size": {
-                "width": 16,
-                "height": 16
+                "width": 64,
+                "height": 128
             }
         },
         "animation": {
@@ -25,47 +25,47 @@
                 "speed": 240,
                 "frame_size": {
                     "width": 64,
-                    "height": 64
+                    "height": 128
                 }
             },
             "player_run_up": {
                 "row": 0,
                 "collum":1,
-                "frame_count": 4,
+                "frame_count": 7,
                 "speed": 24,
                 "frame_size": {
                     "width": 64,
-                    "height": 64
+                    "height": 128
                 }
             },
             "player_run_down": {
                 "row": 0,
                 "collum":2,
-                "frame_count": 4,
+                "frame_count": 7,
                 "speed": 24,
                 "frame_size": {
                     "width": 64,
-                    "height": 64
+                    "height": 128
                 }
             },
             "player_run_right": {
                 "row": 0,
                 "collum":3,
-                "frame_count": 4,
+                "frame_count": 7,
                 "speed": 24,
                 "frame_size": {
                     "width": 64,
-                    "height": 64
+                    "height": 128
                 }
             },
             "player_run_left": {
                 "row": 0,
                 "collum":4,
-                "frame_count": 4,
+                "frame_count": 7,
                 "speed": 24,
                 "frame_size": {
                     "width": 64,
-                    "height": 64
+                    "height": 128
                 }
             }
         }

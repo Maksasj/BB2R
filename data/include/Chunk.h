@@ -6,6 +6,7 @@
 #include <raylib.h>
 #include <stdio.h>
 
+#include "Shader.h"
 #include "Tile.h"
 #include "Block.h"
 #include "MobEntity.h"
@@ -43,6 +44,15 @@ struct Chunk
         }
     }
     
+    void GetLight(LightSystem *lightsystem) {
+        for(int x = 0; x < 16; x++) {   
+            for(int y = 0; y < 16; y++) {
+                if (block_exist[x][y] == true) {
+                    blocks[x][y]->GetLight(lightsystem); 
+                }
+            }
+        }
+    }
 
     std::string GetTile(BiomeManager *biomemanager, FastNoiseLite *noise , int x, int y) {
         double hight =  noise->GetNoise((float)(x + X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(y + Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) +                   noise->GetNoise((float)(5*x + 5*X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(5*y + 5*Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) * 0.5;
@@ -137,19 +147,22 @@ struct Chunk
         std::cout << "Generated Chunk , time eclipsed: " << GetTime() - start_time << " seconds \n";
     }
 
-    void Render() {
+    void Render(Shader shader) {
         for(int x = 0; x < 16; x++) {
             for(int y = 0; y < 16; y++) {
-                if (tile_exist[x][y])  {    tiles[x][y]->Render();  }
+                if (tile_exist[x][y])  {    tiles[x][y]->Render(shader);  }
             }
         }
 
         for(int x = 0; x < 16; x++) {
             for(int y = 0; y < 16; y++) {
-                if (block_exist[x][y]) {    blocks[x][y]->Render(); }
+                if (block_exist[x][y]) {    blocks[x][y]->Render(shader); }
             }
         }
 
+        for(auto item : items) {
+            item->Render(shader);
+        }
     }
 
 };

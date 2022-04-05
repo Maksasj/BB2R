@@ -11,9 +11,12 @@
 #include "ModLoader.h"
 #include "ItemManager.h"
 #include "World.h"
+#include "Planet.h"
 #include "Player.h"
 #include "Hand.h"
 
+#include "Shader.h"
+#include "LightSystem.h"
 #include "gui/Hotbar.h"
 #include "gui/Font.h"
 #include "gui/Text.h"
@@ -49,19 +52,33 @@ struct Game
       TextureManager *texturemanager;
       ItemManager *itemmanager;
 
-      World *world;
+      Planet *planet;
       Player *player;
       game::font *Gfont;
       Gui *gui;
+
+      Shader shader;
+      LightSystem *lightsystem;
 
       Game() {
             game_running = true;
             state = "main_menu";
 
-            InitWindow(SCREEN_WIDTH, SCREEN_WIDTH, "raylib [core] example - basic window");
+            InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "BB2R");
             
             ToggleFullscreen();
             LoadGame();
+
+            shader.LoadFragmentShader();
+            shader.LocateUniform("ambient_light");
+            shader.LocateUniform("light_count");
+            /*
+
+            shader.LocateUniform("light_count");
+            shader.LocateUniform("light_pos_x");
+            shader.LocateUniform("light_pos_y");
+            */
+            lightsystem = new LightSystem(shader);
 
             modloader = new ModLoader();
             texturemanager = new TextureManager(modloader);
@@ -69,13 +86,15 @@ struct Game
             itemmanager = new ItemManager();
             itemmanager->LoadFromMod(modloader->mods["base"]->ItemData);
 
-            world = new World(texturemanager, modloader, "earth");
+
+            planet = new Planet(texturemanager, modloader);
 
             player = new Player(texturemanager, 0, 0);
-            player->SetUpHand(new Hand(world, modloader)); 
+            player->SetUpHand(new Hand(planet->world, modloader)); 
             player->SetUpNEU(itemmanager);
       
             Gfont = new game::font("data/assets/fonts/font.ttf");
+
 
             gui = new Gui();
             
@@ -99,22 +118,39 @@ struct Game
 
       void GameLoop() {
             if (IsKeyDown(KEY_F2)) { ScreenShot(); }
+            if (IsKeyPressed(KEY_P)) { planet->day_lenght *= 1.05; }
+            if (IsKeyPressed(KEY_M)) { planet->day_lenght *= 0.95; }
             
-            BeginDrawing();
-            ClearBackground(RAYWHITE);
+            float ambient_light = planet->ambient_light;
+            shader.SetUniform("ambient_light", &ambient_light, SHADER_UNIFORM_FLOAT);
+            
+            planet->Update(player);
+            planet->GetLight(lightsystem, player);
 
-            world->Render(player->x , player->y);
-            world->Update(player->x , player->y);
-            
             player->Update();
             gui->Update();
+            
+            lightsystem->SetPlayerPos({player->x, player->y});
+            lightsystem->SetLightUniforms(shader);
+
+            BeginDrawing();
+            ClearBackground(BLACK);
 
             texturemanager->UpdateAnimations();
+            
+            //Game world
+                  planet->Render(shader, player);
+                  player->Render(shader);
 
-            player->Render();
-
+            //Light Overlay
+            shader.Activate();
+                  DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK);
+            shader.Deactivate();
+            
+            lightsystem->UnloadLight();
 
             DrawFPS(0, 0); 
+
             gui->Render();
   
             EndDrawing();
@@ -126,10 +162,9 @@ struct Game
             BeginDrawing();
             ClearBackground(RAYWHITE);
       
-            player->Render();
+            player->Render(shader);
 
             EndDrawing();
-
       }
 
       void MainLoop() {
