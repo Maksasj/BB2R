@@ -1,0 +1,29 @@
+{
+    "id": "ginkgo",
+    "minable":  {
+        "hardness": 1,
+        "mining_time": 1,
+        "result": {
+            "item": "log",
+            "count": 1
+        }
+    },
+    "solid": {
+        "origin_point": [16, 16],
+        "collision_box":{
+            "width": 32,
+            "height": 32
+        }
+    },
+    "texture": {
+        "path": "assets/textures/block/ginkgo.png",
+        "size": {
+            "width": 32,
+            "height": 32,
+            "frame_size": {
+                "width": 32,
+                "height": 32
+            }
+        }
+    }
+}

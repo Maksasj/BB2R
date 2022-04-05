@@ -1,0 +1,8 @@
+{
+      "id": "clear_earth",
+      "fill_biome": "clear_plains",
+      "biomes": [
+            "ocean",
+            "clear_plains"  
+      ]
+}

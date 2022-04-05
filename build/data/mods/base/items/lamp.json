@@ -1,0 +1,28 @@
+{
+    "id": "lamp",
+    "title": "Lamp",
+    "stack_size": 50,
+    "tags": {
+        "type": {
+            "id" :"building",
+            "title": "Building",
+            "color": [193, 193, 193]
+        },
+        "description": ""
+    },
+    "usage": {
+        "type": "place",
+        "place_result": "lamp_block"
+    },
+    "texture": {
+        "path": "assets/textures/block/lamp.png",
+        "size": {
+            "width": 16,
+            "height": 32,
+            "frame_size": {
+                "width": 16,
+                "height": 32
+            }
+        }
+    }
+}

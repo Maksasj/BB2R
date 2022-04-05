@@ -1,0 +1,14 @@
+{
+    "id": "lamp_block",
+    "texture": {
+        "path": "assets/textures/block/lamp.png",
+        "size": {
+            "width": 16,
+            "height": 32,
+            "frame_size": {
+                "width": 16,
+                "height": 32
+            }
+        }
+    }
+}

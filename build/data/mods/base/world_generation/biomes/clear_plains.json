@@ -1,0 +1,19 @@
+{
+    "id": "clear_plains",
+    "temperature": {
+        "max": 0.31,
+        "min": -0.3
+    },
+    "humidity": {
+        "max": 0.6,
+        "min": -0.1
+    },
+    "hight_map": {
+        "max": 1,
+        "min": 0
+    },
+    "hight_layer": "grass_tile",
+    "blocks": {
+        "ginkgo": 0.02
+    }
+}
