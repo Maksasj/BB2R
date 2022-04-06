@@ -11,6 +11,7 @@
 
 #include "prototype/Conveyor_Belt.h"
 #include "prototype/Lamp.h"
+#include "prototype/Campfire.h"
 #include "World.h"
 #include "utilities/vector.h"
 #include "ModLoader.h"
@@ -53,9 +54,11 @@ void PlacePrototype(World* world, std::string _block_id, int place_direction, in
             world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
 
       } else if(_block_id == "lamp_block") {
-            std::cout << "Placed Lamp ! \n";
             Lamp* tmp_lamp = CreateLamp(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
             world->_World[{X,Y}]->blocks[px][py] = tmp_lamp;
+      } else if(_block_id == "campfire_block") {
+            Campfire* tmp_campfire = CreateCampfire(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+            world->_World[{X,Y}]->blocks[px][py] = tmp_campfire;
       } else {
             world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
       }

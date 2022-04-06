@@ -16,7 +16,7 @@ struct Lamp : public Block
 {    
     World *world;
 
-    Lamp(TextureManager *texturemanager, float X, float Y) : Block(texturemanager, "lamp", X, Y) {
+    Lamp(TextureManager *texturemanager, float X, float Y) : Block(texturemanager, "lamp_block", X, Y) {
     }
 
     void SetupWorld(void *p) {
