@@ -58,7 +58,7 @@ struct Game
       Gui *gui;
 
       Shader shader;
-      LightSystem *lightsystem;
+      //LightSystem *lightsystem;
 
       Game() {
             game_running = true;
@@ -69,16 +69,16 @@ struct Game
             ToggleFullscreen();
             LoadGame();
 
-            shader.LoadFragmentShader();
-            shader.LocateUniform("ambient_light");
-            shader.LocateUniform("light_count");
+            //shader.LoadFragmentShader();
+            //shader.LocateUniform("ambient_light");
+            //shader.LocateUniform("light_count");
             /*
 
             shader.LocateUniform("light_count");
             shader.LocateUniform("light_pos_x");
             shader.LocateUniform("light_pos_y");
             */
-            lightsystem = new LightSystem(shader);
+            //lightsystem = new LightSystem(shader);
 
             modloader = new ModLoader();
             texturemanager = new TextureManager(modloader);
@@ -121,17 +121,17 @@ struct Game
             if (IsKeyPressed(KEY_P)) { planet->day_lenght *= 1.05; }
             if (IsKeyPressed(KEY_M)) { planet->day_lenght *= 0.95; }
             
-            float ambient_light = planet->ambient_light;
-            shader.SetUniform("ambient_light", &ambient_light, SHADER_UNIFORM_FLOAT);
+            //float ambient_light = planet->ambient_light;
+            //shader.SetUniform("ambient_light", &ambient_light, SHADER_UNIFORM_FLOAT);
             
             planet->Update(player);
-            planet->GetLight(lightsystem, player);
+            //planet->GetLight(lightsystem, player);
 
             player->Update();
             gui->Update();
             
-            lightsystem->SetPlayerPos({player->x, player->y});
-            lightsystem->SetLightUniforms(shader);
+            //lightsystem->SetPlayerPos({player->x, player->y});
+            //lightsystem->SetLightUniforms(shader);
 
             BeginDrawing();
             ClearBackground(BLACK);
@@ -143,11 +143,13 @@ struct Game
                   player->Render(shader);
 
             //Light Overlay
+            /*
             shader.Activate();
                   DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK);
             shader.Deactivate();
-            
-            lightsystem->UnloadLight();
+            */
+
+            //lightsystem->UnloadLight();
 
             DrawFPS(0, 0); 
 
