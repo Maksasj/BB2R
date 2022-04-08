@@ -154,7 +154,6 @@ struct Hand
                               tmp_conv->locked = true;
                               tmp_conv->item_holding = _item_id;
                         }
-
                   } else if (tmp_block->EntityID == "chest") {
                         //Something like drop in chest
                   } else {

@@ -114,8 +114,14 @@ struct Mod
             //Tile
             for (auto tile : TileData) {
                   std::string _path = tile.second["texture"]["path"];
-                  Textures[tile.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, tile.second["texture"]["size"]["width"], tile.second["texture"]["size"]["height"], tile.second["texture"]["size"]["frame_size"]["width"], tile.second["texture"]["size"]["frame_size"]["height"]);
-                                                                              
+
+                  vec2 offset = {0, 0};
+                  if(tile.second["texture"].contains("offset")) {
+                        offset = { tile.second["texture"]["offset"]["x"], tile.second["texture"]["offset"]["y"]};
+                  }
+
+                  Textures[tile.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, { tile.second["texture"]["size"]["width"], tile.second["texture"]["size"]["height"]}, { tile.second["texture"]["size"]["frame_size"]["width"], tile.second["texture"]["size"]["frame_size"]["height"]}, offset);
+                                                                            
                   if(tile.second["texture"].contains("animation")) {
                         for (auto& animation : tile.second["texture"]["animation"].items()) {
                               animationmanager->AddAnimation(
@@ -135,7 +141,13 @@ struct Mod
             //Blocks
             for (auto block : BlockData) {
                   std::string _path = block.second["texture"]["path"];
-                  Textures[block.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, block.second["texture"]["size"]["width"], block.second["texture"]["size"]["height"], block.second["texture"]["size"]["frame_size"]["width"], block.second["texture"]["size"]["frame_size"]["height"]);
+
+                  vec2 offset = {0, 0};
+                  if(block.second["texture"].contains("offset")) {
+                        offset = { block.second["texture"]["offset"]["x"], block.second["texture"]["offset"]["y"]};
+                  }
+
+                  Textures[block.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, {block.second["texture"]["size"]["width"], block.second["texture"]["size"]["height"]}, {block.second["texture"]["size"]["frame_size"]["width"], block.second["texture"]["size"]["frame_size"]["height"]}, offset);
                   
                   if(block.second["texture"].contains("animation")) {
                         for (auto& animation : block.second["texture"]["animation"].items()) {
@@ -147,7 +159,13 @@ struct Mod
             //Mobs
             for (auto mob : MobData) {
                   std::string _path = mob.second["texture"]["path"];
-                  Textures[mob.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, mob.second["texture"]["size"]["width"], mob.second["texture"]["size"]["height"], mob.second["texture"]["size"]["frame_size"]["width"], mob.second["texture"]["size"]["frame_size"]["height"]);
+
+                  vec2 offset = {0, 0};
+                  if(mob.second["texture"].contains("offset")) {
+                        offset = { mob.second["texture"]["offset"]["x"], mob.second["texture"]["offset"]["y"]};
+                  }
+
+                  Textures[mob.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, {mob.second["texture"]["size"]["width"], mob.second["texture"]["size"]["height"]}, {mob.second["texture"]["size"]["frame_size"]["width"], mob.second["texture"]["size"]["frame_size"]["height"]}, offset);
                   
                   if(mob.second["texture"].contains("animation")) {
                         for (auto& animation : mob.second["texture"]["animation"].items()) {
@@ -159,7 +177,13 @@ struct Mod
             //Items
             for (auto item : ItemData) {
                   std::string _path = item.second["texture"]["path"];
-                  Textures[item.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, item.second["texture"]["size"]["width"], item.second["texture"]["size"]["height"], item.second["texture"]["size"]["frame_size"]["width"], item.second["texture"]["size"]["frame_size"]["height"]);
+                  
+                  vec2 offset = {0, 0};
+                  if(item.second["texture"].contains("offset")) {
+                        offset = { item.second["texture"]["offset"]["x"], item.second["texture"]["offset"]["y"]};
+                  }
+
+                  Textures[item.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, {item.second["texture"]["size"]["width"], item.second["texture"]["size"]["height"]}, {item.second["texture"]["size"]["frame_size"]["width"], item.second["texture"]["size"]["frame_size"]["height"]}, offset);
                   
                   if(item.second["texture"].contains("animation")) {
                         for (auto& animation : item.second["texture"]["animation"].items()) {
@@ -170,7 +194,13 @@ struct Mod
 
             for (auto tex : AdditionalTexData) {
                   std::string _path = tex.second["texture"]["path"];
-                  Textures[tex.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, tex.second["texture"]["size"]["width"], tex.second["texture"]["size"]["height"], tex.second["texture"]["size"]["frame_size"]["width"], tex.second["texture"]["size"]["frame_size"]["height"]);
+                  
+                  vec2 offset = {0, 0};
+                  if(tex.second["texture"].contains("offset")) {
+                        offset = { tex.second["texture"]["offset"]["x"], tex.second["texture"]["offset"]["y"]};
+                  }
+
+                  Textures[tex.second["id"]] = new game::Texture("data/mods/"+mod_id+"/"+_path, {tex.second["texture"]["size"]["width"], tex.second["texture"]["size"]["height"]}, {tex.second["texture"]["size"]["frame_size"]["width"], tex.second["texture"]["size"]["frame_size"]["height"]}, offset);
                                                                               
                   if(tex.second["texture"].contains("animation")) {
                         for (auto& animation : tex.second["texture"]["animation"].items()) {

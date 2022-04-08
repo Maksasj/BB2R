@@ -8,6 +8,7 @@
 
 #include "../Defines.h"
 #include "../Utilities/key_exist.h"
+#include "../Utilities/vector.h"
 
 namespace game
 {
@@ -17,14 +18,18 @@ namespace game
         Texture2D texture;
         std::map<std::string, Rectangle> texRect;
         Rectangle static_rect;
+
+        vec2 offset;
+
         int size_w, size_h; int image_w, image_h;
 
-        Texture(std::string img_path, int _size_w, int _size_h, float frame_width, float frame_height) {
+        Texture(std::string img_path, ivec2 _size, vec2 frame_size, vec2 _offset) {
             img = LoadImage(img_path.c_str());
-            ImageResizeNN(&img, _size_w*4, _size_h*4);
+            ImageResizeNN(&img, _size.x*4, _size.y*4);
             image_w = img.width; image_h = img.height;
             
-            static_rect = {0, 0, frame_width*4, frame_height*4};
+            static_rect = {0, 0, frame_size.x*4, frame_size.y*4};
+            offset = {_offset.x*4, _offset.y*4};
 
             texture = LoadTextureFromImage(img);  
 
@@ -33,9 +38,9 @@ namespace game
         
         void Render(std::string _state, float x, float y) {
             if (key_exists(texRect, _state)) {
-                DrawTextureRec(texture, texRect[_state], Vector2{x, y}, RAYWHITE);
+                DrawTextureRec(texture, texRect[_state], Vector2{x + offset.x, y + offset.y}, RAYWHITE);
             } else {
-                DrawTextureRec(texture, static_rect, Vector2{x, y}, RAYWHITE);
+                DrawTextureRec(texture, static_rect, Vector2{x + offset.x, y + offset.y}, RAYWHITE);
             }
         }
     };

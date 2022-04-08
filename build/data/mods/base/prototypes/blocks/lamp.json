@@ -2,6 +2,10 @@
     "id": "lamp_block",
     "texture": {
         "path": "assets/textures/block/lamp.png",
+        "offset": {
+            "x": 0,
+            "y": -16
+        },
         "size": {
             "width": 16,
             "height": 32,
