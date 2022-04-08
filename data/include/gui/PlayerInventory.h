@@ -8,11 +8,11 @@
 #include "Window.h"
 #include "InventoryList.h"
 
-#include "../ItemManager.h"
-#include "../Player.h"
-#include "../Entity.h"
+#include "../Mod/ItemManager.h"
+#include "../Player/Player.h"
+#include "../prototype/Entity.h"
 
-#include "../utilities/vector.h"
+#include "../Utilities/vector.h"
 
 struct PlayerInventory : public GuiElement
 {     

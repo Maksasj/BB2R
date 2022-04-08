@@ -6,12 +6,12 @@
 #include <vector>
 #include <memory>
 
-#include "../TextureManager.h"
-#include "../utilities/vector.h"
-#include "../utilities/rect.h"
-#include "../utilities/MouseClickInRect.h"
+#include "../Texture/TextureManager.h"
+#include "../Utilities/vector.h"
+#include "../Utilities/rect.h"
+#include "../Utilities/MouseClickInRect.h"
 #include "../Defines.h"
-#include "../Player.h"
+#include "../Player/Player.h"
 #include "GuiElement.h"
 
 struct Hotbar : public GuiElement

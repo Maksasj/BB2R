@@ -6,7 +6,7 @@
 
 #include "Texture.h"
 #include "Animation.h"
-#include "Timer.h"
+#include "../Timer.h"
 
 struct AnimationManager
 {   

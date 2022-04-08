@@ -6,8 +6,8 @@
 #include <map>
 #include <raylib.h>
 
-#include "Defines.h"
-#include "utilities/key_exist.h"
+#include "../Defines.h"
+#include "../Utilities/key_exist.h"
 
 namespace game
 {

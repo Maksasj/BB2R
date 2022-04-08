@@ -5,9 +5,9 @@
 #include <raylib.h>
 
 #include "../Timer.h"
-#include "../World.h"
-#include "../Block.h"
-#include "../TextureManager.h"
+#include "../World/World.h"
+#include "Block.h"
+#include "../Texture/TextureManager.h"
 
 struct ConveyorBelt : public Block
 {    

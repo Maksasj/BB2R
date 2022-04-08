@@ -6,7 +6,7 @@
 #include <string>
 #include <json.h>
 
-#include "ModLoader.h"
+#include "../Mod/ModLoader.h"
 #include "Biome.h"
 
 struct BiomeManager 

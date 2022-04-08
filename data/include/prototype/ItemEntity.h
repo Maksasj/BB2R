@@ -4,7 +4,7 @@
 #include <string>
 
 #include "Entity.h"
-#include "TextureManager.h"
+#include "../Texture/TextureManager.h"
 
 struct ItemEntity : public Entity
 {   

@@ -6,12 +6,12 @@
 #include <stdio.h>
 #include <cmath>
 
-#include "Shader.h"
+#include "../Renderer/Shader.h"
 #include "World.h"
-#include "Player.h"
-#include "TextureManager.h"
-#include "ModLoader.h"
-#include "Timer.h"
+#include "../Player/Player.h"
+#include "../Texture/TextureManager.h"
+#include "../Mod/ModLoader.h"
+#include "../Timer.h"
 
 struct Planet
 {   

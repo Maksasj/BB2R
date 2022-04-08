@@ -4,11 +4,11 @@
 #include <iostream>
 #include <raylib.h>
 
-#include "../Shader.h"
+#include "../Renderer/Shader.h"
 #include "../Timer.h"
-#include "../World.h"
-#include "../TextureManager.h"
-#include "../utilities/vector.h"
+#include "../World/World.h"
+#include "../Texture/TextureManager.h"
+#include "../Utilities/vector.h"
 
 typedef struct {
       vec2 pos;

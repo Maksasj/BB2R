@@ -1,7 +1,6 @@
 #ifndef TIMER_CLASS_H
 #define TIMER_CLASS_H
 
-#include <iostream>
 #include <raylib.h>
 #include <stdio.h>
 

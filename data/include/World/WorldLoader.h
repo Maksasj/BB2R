@@ -9,9 +9,9 @@
 #include <stdio.h>
 
 #include "Chunk.h"
-#include "Defines.h"
-#include "TextureManager.h"
-#include "utilities/explode.h"
+#include "../Defines.h"
+#include "../Texture/TextureManager.h"
+#include "../Utilities/explode.h"
 
 inline bool exists (const std::string& filename) {
   struct stat buffer;   

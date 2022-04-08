@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "Item.h"
-#include "ItemManager.h"
+#include "../Mod/ItemManager.h"
 
 typedef struct ItemCell {
     Item item;

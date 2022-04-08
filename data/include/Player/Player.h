@@ -9,17 +9,17 @@
 #include <stdlib.h> 
 #include <raylib.h> 
 
-#include "Shader.h"
-#include "utilities/vector.h"
-#include "utilities/key_exist.h"
+#include "../Renderer/Shader.h"
+#include "../Utilities/vector.h"
+#include "../Utilities/key_exist.h"
 
-#include "ItemManager.h"
+#include "../Mod/ItemManager.h"
 #include "Hand.h"
-#include "Chunk.h"
-#include "Entity.h"
-#include "Timer.h"
+#include "../World/Chunk.h"
+#include "../Prototype/Entity.h"
+#include "../Timer.h"
 #include "Camera.h"
-#include "Defines.h"
+#include "../Defines.h"
 #include "Inventory.h"
 
 struct Player : public Entity

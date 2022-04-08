@@ -5,14 +5,16 @@
 #include <raylib.h>
 #include <stdio.h>
 
-#include "Shader.h"
+#include "../Texture/TextureManager.h"
+#include "../Texture/Texture.h"
 
-#include "TextureManager.h"
-#include "Texture.h"
-#include "Defines.h"
-#include "Camera.h"
-#include "Inventory.h"
-#include "LightSystem.h"
+#include "../Defines.h"
+
+#include "../Player/Camera.h"
+#include "../Player/Inventory.h"
+
+#include "../Renderer/LightSystem.h"
+#include "../Renderer/Shader.h"
 
 struct Entity
 {   

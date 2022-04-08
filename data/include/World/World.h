@@ -7,11 +7,11 @@
 #include <map>
 #include <cmath>
 
-#include "Shader.h"
+#include "../Renderer/Shader.h"
 #include "Chunk.h"
-#include "Defines.h"
-#include "TextureManager.h"
-#include "ModLoader.h"
+#include "../Defines.h"
+#include "../Texture/TextureManager.h"
+#include "../Mod/ModLoader.h"
 
 #include "WorldGenerator.h"
 #include "WorldLoader.h"

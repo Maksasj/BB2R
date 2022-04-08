@@ -6,9 +6,9 @@
 #include <vector>
 #include <memory>
 
-#include "../utilities/vector.h"
-#include "../utilities/rect.h"
-#include "../utilities/MouseClickInRect.h"
+#include "../Utilities/vector.h"
+#include "../Utilities/rect.h"
+#include "../Utilities/MouseClickInRect.h"
 #include "../Defines.h"
 #include "GuiElement.h"
 

@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <json.h>
 
-#include "utilities/files_in_directory.h"
+#include "../Utilities/files_in_directory.h"
 //#include "utilities/folders_in_directory.h"
 #include "Mod.h"
 

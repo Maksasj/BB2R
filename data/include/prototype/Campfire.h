@@ -5,13 +5,13 @@
 #include <raylib.h>
 
 #include "ParticleGenerator.h"
-#include "../Shader.h"
+#include "../Renderer/Shader.h"
 #include "../Timer.h"
-#include "../World.h"
-#include "../Block.h"
-#include "../TextureManager.h"
-#include "../LightSystem.h"
-#include "../utilities/vector.h"
+#include "../World/World.h"
+#include "Block.h"
+#include "../Texture/TextureManager.h"
+#include "../Renderer/LightSystem.h"
+#include "../Utilities/vector.h"
 
 struct Campfire : public Block
 {    

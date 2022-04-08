@@ -2,9 +2,9 @@
 #define LIGHTSYSTEM_CLASS_H
 
 #include <raylib.h>
-#include "Defines.h"
-#include "Shader.h"
-#include "utilities/vector.h"
+#include "../Defines.h"
+#include "../Renderer/Shader.h"
+#include "../Utilities/vector.h"
 
 typedef struct {
     vec2 pos;

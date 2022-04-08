@@ -9,12 +9,13 @@
 #include <string>
 #include <cmath>
 
-#include "prototype/Conveyor_Belt.h"
-#include "prototype/Lamp.h"
-#include "prototype/Campfire.h"
-#include "World.h"
-#include "utilities/vector.h"
-#include "ModLoader.h"
+#include "../Prototype/Conveyor_Belt.h"
+#include "../Prototype/Lamp.h"
+#include "../Prototype/Campfire.h"
+
+#include "../World/World.h"
+#include "../Utilities/vector.h"
+#include "../Mod/ModLoader.h"
 
 typedef struct Drop {
       std::string item_id;

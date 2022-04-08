@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 
-#include "../utilities/vector.h"
+#include "../Utilities/vector.h"
 #include "Font.h"
 #include "GuiElement.h"
 

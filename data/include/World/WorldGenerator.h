@@ -5,8 +5,8 @@
 #include <stdio.h>
 
 #include "Chunk.h"
-#include "TextureManager.h"
-#include "ModLoader.h"
+#include "../Texture/TextureManager.h"
+#include "../Mod/ModLoader.h"
 #include "BiomeManager.h"
 
 struct WorldGenerator

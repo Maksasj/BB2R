@@ -6,7 +6,7 @@
 
 #include "ItemEntity.h"
 #include "Entity.h"
-#include "TextureManager.h"
+#include "../Texture/TextureManager.h"
 
 struct Block : public Entity
 {   

@@ -5,7 +5,7 @@
 #include <map>
 #include <stdio.h>
 
-#include "ModLoader.h"
+#include "../Mod/ModLoader.h"
 #include "Texture.h"
 #include "AnimationManager.h"
 

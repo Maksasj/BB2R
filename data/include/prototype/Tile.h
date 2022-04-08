@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 #include "Entity.h"
-#include "TextureManager.h"
+#include "../Texture/TextureManager.h"
 
 struct Tile : public Entity
 {   

@@ -7,13 +7,13 @@
 #include <string>
 #include <memory>
 
-#include "../ItemManager.h"
-#include "../utilities/vector.h"
-#include "../utilities/rect.h"
-#include "../utilities/MouseClickInRect.h"
+#include "../Mod/ItemManager.h"
+#include "../Utilities/vector.h"
+#include "../Utilities/rect.h"
+#include "../Utilities/MouseClickInRect.h"
 #include "../Defines.h"
-#include "../Entity.h"
-#include "../Inventory.h"
+#include "../prototype/Entity.h"
+#include "../Player/Inventory.h"
 #include "Font.h"
 #include "GuiElement.h"
 

@@ -6,14 +6,14 @@
 #include <raylib.h>
 #include <stdio.h>
 
-#include "Shader.h"
-#include "Tile.h"
-#include "Block.h"
-#include "MobEntity.h"
-#include "ItemEntity.h"
+#include "../Renderer/Shader.h"
+#include "../Prototype/Tile.h"
+#include "../Prototype/Block.h"
+#include "../Prototype/MobEntity.h"
+#include "../Prototype/ItemEntity.h"
 
-#include "Defines.h"
-#include "PerlinNoise/FastNoiseLite.h"
+#include "../Defines.h"
+#include "../PerlinNoise/FastNoiseLite.h"
 #include "BiomeManager.h"
 
 struct Chunk

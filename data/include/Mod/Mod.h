@@ -8,11 +8,11 @@
 #include <json.h>
 #include <map>
 
-#include "utilities/files_in_directory.h"
+#include "../Utilities/files_in_directory.h"
 
-#include "TextureManager.h"
-#include "Texture.h"
-#include "AnimationManager.h"
+#include "../Texture/TextureManager.h"
+#include "../Texture/Texture.h"
+#include "../Texture/AnimationManager.h"
 
 struct Mod
 {   
