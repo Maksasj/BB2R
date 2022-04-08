@@ -1,0 +1,28 @@
+{
+    "id": "stone",
+    "title": "Stone",
+    "stack_size": 50,
+    "tags": {
+        "type": {
+            "id" :"raw_resource",
+            "title": "Raw resource",
+            "color": [193, 193, 193]
+        },
+        "description": ""
+    },
+    "usage": {
+        "type": "place",
+        "place_result": "stone_wall"
+    },
+    "texture": {
+        "path": "assets/textures/items/rock.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

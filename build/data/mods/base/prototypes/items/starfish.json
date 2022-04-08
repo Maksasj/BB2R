@@ -1,0 +1,24 @@
+{
+    "id": "starfish",
+    "title": "Starfish",
+    "stack_size": 50,
+    "tags": {
+        "type": {
+            "id" :"raw_resource",
+            "title": "Raw resource",
+            "color": [193, 193, 193]
+        },
+        "description": ""
+    },
+    "texture": {
+        "path": "assets/textures/items/starfish.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

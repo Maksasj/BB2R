@@ -1,0 +1,28 @@
+{
+    "id": "rock",
+    "minable":  {
+        "hardness": 1,
+        "mining_time": 1,
+        "result": {
+            "item": "stone",
+            "count": 5
+        }
+    },
+    "solid": {
+        "collision_box":{
+            "width": 64,
+            "height": 64
+        }
+    },
+    "texture": {
+        "path": "assets/textures/block/rock.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

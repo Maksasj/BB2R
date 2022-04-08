@@ -1,0 +1,26 @@
+{
+    "id": "campfire_block",
+    "texture": {
+        "path": "assets/textures/block/campfire.png",
+        "size": {
+            "width": 64,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        },
+        "animation": {
+            "idle": {
+                "row": 0,
+                "collum":0,
+                "frame_count": 4,
+                "speed": 32,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            }
+        }  
+    }
+}

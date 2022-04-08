@@ -1,0 +1,29 @@
+{
+    "id": "pickaxe",
+    "title": "Pickaxe",
+    "stack_size": 1,
+    "tags": {
+        "type": {
+            "id" :"tool",
+            "title": "Tool",
+            "color": [255, 77, 77]
+        },
+        "description": "Pickaxe allows you to \nbreak blocks, collect some items. \nThis is a basic pickaxe , but still \nvery useful"
+    },
+    "usage": {
+        "type": "break",
+        "mining_strength": 5,
+        "mining_speed": 1
+    },
+    "texture": {
+        "path": "assets/textures/items/pickaxe.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

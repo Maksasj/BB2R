@@ -1,0 +1,26 @@
+{
+      "id": "fire_particle",
+      "texture": {
+            "path": "assets/textures/items/fire_particle.png",
+            "size": {
+                  "width": 12,
+                  "height": 2,
+                  "frame_size": {
+                        "width": 2,
+                        "height": 2
+                  }
+            },
+            "animation": {
+                  "fire_particle_idle": {
+                        "row": 0,
+                        "collum":0,
+                        "frame_count": 6,
+                        "speed": 120,
+                        "frame_size": {
+                        "width": 4,
+                        "height": 4
+                        }
+                  }
+            }
+      }
+}

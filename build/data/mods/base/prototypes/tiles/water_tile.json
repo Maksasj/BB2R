@@ -1,0 +1,16 @@
+{
+    "id": "water_tile",
+    "solid": false,
+    "slipperiness": 0.98,
+    "texture": {
+        "path": "assets/textures/tile/water_tile.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

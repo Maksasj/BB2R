@@ -1,0 +1,14 @@
+{
+    "id": "ice_rock",
+    "texture": {
+        "path": "assets/textures/block/ice_rock.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}
