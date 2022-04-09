@@ -50,9 +50,13 @@ struct Player : public Entity
             inventory = new Inventory(5);
             inventory->AddItem("conveyor", 500);
             inventory->AddItem("lamp", 500);
-            inventory->AddItem("campfire", 500);
+            inventory->AddItem("campfire", 500);      
+            inventory->AddItem("fish_farm", 500);
+            inventory->AddItem("inserter", 500);
+            inventory->AddItem("red_fish", 500);
 
             hotbar_item_list.push_back("pickaxe");
+
             for (float x = 1; x < 6; x++) {
                   hotbar_item_list.push_back("nothing");
             }

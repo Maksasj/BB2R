@@ -1,0 +1,60 @@
+{
+    "id": "inserter_block",
+    "texture": {
+        "path": "assets/textures/block/inserter.png",
+        "offset": {
+            "x": -16,
+            "y": -16
+        },
+        "size": {
+            "width": 48,
+            "height": 192,
+            "frame_size": {
+                "width": 48,
+                "height": 48
+            }
+        },
+        "animation": {
+            "inserter_block_up": {
+                "row": 0,
+                "collum":0,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 192,
+                    "height": 192
+                }
+            },
+            "inserter_block_down": {
+                "row": 0,
+                "collum":3,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 192,
+                    "height": 192
+                }
+            },
+            "inserter_block_left": {
+                "row": 0,
+                "collum":1,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 192,
+                    "height": 192
+                }
+            },
+            "inserter_block_right": {
+                "row": 0,
+                "collum":2,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 192,
+                    "height": 192
+                }
+            }
+        }
+    }
+}

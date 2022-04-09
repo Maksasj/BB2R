@@ -6,26 +6,22 @@
 
 #include "../Timer.h"
 #include "../World/World.h"
-#include "Block.h"
+#include "BlockWithStorage.h"
 #include "../Texture/TextureManager.h"
 
-struct ConveyorBelt : public Block
+struct ConveyorBelt : public BlockWithStorage
 {    
     World *world;
     bool trans_cd;
 
-    std::string item_holding = "nothing";
     float item_float = 0;
-
     vec2 item_step = {0, 0};
 
     int speed = 240;
 
-    ConveyorBelt(TextureManager *texturemanager, std::string EntityID, int _place_direction, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
-        locked = false;
+    ConveyorBelt(TextureManager *texturemanager, std::string EntityID, int _place_direction, float X, float Y) : BlockWithStorage(texturemanager, EntityID, X, Y) {
         trans_cd = false;
         direction = _place_direction;
-        
     }
 
     void SetupWorld(void *p) {
@@ -33,8 +29,8 @@ struct ConveyorBelt : public Block
     }
 
     void Update() { // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
-        
         if (locked == true) {
+            /*
             if (direction == 1) {
                 item_step.y -= 64/(float)speed;
             } else if (direction == 2) {
@@ -44,70 +40,107 @@ struct ConveyorBelt : public Block
             } else if (direction == 4) {
                 item_step.x += 64/(float)speed;
             }
+            */
 
             if (trans_cd == false) {
-                if (timer.step % speed == 0) {
-                    if (direction == 1) { // UP
-                        if(world->checkBlock(x, y - 64)) {
-                            item_step = {0, 0};
-                            Block *tmp_block = world->getBlock(x, y - 64);
+                if (direction == 1) { // UP
+                    if(world->checkBlock(x, y - 64)) {
+                        Block *tmp_b = world->getBlock(x, y - 64);
+                        if (tmp_b->prototype == "BlockWithStorage") {
+                            BlockWithStorage* tmp_block = static_cast<BlockWithStorage*>(tmp_b);
+
+                            if (tmp_block->EntityID == "conveyor_block") {item_step.y -= 64/(float)speed;}
+                            
                             if (tmp_block->EntityID == "conveyor_block" && tmp_block->locked == false) {
-                                ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
-                                tmp_conv->locked = true; 
-                                tmp_conv->trans_cd = true; 
-                                tmp_conv->item_holding = item_holding;
-                                locked = false;
-                            } else {
+                                if (timer.step % speed == 0) {
+                                    ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
+                                    tmp_conv->locked = true; 
+                                    tmp_conv->trans_cd = true; 
+                                    tmp_conv->item_holding = item_holding;
+                                    locked = false;
+                                }
+                            }   else {
                                 item_step = {0, 0};
                             }
                         }
-                    } else if (direction == 2) { // DOWN
-                        if(world->checkBlock(x, y + 64)) {
-                            item_step = {0, 0};
-                            Block *tmp_block = world->getBlock(x, y + 64);
+                    } else {
+                        item_step = {0, 0};
+                    }
+                } else if (direction == 2) { // DOWN
+                    if(world->checkBlock(x, y + 64)) {
+                        Block *tmp_b = world->getBlock(x, y + 64);
+                        if (tmp_b->prototype == "BlockWithStorage") {
+                            BlockWithStorage* tmp_block = static_cast<BlockWithStorage*>(tmp_b);
+
+                            if (tmp_block->EntityID == "conveyor_block") {item_step.y += 64/(float)speed;}
+                            
                             if (tmp_block->EntityID == "conveyor_block" && tmp_block->locked == false) {
-                                ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
-                                tmp_conv->locked = true; 
-                                tmp_conv->trans_cd = true; 
-                                tmp_conv->item_holding = item_holding;
-                                locked = false;
-                            } else {
+                                if (timer.step % speed == 0) {
+                                    ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
+                                    tmp_conv->locked = true; 
+                                    tmp_conv->trans_cd = true; 
+                                    tmp_conv->item_holding = item_holding;
+                                    locked = false;
+                                }
+                            }   else {
                                 item_step = {0, 0};
                             }
                         }
-                    } else if (direction == 3) { //LEFT
-                        if(world->checkBlock(x - 64, y)) {
-                            item_step = {0, 0};
-                            Block *tmp_block = world->getBlock(x - 64, y);
+                    } else {
+                        item_step = {0, 0};
+                    }
+                } else if (direction == 3) { //LEFT
+                    if(world->checkBlock(x - 64, y)) {
+                        Block *tmp_b = world->getBlock(x - 64, y);
+                        if (tmp_b->prototype == "BlockWithStorage") {
+                            BlockWithStorage* tmp_block = static_cast<BlockWithStorage*>(tmp_b);
+
+                            if (tmp_block->EntityID == "conveyor_block") {item_step.x -= 64/(float)speed;}
+                            
                             if (tmp_block->EntityID == "conveyor_block" && tmp_block->locked == false) {
-                                ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
-                                tmp_conv->locked = true; 
-                                tmp_conv->trans_cd = true; 
-                                tmp_conv->item_holding = item_holding;
-                                locked = false;
-                            } else {
+                                if (timer.step % speed == 0) {
+                                    ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
+                                    tmp_conv->locked = true; 
+                                    tmp_conv->trans_cd = true; 
+                                    tmp_conv->item_holding = item_holding;
+                                    locked = false;
+                                }
+                            }   else {
                                 item_step = {0, 0};
                             }
                         }
-                    } else if (direction == 4) { //RIGHT
-                        if(world->checkBlock(x + 64, y)) { 
-                            item_step = {0, 0};
-                            Block *tmp_block = world->getBlock(x + 64, y);
+                    } else {
+                        item_step = {0, 0};
+                    }
+                } else if (direction == 4) { //RIGHT
+                    if(world->checkBlock(x + 64, y)) { 
+                        Block *tmp_b = world->getBlock(x + 64, y);
+                        if (tmp_b->prototype == "BlockWithStorage") {
+                            BlockWithStorage* tmp_block = static_cast<BlockWithStorage*>(tmp_b);
+
+                            if (tmp_block->EntityID == "conveyor_block") {item_step.x += 64/(float)speed;}
+                            
                             if (tmp_block->EntityID == "conveyor_block" && tmp_block->locked == false) {
-                                ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
-                                tmp_conv->locked = true; 
-                                tmp_conv->trans_cd = true; 
-                                tmp_conv->item_holding = item_holding;
-                                locked = false;
-                            } else {
+                                if (timer.step % speed == 0) {
+                                    ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
+                                    tmp_conv->locked = true; 
+                                    tmp_conv->trans_cd = true; 
+                                    tmp_conv->item_holding = item_holding;
+                                    locked = false;
+                                }
+                            }   else {
                                 item_step = {0, 0};
                             }
                         }
+                    } else {
+                        item_step = {0, 0};
                     }
                 }
             }
 
             trans_cd = false;
+        } else {
+            item_step = {0, 0};
         }
     }
     

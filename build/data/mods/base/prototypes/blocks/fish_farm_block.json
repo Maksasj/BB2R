@@ -1,0 +1,14 @@
+{
+    "id": "fish_farm_block",
+    "texture": {
+        "path": "assets/textures/block/fish_trap.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

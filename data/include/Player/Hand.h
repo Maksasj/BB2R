@@ -12,6 +12,9 @@
 #include "../Prototype/Conveyor_Belt.h"
 #include "../Prototype/Lamp.h"
 #include "../Prototype/Campfire.h"
+#include "../Prototype/Inserter.h"
+#include "../Prototype/Fish_Farm.h"
+#include "../Prototype/BlockWithStorage.h"
 
 #include "../World/World.h"
 #include "../Utilities/vector.h"
@@ -43,7 +46,6 @@ bool collis(BlockRect rect1, BlockRect rect2) {
 
 void PlacePrototype(World* world, std::string _block_id, int place_direction, int X, int Y, int px, int py) {
       if(_block_id == "conveyor_block") {
-            
             ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
             tmp_conv->SetupWorld(world);
 
@@ -54,9 +56,22 @@ void PlacePrototype(World* world, std::string _block_id, int place_direction, in
 
             world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
 
+      }else if(_block_id == "inserter_block") {
+            Inserter *tmp_inserter = CreateInserter(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+            tmp_inserter->SetupWorld(world);
+
+            if (place_direction == 1) { tmp_inserter->EntityState = "inserter_block_up"; } else 
+            if (place_direction == 2) { tmp_inserter->EntityState = "inserter_block_down"; } else 
+            if (place_direction == 3) { tmp_inserter->EntityState = "inserter_block_left"; } else 
+            if (place_direction == 4) { tmp_inserter->EntityState = "inserter_block_right"; }
+
+            world->_World[{X,Y}]->blocks[px][py] = tmp_inserter;
       } else if(_block_id == "lamp_block") {
             Lamp* tmp_lamp = CreateLamp(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
             world->_World[{X,Y}]->blocks[px][py] = tmp_lamp;
+      } else if(_block_id == "fish_farm_block") {
+            FishFarm* tmp_fish_farm = CreateFishFarm(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+            world->_World[{X,Y}]->blocks[px][py] = tmp_fish_farm;
       } else if(_block_id == "campfire_block") {
             Campfire* tmp_campfire = CreateCampfire(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
             world->_World[{X,Y}]->blocks[px][py] = tmp_campfire;
@@ -148,12 +163,12 @@ struct Hand
       void DropItem(std::string _item_id, int count, int X, int Y, int px, int py) {
             if (world->_World[{X,Y}]->block_exist[px][py]) {
                   Block *tmp_block = world->_World[{X,Y}]->blocks[px][py];
-                  if (tmp_block->EntityID == "conveyor_block") {
-                        ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(tmp_block);
-                        if (tmp_conv->locked == false) {
-                              tmp_conv->locked = true;
-                              tmp_conv->item_holding = _item_id;
-                        }
+                  if (tmp_block->prototype == "BlockWithStorage") {
+                        BlockWithStorage* tmp_block = dynamic_cast<BlockWithStorage*>(world->_World[{X,Y}]->blocks[px][py]);
+                        if (tmp_block->locked == false) {
+                              tmp_block->locked = true;
+                              tmp_block->item_holding = _item_id;
+                        }              
                   } else if (tmp_block->EntityID == "chest") {
                         //Something like drop in chest
                   } else {

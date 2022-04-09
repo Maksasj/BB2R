@@ -1,0 +1,28 @@
+{
+    "id": "inserter",
+    "title": "Inserter",
+    "stack_size": 50,
+    "tags": {
+        "type": {
+            "id" :"building",
+            "title": "Building",
+            "color": [193, 193, 193]
+        },
+        "description": ""
+    },
+    "usage": {
+        "type": "place",
+        "place_result": "inserter_block"
+    },
+    "texture": {
+        "path": "assets/textures/block/inserter.png",
+        "size": {
+            "width": 64,
+            "height": 128,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}
