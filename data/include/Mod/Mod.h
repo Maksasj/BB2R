@@ -22,6 +22,7 @@ struct Mod
     std::map<std::string, nlohmann::json> BlockData;
     std::map<std::string, nlohmann::json> MobData;
     std::map<std::string, nlohmann::json> ItemData;
+    std::map<std::string, nlohmann::json> RecipeData;
 
     std::map<std::string, nlohmann::json> AdditionalTexData;
 
@@ -29,6 +30,7 @@ struct Mod
     std::vector<std::string> block_file_array;
     std::vector<std::string> mob_file_array;
     std::vector<std::string> item_file_array;
+    std::vector<std::string> recipe_file_array;
     std::vector<std::string> additional_textures_file_array;
     
     std::vector<std::string> biomes_file_array;
@@ -44,6 +46,7 @@ struct Mod
             block_file_array = files_in_directory("data/mods/"+mod_id+"/prototypes/blocks");
             mob_file_array = files_in_directory("data/mods/"+mod_id+"/prototypes/mobs");
             item_file_array = files_in_directory("data/mods/"+mod_id+"/prototypes/items");
+            recipe_file_array = files_in_directory("data/mods/"+mod_id+"/recipes");
 
             additional_textures_file_array = files_in_directory("data/mods/"+mod_id+"/assets/other");
 
@@ -81,6 +84,14 @@ struct Mod
                   std::ifstream ifs("data/mods/"+mod_id+"/prototypes/items/" + item_path);
                   nlohmann::json ItemData_tmp = nlohmann::json::parse(ifs);
                   ItemData[ItemData_tmp["id"]] = ItemData_tmp;
+                  ifs.close();
+            }
+            
+            //Recipes
+            for (auto recipe_path : recipe_file_array) {
+                  std::ifstream ifs("data/mods/"+mod_id+"/recipes/" + recipe_path);
+                  nlohmann::json RecipeData_tmp = nlohmann::json::parse(ifs);
+                  RecipeData[RecipeData_tmp["id"]] = RecipeData_tmp;
                   ifs.close();
             }
 

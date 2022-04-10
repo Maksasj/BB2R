@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Item.h"
+#include "../Prototype/Item.h"
 #include "../Mod/ItemManager.h"
 
 typedef struct ItemCell {
@@ -22,7 +22,7 @@ struct Inventory
       Inventory(int inv_size) {
             max_size = inv_size;
 
-            storage.push_back({Item("pickaxe"), 1});
+            storage.push_back( { {"pickaxe"}, 1} );
       }
 
       void SetUpNEU(ItemManager *_itemmanager) {
@@ -52,6 +52,7 @@ struct Inventory
       }
 
       void AddItem(std::string _id, int _count) {
+            /*
             for (auto &itemcell : storage) {
                   if (itemcell.item.id == _id && _count > 0) {
                         if (itemcell.count + _count < (int)itemmanager->ItemData[_id]["stack_size"]) {
@@ -62,7 +63,8 @@ struct Inventory
                         }
                   }
             }
-            if (_count > 0) { storage.push_back({Item(_id), _count}); }
+            */ 
+            storage.push_back({ {_id} , _count}); 
       }
       
       void SubtractItem(std::string _id, int _count) {

@@ -1,5 +1,6 @@
 {
     "id": "campfire_block",
+    "prototype": "Campfire",
     "texture": {
         "path": "assets/textures/block/campfire.png",
         "size": {

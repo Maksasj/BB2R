@@ -1,5 +1,6 @@
 {
     "id": "lamp_block",
+    "prototype": "Lamp",
     "texture": {
         "path": "assets/textures/block/lamp.png",
         "offset": {

@@ -1,6 +1,6 @@
 {
-    "id": "fish_farm",
-    "title": "Fish Farm",
+    "id": "fish_trap",
+    "title": "Fish Trap",
     "stack_size": 50,
     "tags": {
         "type": {
@@ -12,7 +12,7 @@
     },
     "usage": {
         "type": "place",
-        "place_result": "fish_farm_block"
+        "place_result": "fish_trap_block"
     },
     "texture": {
         "path": "assets/textures/block/fish_trap.png",

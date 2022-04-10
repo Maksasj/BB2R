@@ -1,5 +1,10 @@
 {
-    "id": "fish_farm_block",
+    "id": "fish_trap_block",
+    "prototype": "CraftingMachine",
+    "crafting": {
+        "crafting_speed": 8000,
+        "fixed_recipe": "red_fish"
+    },
     "texture": {
         "path": "assets/textures/block/fish_trap.png",
         "size": {

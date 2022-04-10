@@ -3,12 +3,8 @@
 
 #include <string>
 
-struct Item
-{     
+typedef struct Item {
       std::string id;
-      Item(std::string _id) {
-            id = _id;
-      }
-};
+} Item;
 
 #endif

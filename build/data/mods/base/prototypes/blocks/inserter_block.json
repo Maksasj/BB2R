@@ -1,5 +1,6 @@
 {
     "id": "inserter_block",
+    "prototype": "Inserter",
     "texture": {
         "path": "assets/textures/block/inserter.png",
         "offset": {

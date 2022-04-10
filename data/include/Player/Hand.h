@@ -15,6 +15,8 @@
 #include "../Prototype/Inserter.h"
 #include "../Prototype/Fish_Farm.h"
 #include "../Prototype/BlockWithStorage.h"
+#include "../Prototype/CraftingMachine.h"
+#include "../Prototype/Recipe.h"
 
 #include "../World/World.h"
 #include "../Utilities/vector.h"
@@ -44,37 +46,63 @@ bool collis(BlockRect rect1, BlockRect rect2) {
       return false;
 }
 
-void PlacePrototype(World* world, std::string _block_id, int place_direction, int X, int Y, int px, int py) {
-      if(_block_id == "conveyor_block") {
-            ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-            tmp_conv->SetupWorld(world);
+void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, int place_direction, int X, int Y, int px, int py) {
+      std::string prototype = "nothing";
+      
+      if (_modloader->mods["base"]->BlockData[_block_id].contains("prototype")) {
+            prototype = _modloader->mods["base"]->BlockData[_block_id]["prototype"];
+            std::cout << prototype << "\n";
 
-            if (place_direction == 1) { tmp_conv->EntityState = "conveyor_block_up"; } else 
-            if (place_direction == 2) { tmp_conv->EntityState = "conveyor_block_down"; } else 
-            if (place_direction == 3) { tmp_conv->EntityState = "conveyor_block_left"; } else 
-            if (place_direction == 4) { tmp_conv->EntityState = "conveyor_block_right"; }
+            if(prototype == "Conveyor") {
+                  ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                  tmp_conv->SetupWorld(world);
 
-            world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+                  if (place_direction == 1) { tmp_conv->EntityState = "conveyor_block_up"; } else 
+                  if (place_direction == 2) { tmp_conv->EntityState = "conveyor_block_down"; } else 
+                  if (place_direction == 3) { tmp_conv->EntityState = "conveyor_block_left"; } else 
+                  if (place_direction == 4) { tmp_conv->EntityState = "conveyor_block_right"; }
 
-      }else if(_block_id == "inserter_block") {
-            Inserter *tmp_inserter = CreateInserter(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-            tmp_inserter->SetupWorld(world);
+                  world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
 
-            if (place_direction == 1) { tmp_inserter->EntityState = "inserter_block_up"; } else 
-            if (place_direction == 2) { tmp_inserter->EntityState = "inserter_block_down"; } else 
-            if (place_direction == 3) { tmp_inserter->EntityState = "inserter_block_left"; } else 
-            if (place_direction == 4) { tmp_inserter->EntityState = "inserter_block_right"; }
+            }else if(prototype == "Inserter") {
+                  Inserter *tmp_inserter = CreateInserter(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                  tmp_inserter->SetupWorld(world);
 
-            world->_World[{X,Y}]->blocks[px][py] = tmp_inserter;
-      } else if(_block_id == "lamp_block") {
-            Lamp* tmp_lamp = CreateLamp(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-            world->_World[{X,Y}]->blocks[px][py] = tmp_lamp;
-      } else if(_block_id == "fish_farm_block") {
-            FishFarm* tmp_fish_farm = CreateFishFarm(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-            world->_World[{X,Y}]->blocks[px][py] = tmp_fish_farm;
-      } else if(_block_id == "campfire_block") {
-            Campfire* tmp_campfire = CreateCampfire(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-            world->_World[{X,Y}]->blocks[px][py] = tmp_campfire;
+                  if (place_direction == 1) { tmp_inserter->EntityState = "inserter_block_up"; } else 
+                  if (place_direction == 2) { tmp_inserter->EntityState = "inserter_block_down"; } else 
+                  if (place_direction == 3) { tmp_inserter->EntityState = "inserter_block_left"; } else 
+                  if (place_direction == 4) { tmp_inserter->EntityState = "inserter_block_right"; }
+
+                  world->_World[{X,Y}]->blocks[px][py] = tmp_inserter;
+            } else if(prototype == "Lamp") {
+                  Lamp* tmp_lamp = CreateLamp(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                  world->_World[{X,Y}]->blocks[px][py] = tmp_lamp;
+            } else if(prototype == "CraftingMachine") {
+                  Recipe recipe;
+                  std::string recipe_str = _modloader->mods["base"]->BlockData[_block_id]["crafting"]["fixed_recipe"];
+
+                  CraftingMachine* craftingmachine = CreateCraftingMachine(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                  
+                  for(auto item : _modloader->mods["base"]->RecipeData[recipe_str]["recipe"]["ingredients"]) {
+                        ItemRecipe itemrecipe;
+                        itemrecipe.item = { item["item"] };
+                        itemrecipe.count = { item["quantity"] };
+                        recipe.ingredients.push_back(itemrecipe);
+                  }
+            
+                  recipe.result.id = _modloader->mods["base"]->RecipeData[recipe_str]["recipe"]["result"]["item"];
+                  std::cout << "MARKER \n";
+
+                  craftingmachine->Recipe = recipe;
+                  craftingmachine->Speed = (int)_modloader->mods["base"]->BlockData[_block_id]["crafting"]["crafting_speed"];
+
+                  world->_World[{X,Y}]->blocks[px][py] = craftingmachine;
+
+
+            } else if(prototype == "Campfire") {
+                  Campfire* tmp_campfire = CreateCampfire(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                  world->_World[{X,Y}]->blocks[px][py] = tmp_campfire;
+            }
       } else {
             world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
       }
@@ -242,7 +270,7 @@ struct Hand
 
             if(world->_World[{X,Y}]->block_exist[px][py] == false) {
                   
-                  PlacePrototype(world, _block_id, place_direction, X, Y, px, py);
+                  PlacePrototype(world, modloader, _block_id, place_direction, X, Y, px, py);
                   
                   world->_World[{X,Y}]->block_exist[px][py] = true;
                   world->Chunks[{X,Y}] = world->_World[{X,Y}];    

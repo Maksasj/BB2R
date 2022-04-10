@@ -1,0 +1,13 @@
+{
+      "id": "red_fish",
+      "title": "Red Fish",
+      "category": "fishing",
+      "recipe": {
+            "ingredients": [
+            ],
+            "result": {
+                  "item": "red_fish",
+                  "quantity": 1
+            }
+      }
+  }

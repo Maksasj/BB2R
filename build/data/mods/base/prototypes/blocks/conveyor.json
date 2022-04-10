@@ -1,5 +1,6 @@
 {
     "id": "conveyor_block",
+    "prototype": "Conveyor",
     "texture": {
         "path": "assets/textures/block/conveyor.png",
         "size": {

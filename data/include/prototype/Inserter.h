@@ -25,93 +25,71 @@ struct Inserter : public BlockWithStorage
     void Update() { // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
         if (direction == 1) { // UP
             if(world->checkBlock(x, y - 64)) {
-                Block *tmp_block_first = world->getBlock(x, y - 64);
-                if (tmp_block_first->prototype == "BlockWithStorage") {
-                    BlockWithStorage* block_with_storage_first_tmp = static_cast<BlockWithStorage*>(world->getBlock(x, y - 64));
+                //This part can be unsafe
+                BlockWithStorage* block_with_storage_first_tmp = static_cast<BlockWithStorage*>(world->getBlock(x, y - 64));
 
-                    if (block_with_storage_first_tmp->locked) {
-                        
-                        //Checking block what where it wanna put item
-                        if(world->checkBlock(x, y + 64)) {
-                            Block *tmp_block_second = world->getBlock(x, y + 64);
-                            if (tmp_block_second->prototype == "BlockWithStorage") {
-                                BlockWithStorage* block_with_storage_second_tmp = static_cast<BlockWithStorage*>(world->getBlock(x, y + 64));
+                if (block_with_storage_first_tmp->locked) {
+                    
+                    //Checking block what where it wanna put item
+                    if(world->checkBlock(x, y + 64)) {
+                        //Also this part can be very unsafe
+                        BlockWithStorage* block_with_storage_second_tmp = static_cast<BlockWithStorage*>(world->getBlock(x, y + 64));
 
-                                if (!block_with_storage_second_tmp->locked) {
-                                    block_with_storage_first_tmp->locked = false;
-                                    block_with_storage_second_tmp->locked = true;
-                                    block_with_storage_second_tmp->item_holding = block_with_storage_first_tmp->item_holding;
-                                }
-                            }
+                        if (!block_with_storage_second_tmp->locked) {
+                            block_with_storage_first_tmp->locked = false;
+                            block_with_storage_second_tmp->locked = true;
+                            block_with_storage_second_tmp->item_holding = block_with_storage_first_tmp->item_holding;
                         }
                     }
                 }
             }
         } else if (direction == 2) { // DOWN
             if(world->checkBlock(x, y + 64)) {
-                Block *tmp_block_first = world->getBlock(x, y + 64);
-                if (tmp_block_first->prototype == "BlockWithStorage") {
-                    BlockWithStorage* block_with_storage_first_tmp = static_cast<BlockWithStorage*>(world->getBlock(x, y + 64));
+                BlockWithStorage* block_with_storage_first_tmp = static_cast<BlockWithStorage*>(world->getBlock(x, y + 64));
+                
+                if (block_with_storage_first_tmp->locked) {
                     
-                    if (block_with_storage_first_tmp->locked) {
-                        
-                        //Checking block what where it wanna put item
-                        if(world->checkBlock(x, y - 64)) {
-                            Block *tmp_block_second = world->getBlock(x, y - 64);
-                            if (tmp_block_second->prototype == "BlockWithStorage") {
-                                BlockWithStorage* block_with_storage_second_tmp = static_cast<BlockWithStorage*>(world->getBlock(x, y - 64));
-                                if (!block_with_storage_second_tmp->locked) {
-                                    block_with_storage_first_tmp->locked = false;
-                                    block_with_storage_second_tmp->locked = true;
-                                    block_with_storage_second_tmp->item_holding = block_with_storage_first_tmp->item_holding;
-                                }
-                            }
+                    //Checking block what where it wanna put item
+                    if(world->checkBlock(x, y - 64)) {
+                        BlockWithStorage* block_with_storage_second_tmp = static_cast<BlockWithStorage*>(world->getBlock(x, y - 64));
+                        if (!block_with_storage_second_tmp->locked) {
+                            block_with_storage_first_tmp->locked = false;
+                            block_with_storage_second_tmp->locked = true;
+                            block_with_storage_second_tmp->item_holding = block_with_storage_first_tmp->item_holding;
                         }
                     }
                 }
             }
         } else if (direction == 3) { //LEFT
             if(world->checkBlock(x - 64, y)) {
-                Block *tmp_block_first = world->getBlock(x - 64, y);
-                if (tmp_block_first->prototype == "BlockWithStorage") {
-                    BlockWithStorage* block_with_storage_first_tmp = static_cast<BlockWithStorage*>(world->getBlock(x - 64, y));
+                BlockWithStorage* block_with_storage_first_tmp = static_cast<BlockWithStorage*>(world->getBlock(x - 64, y));
+                
+                if (block_with_storage_first_tmp->locked) {
                     
-                    if (block_with_storage_first_tmp->locked) {
-                        
-                        //Checking block what where it wanna put item
-                        if(world->checkBlock(x + 64, y)) {
-                            Block *tmp_block_second = world->getBlock(x + 64, y);
-                            if (tmp_block_second->prototype == "BlockWithStorage") {
-                                BlockWithStorage* block_with_storage_second_tmp = static_cast<BlockWithStorage*>(world->getBlock(x + 64, y));
-                                if (!block_with_storage_second_tmp->locked) {
-                                    block_with_storage_first_tmp->locked = false;
-                                    block_with_storage_second_tmp->locked = true;
-                                    block_with_storage_second_tmp->item_holding = block_with_storage_first_tmp->item_holding;
-                                }
-                            }
+                    //Checking block what where it wanna put item
+                    if(world->checkBlock(x + 64, y)) {
+                        BlockWithStorage* block_with_storage_second_tmp = static_cast<BlockWithStorage*>(world->getBlock(x + 64, y));
+                        if (!block_with_storage_second_tmp->locked) {
+                            block_with_storage_first_tmp->locked = false;
+                            block_with_storage_second_tmp->locked = true;
+                            block_with_storage_second_tmp->item_holding = block_with_storage_first_tmp->item_holding;
                         }
                     }
                 }
             }
         } else if (direction == 4) { //RIGHT
             if(world->checkBlock(x + 64, y)) {
-                Block *tmp_block_first = world->getBlock(x + 64, y);
-                if (tmp_block_first->prototype == "BlockWithStorage") {
-                    BlockWithStorage* block_with_storage_first_tmp = static_cast<BlockWithStorage*>(world->getBlock(x + 64, y));
+                BlockWithStorage* block_with_storage_first_tmp = static_cast<BlockWithStorage*>(world->getBlock(x + 64, y));
+                
+                if (block_with_storage_first_tmp->locked) {
                     
-                    if (block_with_storage_first_tmp->locked) {
-                        
-                        //Checking block what where it wanna put item
-                        if(world->checkBlock(x - 64, y)) {
-                            Block *tmp_block_second = world->getBlock(x - 64, y);
-                            if (tmp_block_second->prototype == "BlockWithStorage") {
-                                BlockWithStorage* block_with_storage_second_tmp = static_cast<BlockWithStorage*>(world->getBlock(x - 64, y));
-                                if (!block_with_storage_second_tmp->locked) {
-                                    block_with_storage_first_tmp->locked = false;
-                                    block_with_storage_second_tmp->locked = true;
-                                    block_with_storage_second_tmp->item_holding = block_with_storage_first_tmp->item_holding;
-                                }
-                            }
+                    //Checking block what where it wanna put item
+                    if(world->checkBlock(x - 64, y)) {
+                        BlockWithStorage* block_with_storage_second_tmp = static_cast<BlockWithStorage*>(world->getBlock(x - 64, y));
+                        if (!block_with_storage_second_tmp->locked) {
+                            block_with_storage_first_tmp->locked = false;
+                            block_with_storage_second_tmp->locked = true;
+                            block_with_storage_second_tmp->item_holding = block_with_storage_first_tmp->item_holding;
                         }
                     }
                 }
