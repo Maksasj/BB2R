@@ -1,0 +1,28 @@
+{
+    "id": "hoe",
+    "title": "Hoe",
+    "stack_size": 1,
+    "tags": {
+        "type": {
+            "id" :"tool",
+            "title": "Tool",
+            "color": [255, 77, 77]
+        },
+        "description": "Hoe"
+    },
+    "usage": {
+        "type": "plow",
+        "plowed_to": "dirt_farmland"
+    },
+    "texture": {
+        "path": "assets/textures/items/hoe.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

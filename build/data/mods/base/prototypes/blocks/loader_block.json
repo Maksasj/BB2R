@@ -1,0 +1,57 @@
+{
+    "id": "loader_block",
+    "prototype": "Loader",
+    "texture": {
+        "path": "assets/textures/block/loader_block.png",
+        "size": {
+            "width": 16,
+            "height": 64,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        },
+        "animation": {
+            "loader_block_up": {
+                "row": 0,
+                "collum":0,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "loader_block_down": {
+                "row": 0,
+                "collum":3,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "loader_block_left": {
+                "row": 0,
+                "collum":1,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "loader_block_right": {
+                "row": 0,
+                "collum":2,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            }
+        }
+    }
+}

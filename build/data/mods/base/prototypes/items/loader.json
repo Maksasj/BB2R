@@ -1,0 +1,28 @@
+{
+    "id": "loader",
+    "title": "Loader",
+    "stack_size": 50,
+    "tags": {
+        "type": {
+            "id" :"building",
+            "title": "Building",
+            "color": [193, 193, 193]
+        },
+        "description": ""
+    },
+    "usage": {
+        "type": "place",
+        "place_result": "loader_block"
+    },
+    "texture": {
+        "path": "assets/textures/items/loader.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

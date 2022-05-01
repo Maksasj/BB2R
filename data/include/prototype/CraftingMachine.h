@@ -15,7 +15,7 @@
 #include "../Timer.h"
 
 struct CraftingMachine : public Block
-{    
+{   
     bool locked;
     std::string item_holding;
 
@@ -35,6 +35,7 @@ struct CraftingMachine : public Block
 
             if(can_craft) {
                 item_holding = Recipe.result.id;
+                std::cout << "Crafted item: "+ item_holding << "\n";
                 locked = true;
             }
 

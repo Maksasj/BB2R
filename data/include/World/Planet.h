@@ -16,8 +16,10 @@
 struct Planet
 {   
       World *world;
+
       float ambient_light;
       float ambient_light_min = 0.2;
+      
       float day_lenght = 1600.0;
 
       Planet(TextureManager *texturemanager, ModLoader *modloader) {
@@ -26,7 +28,6 @@ struct Planet
       }
 
       void Update(Player *player) {
-
             world->Update(player->x, player->y);
 
             ambient_light = ((sin(timer.step/day_lenght) + 1)/2.0) + ambient_light_min;

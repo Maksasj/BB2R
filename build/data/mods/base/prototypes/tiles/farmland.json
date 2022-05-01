@@ -1,9 +1,9 @@
 {
-    "id": "clear_grass_tile",
-    "subgroup": "farmable_soil",
+    "id": "farmland",
+    "subgroup": "farmland",
     "solid": false,
     "texture": {
-        "path": "assets/textures/tile/clear_grass_tile.png",
+        "path": "assets/textures/tile/farmland.png",
         "size": {
             "width": 16,
             "height": 16,

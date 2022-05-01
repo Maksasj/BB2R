@@ -1,0 +1,33 @@
+{
+    "id": "lead_ore_rock",
+    "prototype": "Ore_Rock",
+    "minable":  {
+        "hardness": 1,
+        "mining_time": 1,
+        "result": {
+            "item": "lead_ore",
+            "count": 1
+        }
+    },
+    "solid": {
+        "collision_box":{
+            "width": 64,
+            "height": 64
+        }
+    },
+    "texture": {
+        "path": "assets/textures/block/lead_ore_rock.png",
+        "offset": {
+            "x": -8,
+            "y": -16
+        },
+        "size": {
+            "width": 32,
+            "height": 32,
+            "frame_size": {
+                "width": 32,
+                "height": 32
+            }
+        }
+    }
+}

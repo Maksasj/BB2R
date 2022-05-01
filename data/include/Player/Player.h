@@ -49,11 +49,16 @@ struct Player : public Entity
 
             inventory = new Inventory(5);
             inventory->AddItem("conveyor", 500);
+            inventory->AddItem("hoe", 500);
             inventory->AddItem("lamp", 500);
             inventory->AddItem("campfire", 500);      
             inventory->AddItem("fish_trap", 500);
             inventory->AddItem("inserter", 500);
             inventory->AddItem("red_fish", 500);
+            inventory->AddItem("drill", 500);
+            inventory->AddItem("ground_grape", 500);
+            inventory->AddItem("steel_furnace", 500);
+            inventory->AddItem("loader", 500);
 
             hotbar_item_list.push_back("pickaxe");
 
@@ -125,6 +130,10 @@ struct Player : public Entity
                         }
                   } else if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "use") {
                         //Try use item
+                  } else if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "plow") {
+                        //Hoe, plow
+                        hand->ChangeTile(x, y, hotbar_item_id);
+
                   }
             } else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
                   if (itemmanager->ItemData[hotbar_item_id]["usage"]["type"] == "break") {

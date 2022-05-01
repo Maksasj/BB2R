@@ -9,18 +9,27 @@
 #include <string>
 #include <cmath>
 
+//Tiles
+#include "../Prototype/Farmland.h"
+
+//Blocks
 #include "../Prototype/Conveyor_Belt.h"
 #include "../Prototype/Lamp.h"
 #include "../Prototype/Campfire.h"
 #include "../Prototype/Inserter.h"
-#include "../Prototype/Fish_Farm.h"
+#include "../Prototype/Drill.h"
 #include "../Prototype/BlockWithStorage.h"
 #include "../Prototype/CraftingMachine.h"
+#include "../Prototype/Crop.h"
+
+//Other
 #include "../Prototype/Recipe.h"
 
 #include "../World/World.h"
 #include "../Utilities/vector.h"
 #include "../Mod/ModLoader.h"
+
+#include "PlacePrototype.h"
 
 typedef struct Drop {
       std::string item_id;
@@ -44,68 +53,6 @@ bool collis(BlockRect rect1, BlockRect rect2) {
               return true;
       }
       return false;
-}
-
-void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, int place_direction, int X, int Y, int px, int py) {
-      std::string prototype = "nothing";
-      
-      if (_modloader->mods["base"]->BlockData[_block_id].contains("prototype")) {
-            prototype = _modloader->mods["base"]->BlockData[_block_id]["prototype"];
-            std::cout << prototype << "\n";
-
-            if(prototype == "Conveyor") {
-                  ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-                  tmp_conv->SetupWorld(world);
-
-                  if (place_direction == 1) { tmp_conv->EntityState = "conveyor_block_up"; } else 
-                  if (place_direction == 2) { tmp_conv->EntityState = "conveyor_block_down"; } else 
-                  if (place_direction == 3) { tmp_conv->EntityState = "conveyor_block_left"; } else 
-                  if (place_direction == 4) { tmp_conv->EntityState = "conveyor_block_right"; }
-
-                  world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
-
-            }else if(prototype == "Inserter") {
-                  Inserter *tmp_inserter = CreateInserter(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-                  tmp_inserter->SetupWorld(world);
-
-                  if (place_direction == 1) { tmp_inserter->EntityState = "inserter_block_up"; } else 
-                  if (place_direction == 2) { tmp_inserter->EntityState = "inserter_block_down"; } else 
-                  if (place_direction == 3) { tmp_inserter->EntityState = "inserter_block_left"; } else 
-                  if (place_direction == 4) { tmp_inserter->EntityState = "inserter_block_right"; }
-
-                  world->_World[{X,Y}]->blocks[px][py] = tmp_inserter;
-            } else if(prototype == "Lamp") {
-                  Lamp* tmp_lamp = CreateLamp(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-                  world->_World[{X,Y}]->blocks[px][py] = tmp_lamp;
-            } else if(prototype == "CraftingMachine") {
-                  Recipe recipe;
-                  std::string recipe_str = _modloader->mods["base"]->BlockData[_block_id]["crafting"]["fixed_recipe"];
-
-                  CraftingMachine* craftingmachine = CreateCraftingMachine(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-                  
-                  for(auto item : _modloader->mods["base"]->RecipeData[recipe_str]["recipe"]["ingredients"]) {
-                        ItemRecipe itemrecipe;
-                        itemrecipe.item = { item["item"] };
-                        itemrecipe.count = { item["quantity"] };
-                        recipe.ingredients.push_back(itemrecipe);
-                  }
-            
-                  recipe.result.id = _modloader->mods["base"]->RecipeData[recipe_str]["recipe"]["result"]["item"];
-                  std::cout << "MARKER \n";
-
-                  craftingmachine->Recipe = recipe;
-                  craftingmachine->Speed = (int)_modloader->mods["base"]->BlockData[_block_id]["crafting"]["crafting_speed"];
-
-                  world->_World[{X,Y}]->blocks[px][py] = craftingmachine;
-
-
-            } else if(prototype == "Campfire") {
-                  Campfire* tmp_campfire = CreateCampfire(world->worldgenerator->texturemanager, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-                  world->_World[{X,Y}]->blocks[px][py] = tmp_campfire;
-            }
-      } else {
-            world->_World[{X,Y}]->blocks[px][py] = CreateBlock(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
-      }
 }
 
 struct Hand
@@ -271,8 +218,28 @@ struct Hand
             if(world->_World[{X,Y}]->block_exist[px][py] == false) {
                   
                   PlacePrototype(world, modloader, _block_id, place_direction, X, Y, px, py);
+            
+                  world->Chunks[{X,Y}] = world->_World[{X,Y}];    
+            }
+      }
+
+      void ChangeTile(float Player_X, float Player_Y, std::string _item_id) {
+            int ox = Player_X + (GetMousePosition().x + 32 - HALF_SCREEN_WIDTH);
+            int oy = Player_Y + (GetMousePosition().y + 32 - HALF_SCREEN_HEIGHT);
+
+            int X = floor(ox / CHUNK_SIZE); if (ox < 0) { X--; }
+            int Y = floor(oy / CHUNK_SIZE); if (oy < 0) { Y--; }
+
+            int px = abs((ox - CHUNK_SIZE*X)/TILE_SIZE);
+            int py = abs((oy - CHUNK_SIZE*Y)/TILE_SIZE);
+
+            if(world->_World[{X,Y}]->tiles[px][py]->subgroup == "farmable_soil") {
+                  Farmland* farmland = CreateFarmland(world->worldgenerator->texturemanager, "farmland", CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
                   
-                  world->_World[{X,Y}]->block_exist[px][py] = true;
+                  farmland->grow_multiplier = 1;
+                  
+                  world->_World[{X,Y}]->tiles[px][py] = farmland;
+                  world->_World[{X,Y}]->tile_exist[px][py] = true;
                   world->Chunks[{X,Y}] = world->_World[{X,Y}];    
             }
       }

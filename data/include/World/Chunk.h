@@ -104,6 +104,17 @@ struct Chunk
         
         for(int x = 0; x < 16; x++) {   
             for(int y = 0; y < 16; y++) {
+                tiles[x][y] = CreateTile(texturemanager, "clear_grass_tile", CHUNK_SIZE*X + x*TILE_SIZE, CHUNK_SIZE*Y + y*TILE_SIZE); 
+                
+                tiles[x][y]->subgroup = "farmable_soil";
+                
+                tile_exist[x][y] = true;
+            }
+        }
+
+        /*
+        for(int x = 0; x < 16; x++) {   
+            for(int y = 0; y < 16; y++) {
 
                 //Noises
                 double hight =  noise->GetNoise((float)(x + X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(y + Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) +                   noise->GetNoise((float)(5*x + 5*X*CHUNK_TILE_WIDTH)*biomemanager->noise_size, (float)(5*y + 5*Y*CHUNK_TILE_WIDTH)*biomemanager->noise_size) * 0.5;
@@ -142,8 +153,9 @@ struct Chunk
                 }
             }
         }
+        */
 
-        ReloadConnections(biomemanager, noise);
+        //ReloadConnections(biomemanager, noise);
         std::cout << "Generated Chunk , time eclipsed: " << GetTime() - start_time << " seconds \n";
     }
 

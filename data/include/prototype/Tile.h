@@ -9,6 +9,8 @@
 
 struct Tile : public Entity
 {   
+    std::string subgroup;
+
     Tile(TextureManager *texturemanager, std::string EntityID, float X, float Y) : Entity(texturemanager, EntityID, X, Y) {
     }
 };

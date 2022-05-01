@@ -1,0 +1,28 @@
+{
+    "id": "drill",
+    "title": "Drill",
+    "stack_size": 50,
+    "tags": {
+        "type": {
+            "id" :"building",
+            "title": "Building",
+            "color": [193, 193, 193]
+        },
+        "description": ""
+    },
+    "usage": {
+        "type": "place",
+        "place_result": "drill_block"
+    },
+    "texture": {
+        "path": "assets/textures/block/drill.png",
+        "size": {
+            "width": 16,
+            "height": 64,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

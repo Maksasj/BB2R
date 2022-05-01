@@ -1,0 +1,61 @@
+{
+    "id": "drill_block",
+    "prototype": "Drill",
+    "mining": {
+        "hardness": 2,
+        "mining_speed": 15000
+    },
+    "texture": {
+        "path": "assets/textures/block/drill.png",
+        "size": {
+            "width": 16,
+            "height": 64,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        },
+        "animation": {
+            "drill_block_up": {
+                "row": 0,
+                "collum":0,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "drill_block_down": {
+                "row": 0,
+                "collum":3,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "drill_block_left": {
+                "row": 0,
+                "collum":1,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            },
+            "drill_block_right": {
+                "row": 0,
+                "collum":2,
+                "frame_count": 1,
+                "speed": 120,
+                "frame_size": {
+                    "width": 64,
+                    "height": 64
+                }
+            }
+        }
+    }
+}

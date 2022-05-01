@@ -14,6 +14,7 @@
     },
     "hight_layer": "grass_tile",
     "blocks": {
-        "ginkgo": 0.02
+        "ginkgo": 0.02,
+        "lead_ore_rock": 0.02
     }
 }

@@ -1,11 +1,10 @@
 {
-    "id": "clear_grass_tile",
-    "subgroup": "farmable_soil",
-    "solid": false,
+    "id": "ground_grape_block",
+    "prototype": "Plant",
     "texture": {
-        "path": "assets/textures/tile/clear_grass_tile.png",
+        "path": "assets/textures/block/ground_grape_block.png",
         "size": {
-            "width": 16,
+            "width": 112,
             "height": 16,
             "frame_size": {
                 "width": 16,

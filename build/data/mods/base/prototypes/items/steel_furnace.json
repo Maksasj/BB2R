@@ -1,0 +1,28 @@
+{
+    "id": "steel_furnace",
+    "title": "Steel Furnace",
+    "stack_size": 50,
+    "tags": {
+        "type": {
+            "id" :"building",
+            "title": "Building",
+            "color": [193, 193, 193]
+        },
+        "description": ""
+    },
+    "usage": {
+        "type": "place",
+        "place_result": "steel_furnace_block"
+    },
+    "texture": {
+        "path": "assets/textures/block/steel_furnace.png",
+        "size": {
+            "width": 16,
+            "height": 64,
+            "frame_size": {
+                "width": 16,
+                "height": 32
+            }
+        }
+    }
+}

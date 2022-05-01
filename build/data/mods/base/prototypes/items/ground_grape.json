@@ -1,0 +1,28 @@
+{
+    "id": "ground_grape",
+    "title": "Ground Grape",
+    "stack_size": 50,
+    "tags": {
+        "type": {
+            "id" :"building",
+            "title": "Building",
+            "color": [193, 193, 193]
+        },
+        "description": ""
+    },
+    "usage": {
+        "type": "place",
+        "place_result": "ground_grape_block"
+    },
+    "texture": {
+        "path": "assets/textures/items/ground_grape.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}
