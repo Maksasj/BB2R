@@ -4,7 +4,7 @@
 #include <iostream>
 #include <raylib.h>
 
-#include "Block.h"
+#include "BlockWithStorage.h"
 #include "Recipe.h"
 
 #include "../Renderer/Shader.h"
@@ -14,16 +14,13 @@
 #include "../Utilities/vector.h"
 #include "../Timer.h"
 
-struct CraftingMachine : public Block
+struct CraftingMachine : public BlockWithStorage
 {   
-    bool locked;
-    std::string item_holding;
-
     Recipe Recipe;
     int Speed;
 
-    CraftingMachine(TextureManager *texturemanager, std::string EntityID, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
-        item_holding = "nothing";
+    CraftingMachine(TextureManager *texturemanager, std::string EntityID, float X, float Y) : BlockWithStorage(texturemanager, EntityID, X, Y) {
+        locked = false;
     }
 
     void Update() {
@@ -34,9 +31,26 @@ struct CraftingMachine : public Block
             }
 
             if(can_craft) {
-                item_holding = Recipe.result.id;
-                std::cout << "Crafted item: "+ item_holding << "\n";
-                locked = true;
+                std::string product_id = Recipe.result.id;
+                std::cout << "Crafted item: "+ product_id << "\n";
+
+                RESULT result = put_item(Output, product_id, 1);
+
+                switch (result)
+                {
+                case SUCCESS:
+                    std::cout << "Successully putted item in needed slot \n";
+                    
+                    break;
+                case FULL:
+                    std::cout << "Slot full \n";
+
+
+                    break;
+            
+                default:
+                    break;
+                }
             }
 
         }

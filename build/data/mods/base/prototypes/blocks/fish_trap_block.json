@@ -2,7 +2,7 @@
     "id": "fish_trap_block",
     "prototype": "CraftingMachine",
     "crafting": {
-        "crafting_speed": 8000,
+        "crafting_speed": 80,
         "fixed_recipe": "red_fish"
     },
     "texture": {

@@ -32,6 +32,7 @@ void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, 
 
             if(prototype == "Conveyor") {
                   ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                  tmp_conv->prototype = "Conveyor";
                   tmp_conv->SetupWorld(world);
 
                   if (place_direction == 1) { tmp_conv->EntityState = "conveyor_block_up"; } else 
@@ -115,6 +116,8 @@ void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, 
 
                   craftingmachine->Recipe = recipe;
                   craftingmachine->Speed = (int)_modloader->mods["base"]->BlockData[_block_id]["crafting"]["crafting_speed"];
+                  craftingmachine->single_item = true;
+
 
                   world->_World[{X,Y}]->blocks[px][py] = craftingmachine;
                   world->_World[{X,Y}]->block_exist[px][py] = true;

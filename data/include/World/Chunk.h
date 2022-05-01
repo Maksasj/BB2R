@@ -176,7 +176,6 @@ struct Chunk
             item->Render(shader);
         }
     }
-
 };
 
 
