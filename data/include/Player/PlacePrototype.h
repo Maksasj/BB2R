@@ -23,7 +23,7 @@
 #include "../Utilities/vector.h"
 #include "../Mod/ModLoader.h"
 
-void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, int place_direction, int X, int Y, int px, int py) {
+void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, Direction place_direction, int X, int Y, int px, int py) {
       std::string prototype = "nothing";
       
       if (_modloader->mods["base"]->BlockData[_block_id].contains("prototype")) {
@@ -33,12 +33,13 @@ void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, 
             if(prototype == "Conveyor") {
                   ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
                   tmp_conv->prototype = "Conveyor";
+                  tmp_conv->single_item = true;
                   tmp_conv->SetupWorld(world);
 
-                  if (place_direction == 1) { tmp_conv->EntityState = "conveyor_block_up"; } else 
-                  if (place_direction == 2) { tmp_conv->EntityState = "conveyor_block_down"; } else 
-                  if (place_direction == 3) { tmp_conv->EntityState = "conveyor_block_left"; } else 
-                  if (place_direction == 4) { tmp_conv->EntityState = "conveyor_block_right"; }
+                  if (place_direction == North) { tmp_conv->EntityState = "conveyor_block_up"; } else 
+                  if (place_direction == West) { tmp_conv->EntityState = "conveyor_block_left"; } else 
+                  if (place_direction == South) { tmp_conv->EntityState = "conveyor_block_down"; } else 
+                  if (place_direction == East) { tmp_conv->EntityState = "conveyor_block_right"; }
 
                   world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
                   world->_World[{X,Y}]->block_exist[px][py] = true;
@@ -65,10 +66,10 @@ void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, 
 
                   tmp_loader->SetupWorld(world);
 
-                  if (place_direction == 1) { tmp_loader->EntityState = "loader_block_up"; } else 
-                  if (place_direction == 2) { tmp_loader->EntityState = "loader_block_down"; } else 
-                  if (place_direction == 3) { tmp_loader->EntityState = "loader_block_left"; } else 
-                  if (place_direction == 4) { tmp_loader->EntityState = "loader_block_right"; }
+                  if (place_direction == North) { tmp_loader->EntityState = "loader_block_up"; } else 
+                  if (place_direction == West) { tmp_loader->EntityState = "loader_block_left"; } else 
+                  if (place_direction == South) { tmp_loader->EntityState = "loader_block_down"; } else 
+                  if (place_direction == East) { tmp_loader->EntityState = "loader_block_right"; }
 
                   world->_World[{X,Y}]->blocks[px][py] = tmp_loader;
                   world->_World[{X,Y}]->block_exist[px][py] = true;
@@ -77,10 +78,10 @@ void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, 
                   Inserter *tmp_inserter = CreateInserter(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
                   tmp_inserter->SetupWorld(world);
 
-                  if (place_direction == 1) { tmp_inserter->EntityState = "inserter_block_up"; } else 
-                  if (place_direction == 2) { tmp_inserter->EntityState = "inserter_block_down"; } else 
-                  if (place_direction == 3) { tmp_inserter->EntityState = "inserter_block_left"; } else 
-                  if (place_direction == 4) { tmp_inserter->EntityState = "inserter_block_right"; }
+                  if (place_direction == North) { tmp_inserter->EntityState = "inserter_block_up"; } else 
+                  if (place_direction == West) { tmp_inserter->EntityState = "inserter_block_left"; } else 
+                  if (place_direction == South) { tmp_inserter->EntityState = "inserter_block_down"; } else 
+                  if (place_direction == East) { tmp_inserter->EntityState = "inserter_block_right"; }
 
                   world->_World[{X,Y}]->blocks[px][py] = tmp_inserter;
                   world->_World[{X,Y}]->block_exist[px][py] = true;

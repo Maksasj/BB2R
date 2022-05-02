@@ -4,13 +4,14 @@
 #include <iostream>
 #include <stdio.h>
 
+#include "Direction.h"
 #include "ItemEntity.h"
 #include "Entity.h"
 #include "../Texture/TextureManager.h"
 
 struct Block : public Entity
 {   
-    int direction; // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
+    Direction direction;
 
     std::string prototype;
 

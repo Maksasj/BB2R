@@ -17,9 +17,8 @@
 struct Loader : public Block
 {   
     World *world;
-    int speed;
 
-    Loader(TextureManager *texturemanager, std::string EntityID, int _place_direction, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
+    Loader(TextureManager *texturemanager, std::string EntityID, Direction _place_direction, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
         direction = _place_direction;
     }
 
@@ -28,89 +27,151 @@ struct Loader : public Block
     }
 
     void Update() {
-        if (direction == 1) { // UP
-            if(world->checkBlock(x - 64, y)) { 
-                BlockWithStorage* tml_b_s = dynamic_cast<BlockWithStorage*>(world->getBlock(x - 64, y));
+        switch (direction)
+        {
+        case North:
+            if(world->checkBlock(x, y + 64)) { 
+                bws block = dynamic_cast<bws>(world->getBlock(x, y + 64));
 
-                if(tml_b_s != NULL) {
-                    if(tml_b_s->locked == true && world->checkBlock(x + 64, y)) {
-                        BlockWithStorage* tml_b_s1 = dynamic_cast<BlockWithStorage*>(world->getBlock(x + 64, y));
-                        if(tml_b_s1 != NULL) {
+                if(block != NULL) {
+                    CellType cell_type = Null;
+                    std::string item_id;
+
+                    if(block->s_output.count == 1) {
+                        cell_type = Output;
+                        item_id = block->s_output.item_id;
+                    }
                         
-                            if(!tml_b_s1->locked) {
-                                tml_b_s1->item_holding = tml_b_s->item_holding;
-                                tml_b_s1->locked = true;
-                                tml_b_s->locked = false;
+                    if(block->s_storage.count == 1) {
+                        cell_type = Storage;
+                        item_id = block->s_storage.item_id;
+                    }
 
-                                std::cout << "Transported Item: "+tml_b_s1->item_holding+"\n";
-                            }
-                            
+                    if(cell_type != Null && world->checkBlock(x, y - 64)) {
+                        bws block1 = dynamic_cast<bws>(world->getBlock(x, y - 64));
+
+                        if(block1 != NULL) {
+                            Result result = block1->put_item(Storage, item_id, 1);
+
+                            if(result == FULL)
+                                result = block1->put_item(Input, item_id, 1);
+
+                            if(result == SUCCESS)
+                                block->s_output.count = 0;
                         }
                     }
                 }
             }
-        } else if (direction == 2) { // DOWN
-            if(world->checkBlock(x + 64, y)) { 
-                BlockWithStorage* tml_b_s = dynamic_cast<BlockWithStorage*>(world->getBlock(x + 64, y));
+            break;
+        case West:
+            if(world->checkBlock(x + 64, y)) {
+                bws block = dynamic_cast<bws>(world->getBlock(x + 64, y));
 
-                if(tml_b_s != NULL) {
-                    if(tml_b_s->locked == true && world->checkBlock(x - 64, y)) { 
-                        BlockWithStorage* tml_b_s1 = dynamic_cast<BlockWithStorage*>(world->getBlock(x - 64, y));
-                        if(tml_b_s1 != NULL) {
-                            if(tml_b_s1->locked) {
-                                tml_b_s1->item_holding = tml_b_s->item_holding;
-                                tml_b_s1->locked = true;
-                                tml_b_s->locked = false;
+                if(block != NULL) {
+                    CellType cell_type = Null;
+                    std::string item_id;
 
-                                std::cout << "Transported Item: "+tml_b_s1->item_holding+"\n";
-                            }
+                    if(block->s_output.count == 1) {
+                        cell_type = Output;
+                        item_id = block->s_output.item_id;
+                    }
+                        
+                    if(block->s_storage.count == 1) {
+                        cell_type = Storage;
+                        item_id = block->s_storage.item_id;
+                    }
+
+                    if(cell_type != Null && world->checkBlock(x - 64, y)) {
+                        bws block1 = dynamic_cast<bws>(world->getBlock(x - 64, y));
+
+                        if(block1 != NULL) {
+                            Result result = block1->put_item(Storage, item_id, 1);
+
+                            if(result == FULL)
+                                result = block1->put_item(Input, item_id, 1);
+
+                            if(result == SUCCESS)
+                                block->s_output.count = 0;
                         }
                     }
                 }
             }
-        } else if (direction == 3) { //LEFT
-            if(world->checkBlock(x, y - 64)) { 
-                BlockWithStorage* tml_b_s = dynamic_cast<BlockWithStorage*>(world->getBlock(x, y - 64));
+            break;
+        case South:
+            if(world->checkBlock(x , y - 64)) { 
+                bws block = dynamic_cast<bws>(world->getBlock(x, y - 64));
 
-                if(tml_b_s != NULL) {
-                    if(tml_b_s->locked == true && world->checkBlock(x, y + 64)) { 
-                        BlockWithStorage* tml_b_s1 = dynamic_cast<BlockWithStorage*>(world->getBlock(x, y + 64));
-                        if(tml_b_s1 != NULL) {
-                            if(tml_b_s1->locked) {
-                                tml_b_s1->item_holding = tml_b_s->item_holding;
-                                tml_b_s1->locked = true;
-                                tml_b_s->locked = false;
+                if(block != NULL) {
+                    CellType cell_type = Null;
+                    std::string item_id;
 
-                                std::cout << "Transported Item: "+tml_b_s1->item_holding+"\n";
-                            }
+                    if(block->s_output.count == 1) {
+                        cell_type = Output;
+                        item_id = block->s_output.item_id;
+                    }
+                        
+                    if(block->s_storage.count == 1) {
+                        cell_type = Storage;
+                        item_id = block->s_storage.item_id;
+                    }
+
+                    if(cell_type != Null && world->checkBlock(x, y + 64)) {
+                        bws block1 = dynamic_cast<bws>(world->getBlock(x, y + 64));
+
+                        if(block1 != NULL) {
+                            Result result = block1->put_item(Storage, item_id, 1);
+
+                            if(result == FULL)
+                                result = block1->put_item(Input, item_id, 1);
+
+                            if(result == SUCCESS)
+                                block->s_output.count = 0;
                         }
                     }
                 }
             }
-        } else if (direction == 4) { //RIGHT
-             if(world->checkBlock(x, y + 64)) { 
-                BlockWithStorage* tml_b_s = dynamic_cast<BlockWithStorage*>(world->getBlock(x, y + 64));
+        break;
+        case East:
+            if(world->checkBlock(x - 64, y)) { 
+                bws block = dynamic_cast<bws>(world->getBlock(x - 64, y));
 
-                if(tml_b_s != NULL) {
-                    if(tml_b_s->locked == true && world->checkBlock(x, y - 64)) { 
-                        BlockWithStorage* tml_b_s1 = dynamic_cast<BlockWithStorage*>(world->getBlock(x, y - 64));
-                        if(tml_b_s1 != NULL) {
-                            if(tml_b_s1->locked) {
-                                tml_b_s1->item_holding = tml_b_s->item_holding;
-                                tml_b_s1->locked = true;
-                                tml_b_s->locked = false;
+                if(block != NULL) {
+                    CellType cell_type = Null;
+                    std::string item_id;
 
-                                std::cout << "Transported Item: "+tml_b_s1->item_holding+"\n";
-                            }
+                    if(block->s_output.count == 1) {
+                        cell_type = Output;
+                        item_id = block->s_output.item_id;
+                    }
+                        
+                    if(block->s_storage.count == 1) {
+                        cell_type = Storage;
+                        item_id = block->s_storage.item_id;
+                    }
+                        
+                    if(cell_type != Null && world->checkBlock(x + 64, y)) {
+                        bws block1 = dynamic_cast<bws>(world->getBlock(x + 64, y));
+
+                        if(block1 != NULL) {
+                            Result result = block1->put_item(Storage, item_id, 1);
+
+                            if(result == FULL)
+                                result = block1->put_item(Input, item_id, 1);
+
+                            if(result == SUCCESS)
+                                block->s_output.count = 0;
                         }
                     }
                 }
             }
+            break;
+        default:
+            break;
         }
     }
 };
 
-Loader* CreateLoader(TextureManager *texturemanager, std::string EntityID, int _place_direction,float X, float Y) {
+Loader* CreateLoader(TextureManager *texturemanager, std::string EntityID, Direction _place_direction,float X, float Y) {
     Loader* loader = new Loader(texturemanager, EntityID, _place_direction, X, Y);
     return loader;
 }

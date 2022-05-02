@@ -20,7 +20,7 @@ struct Drill : public Block
     int Speed;
     int hardness;
 
-    Drill(TextureManager *texturemanager, std::string EntityID, int _place_direction, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
+    Drill(TextureManager *texturemanager, std::string EntityID, Direction _place_direction, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
         direction = _place_direction;
     }
 
@@ -29,6 +29,7 @@ struct Drill : public Block
     }
 
     void Update() {
+        /*
         if(timer.step % Speed == 0) {
             if (direction == 1) { // UP
                 if(world->checkBlock(x, y - 64)) {
@@ -104,10 +105,11 @@ struct Drill : public Block
                 }
             }
         }
+        */
     }
 };
 
-Drill* CreateDrill(TextureManager *texturemanager, std::string EntityID, int _place_direction,float X, float Y) {
+Drill* CreateDrill(TextureManager *texturemanager, std::string EntityID, Direction _place_direction,float X, float Y) {
     Drill* drill = new Drill(texturemanager, EntityID, _place_direction, X, Y);
     return drill;
 }

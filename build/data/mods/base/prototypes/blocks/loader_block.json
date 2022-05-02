@@ -14,7 +14,7 @@
         "animation": {
             "loader_block_up": {
                 "row": 0,
-                "collum":0,
+                "collum":2,
                 "frame_count": 1,
                 "speed": 120,
                 "frame_size": {
@@ -44,7 +44,7 @@
             },
             "loader_block_right": {
                 "row": 0,
-                "collum":2,
+                "collum":0,
                 "frame_count": 1,
                 "speed": 120,
                 "frame_size": {

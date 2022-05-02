@@ -13,7 +13,7 @@
 #include "../Renderer/LightSystem.h"
 #include "../Utilities/vector.h"
 
-enum RESULT 
+enum Result 
 {   
     SUCCESS = 1, 
     FULL = 2,
@@ -24,6 +24,8 @@ enum CellType
     Input = 1,
     Output = 2,
     Storage = 3,
+
+    Null = 0,
 };
 
 typedef struct Cell {
@@ -42,10 +44,8 @@ typedef struct SingleCell {
 } SingleCell;
 
 struct BlockWithStorage : public Block
-{    
-    bool locked;
+{
     bool single_item;
-    std::string item_holding;
 
     StorageCells input;
     StorageCells output;
@@ -56,10 +56,12 @@ struct BlockWithStorage : public Block
     SingleCell s_storage;
 
     BlockWithStorage(TextureManager *texturemanager, std::string EntityID, float X, float Y) : Block(texturemanager, EntityID, X, Y) {
-    
+        s_input.count = 0;
+        s_output.count = 0;
+        s_storage.count = 0;
     }
 
-    RESULT put_item(CellType cell_type, std::string id, int count) {
+    Result put_item(CellType cell_type, std::string id, int count) {
         switch (cell_type)
         {
         case Input:
@@ -73,7 +75,7 @@ struct BlockWithStorage : public Block
                 }
                 return FULL;
             } else {
-                if(count == 1 && s_output.count != 1) {
+                if(count == 1 && s_input.count != 1) {
                     s_input.item_id = id;
                     s_input.count = 1;
                     return SUCCESS;
@@ -92,6 +94,10 @@ struct BlockWithStorage : public Block
                 }
                 return FULL;
             } else {
+                if(s_output.count == 1) {
+                    return FULL;
+                }
+
                 if(count == 1 && s_output.count != 1) {
                     s_output.item_id = id;
                     s_output.count = 1;
@@ -112,7 +118,8 @@ struct BlockWithStorage : public Block
                 }
                 return FULL;
             } else {
-                if(count == 1 && s_output.count != 1) {
+
+                if(count == 1 && s_storage.count != 1) {
                     s_storage.item_id = id;
                     s_storage.count = 1;
                     return SUCCESS;
@@ -127,5 +134,7 @@ struct BlockWithStorage : public Block
         }
     }
 };
+
+typedef BlockWithStorage* bws;
 
 #endif

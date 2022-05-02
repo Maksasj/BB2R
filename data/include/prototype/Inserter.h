@@ -13,8 +13,7 @@ struct Inserter : public BlockWithStorage
 {    
     World *world;
 
-    Inserter(TextureManager *texturemanager, std::string EntityID, int _place_direction, float X, float Y) : BlockWithStorage(texturemanager, EntityID, X, Y) {
-        locked = false;
+    Inserter(TextureManager *texturemanager, std::string EntityID, Direction _place_direction, float X, float Y) : BlockWithStorage(texturemanager, EntityID, X, Y) {
         direction = _place_direction;
     }
 
@@ -22,7 +21,8 @@ struct Inserter : public BlockWithStorage
         world = static_cast<World*>(p);
     }
 
-    void Update() { // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
+    void Update() {
+        /*
         if (direction == 1) { // UP
             if(world->checkBlock(x, y - 64)) {
                 //This part can be unsafe
@@ -95,6 +95,7 @@ struct Inserter : public BlockWithStorage
                 }
             }
         }
+        */
     }
     
     void Render(Shader shader) {
@@ -102,7 +103,7 @@ struct Inserter : public BlockWithStorage
     }
 };
 
-Inserter* CreateInserter(TextureManager *texturemanager, std::string EntityID, int _place_direction, float X, float Y) {
+Inserter* CreateInserter(TextureManager *texturemanager, std::string EntityID, Direction _place_direction, float X, float Y) {
     Inserter* inserter = new Inserter(texturemanager, EntityID, _place_direction, X, Y);
     return inserter;
 }

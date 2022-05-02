@@ -20,11 +20,11 @@ struct CraftingMachine : public BlockWithStorage
     int Speed;
 
     CraftingMachine(TextureManager *texturemanager, std::string EntityID, float X, float Y) : BlockWithStorage(texturemanager, EntityID, X, Y) {
-        locked = false;
     }
 
     void Update() {
-        if(!locked && timer.step % Speed == 0) {
+        //There we need some rewriting
+        if(timer.step % Speed == 0) {
             bool can_craft = true;
             for(auto ingredient : Recipe.ingredients) {
                 //yea
@@ -32,18 +32,16 @@ struct CraftingMachine : public BlockWithStorage
 
             if(can_craft) {
                 std::string product_id = Recipe.result.id;
-                std::cout << "Crafted item: "+ product_id << "\n";
-
-                RESULT result = put_item(Output, product_id, 1);
+                Result result = put_item(Output, product_id, 1);
 
                 switch (result)
                 {
                 case SUCCESS:
-                    std::cout << "Successully putted item in needed slot \n";
+                    //std::cout << "Successully crafted item and puted in inventory: "+product_id+"\n";
                     
                     break;
                 case FULL:
-                    std::cout << "Slot full \n";
+                    //std::cout << "Slot full \n";
 
 
                     break;

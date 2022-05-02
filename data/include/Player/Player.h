@@ -13,6 +13,7 @@
 #include "../Utilities/vector.h"
 #include "../Utilities/key_exist.h"
 
+#include "../Prototype/Direction.h"
 #include "../Mod/ItemManager.h"
 #include "Hand.h"
 #include "../World/Chunk.h"
@@ -34,7 +35,7 @@ struct Player : public Entity
       Hand *hand;
       ItemManager *itemmanager;
 
-      int place_direction;
+      Direction place_direction;
 
       Player (TextureManager *texturemanager, float X, float Y) : Entity(texturemanager, "player", X, Y) {
             EntityState = "player_idle";
@@ -45,7 +46,7 @@ struct Player : public Entity
             hotbar_item_id = "pickaxe";
             hotbar_active_cell = 0;
 
-            place_direction = 1;
+            place_direction = (Direction)1;
 
             inventory = new Inventory(5);
             inventory->AddItem("conveyor", 500);
@@ -150,23 +151,23 @@ struct Player : public Entity
 
             if(IsKeyPressed(KEY_R)) {
                   if (place_direction + 1 <= 4) {
-                        place_direction++;
+                        place_direction = (Direction)(1 + (int)place_direction);
                   } else {
-                        place_direction = 0;
+                        place_direction = (Direction)1;
                   }
             }
       }
 
       void Render(Shader shader) {
             // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
-            if(place_direction == 1) {
-                  DrawText("UP", 100, 100, 50, WHITE);  
-            } else if(place_direction == 2) {
-                  DrawText("DOWN", 100, 100, 50, WHITE);  
-            } else if(place_direction == 3) {
-                  DrawText("LEFT", 100, 100, 50, WHITE);  
-            } else if(place_direction == 4) {
-                  DrawText("RIGHT", 100, 100, 50, WHITE);  
+            if(place_direction == North) {
+                  DrawText("North", 100, 100, 50, WHITE);  
+            } else if(place_direction == West) {
+                  DrawText("West", 100, 100, 50, WHITE);  
+            } else if(place_direction == South) {
+                  DrawText("South", 100, 100, 50, WHITE);  
+            } else if(place_direction == East) {
+                  DrawText("East", 100, 100, 50, WHITE);  
             }
 
             tex->Render(EntityState, x - camera.x, y - camera.y);

@@ -9,106 +9,107 @@
 #include "BlockWithStorage.h"
 #include "../Texture/TextureManager.h"
 
+typedef Block bl;
+
 struct ConveyorBelt : public BlockWithStorage
 {    
+    typedef ConveyorBelt cb;
+
     World *world;
-    bool trans_cd;
 
     int speed = 240;
+    bool trans_cd = false;
 
-    ConveyorBelt(TextureManager *texturemanager, std::string EntityID, int _place_direction, float X, float Y) : BlockWithStorage(texturemanager, EntityID, X, Y) {
+    ConveyorBelt(TextureManager *texturemanager, std::string EntityID, Direction _place_direction, float X, float Y) : BlockWithStorage(texturemanager, EntityID, X, Y) {
         direction = _place_direction;
-
-        trans_cd = false;
-        locked = false;
     }
 
     void SetupWorld(void *p) {
         world = static_cast<World*>(p);
     }
 
-    void Update() { // 1 UP // 2 DOWN // 3 LEFT // 4 RIGHT
-        if(timer.step % speed == 0) {
-            if (locked == true) {
-                if (trans_cd == false) {
-               
-                    if (direction == 1) { // UP
-                        if(world->checkBlock(x, y - 64)) { 
-                            Block *tmp_block = world->getBlock(x, y - 64);
-                            if(tmp_block->prototype == "Conveyor") {
-                                ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(world->getBlock(x, y - 64));
-                                
-                                if(tmp_conv->locked == false) {
-                                    tmp_conv->locked = true;
-                                    tmp_conv->trans_cd = true;
-                                    tmp_conv->item_holding = item_holding;
-                                    locked = false;
-                                }
-                            }
-                        }
-                    } else if (direction == 2) { // DOWN
-                        if(world->checkBlock(x, y + 64)) { 
-                            Block *tmp_block = world->getBlock(x, y + 64);
-                            if(tmp_block->prototype == "Conveyor") {
-                                ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(world->getBlock(x, y + 64));
-                                
-                                if(tmp_conv->locked == false) {
-                                    tmp_conv->locked = true;
-                                    tmp_conv->trans_cd = true;
-                                    tmp_conv->item_holding = item_holding;
-                                    locked = false;
-                                }
-                            }
-                        }
-                    } else if (direction == 3) { //LEFT
-                        if(world->checkBlock(x - 64, y)) { 
-                            Block *tmp_block = world->getBlock(x - 64, y);
-                            if(tmp_block->prototype == "Conveyor") {
-                                ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(world->getBlock(x - 64, y));
-                                
-                                if(tmp_conv->locked == false) {
-                                    tmp_conv->locked = true;
-                                    tmp_conv->trans_cd = true;
-                                    tmp_conv->item_holding = item_holding;
-                                    locked = false;
-                                }
-                            }
-                        }
-                    } else if (direction == 4) { //RIGHT
-                        if(world->checkBlock(x + 64, y)) { 
-                            Block *tmp_block = world->getBlock(x + 64, y);
-                            if(tmp_block->prototype == "Conveyor") {
-                                ConveyorBelt* tmp_conv = dynamic_cast<ConveyorBelt*>(world->getBlock(x + 64, y));
-                                
-                                if(tmp_conv->locked == false) {
-                                    tmp_conv->locked = true;
-                                    tmp_conv->trans_cd = true;
-                                    tmp_conv->item_holding = item_holding;
-                                    locked = false;
-                                }
-                            }
+    void Update() {
+        /*
+        if(s_storage.count == 1 && timer.step % speed == 0 && trans_cd == false) {
+            switch (direction)
+            {
+            case North:
+                if(world->checkBlock(x, y - 64)) { 
+                    bl *tmp_block = world->getBlock(x, y - 64);
+                    if(tmp_block->prototype == "Conveyor") {
+                        cb* tmp_conv = dynamic_cast<cb*>(world->getBlock(x, y - 64));                            
+                        Result result = tmp_conv->put_item(Storage, s_storage.item_id, 1);
+                        
+                        if(result == SUCCESS) {
+                            s_storage.count = 0;
+                            tmp_conv->trans_cd = true;
                         }
                     }
-                } else {
-                    trans_cd = false;
                 }
+                break;
+
+            case South:
+                if(world->checkBlock(x, y + 64)) { 
+                    bl *tmp_block = world->getBlock(x, y + 64);
+                    if(tmp_block->prototype == "Conveyor") {
+                        cb* tmp_conv = dynamic_cast<cb*>(world->getBlock(x, y + 64));                            
+                        Result result = tmp_conv->put_item(Storage, s_storage.item_id, 1);
+                    
+                        if(result == SUCCESS) {
+                            s_storage.count = 0;
+                            tmp_conv->trans_cd = true;
+                        }
+                    }
+                }
+                break;
+
+            case West:
+                if(world->checkBlock(x - 64, y)) { 
+                    bl *tmp_block = world->getBlock(x - 64, y);
+                    if(tmp_block->prototype == "Conveyor") {
+                        cb* tmp_conv = dynamic_cast<cb*>(world->getBlock(x - 64, y));                            
+                        Result result = tmp_conv->put_item(Storage, s_storage.item_id, 1);
+                        
+                        if(result == SUCCESS) {
+                            s_storage.count = 0;
+                            tmp_conv->trans_cd = true;
+                        }
+                    }
+                }
+                break;
+
+            case East:
+                if(world->checkBlock(x + 64, y)) { 
+                    bl *tmp_block = world->getBlock(x + 64, y);
+                    if(tmp_block->prototype == "Conveyor") {
+                        cb* tmp_conv = dynamic_cast<cb*>(world->getBlock(x + 64, y));                            
+                        Result result = tmp_conv->put_item(Storage, s_storage.item_id, 1);
+                        
+                        if(result == SUCCESS) {
+                            s_storage.count = 0;
+                            tmp_conv->trans_cd = true;
+                        }
+                    }
+                }
+                break;
+
+            default:
+                break;
             }
         }
+        */
+        trans_cd = false;
     }
     
     void Render(Shader shader) {
         tex->Render(EntityState, x - camera.x, y - camera.y);
 
-        if (locked) {
-            //DrawRectangleV({x - camera.x, y - camera.y}, {64, 64}, {255, 0, 0, 50});
-            //DrawRectangleV({x - camera.x + item_step.x, y - camera.y + item_step.y}, {64, 64}, {0, 0, 255, 50});
-
-            texturemanager->Textures[item_holding]->Render("idle", x - camera.x, y - camera.y);
-        }
+        if (s_storage.count == 1)
+            texturemanager->Textures[s_storage.item_id]->Render("idle", x - camera.x, y - camera.y);
     }
 };
 
-ConveyorBelt* CreateConveyorBelt(TextureManager *texturemanager, std::string EntityID, int _place_direction, float X, float Y) {
+ConveyorBelt* CreateConveyorBelt(TextureManager *texturemanager, std::string EntityID, Direction _place_direction, float X, float Y) {
     ConveyorBelt* belt = new ConveyorBelt(texturemanager, EntityID, _place_direction, X, Y);
     return belt;
 }

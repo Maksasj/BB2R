@@ -59,7 +59,7 @@ struct Hand
 {     
       World *world;
       ModLoader *modloader;
-      int place_direction;
+      Direction place_direction;
 
       Hand(World *_world, ModLoader *_modloader) { world = _world; modloader = _modloader; }
 
@@ -140,10 +140,12 @@ struct Hand
                   Block *tmp_block = world->_World[{X,Y}]->blocks[px][py];
                   if (tmp_block->prototype == "BlockWithStorage") {
                         BlockWithStorage* tmp_block = dynamic_cast<BlockWithStorage*>(world->_World[{X,Y}]->blocks[px][py]);
+                        /*
                         if (tmp_block->locked == false) {
                               tmp_block->locked = true;
                               tmp_block->item_holding = _item_id;
-                        }              
+                        }
+                        */             
                   } else if (tmp_block->EntityID == "chest") {
                         //Something like drop in chest
                   } else {
