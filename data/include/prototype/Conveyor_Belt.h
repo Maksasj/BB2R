@@ -29,7 +29,6 @@ struct ConveyorBelt : public BlockWithStorage
     }
 
     void Update() {
-        /*
         if(s_storage.count == 1 && timer.step % speed == 0 && trans_cd == false) {
             switch (direction)
             {
@@ -97,7 +96,6 @@ struct ConveyorBelt : public BlockWithStorage
                 break;
             }
         }
-        */
         trans_cd = false;
     }
     
