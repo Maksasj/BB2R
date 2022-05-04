@@ -14,6 +14,8 @@
 #include "../Utilities/vector.h"
 #include "../Timer.h"
 
+typedef std::string str;
+
 struct CraftingMachine : public BlockWithStorage
 {   
     Recipe Recipe;
@@ -26,12 +28,34 @@ struct CraftingMachine : public BlockWithStorage
         //There we need some rewriting
         if(timer.step % Speed == 0) {
             bool can_craft = true;
+
+
             for(auto ingredient : Recipe.ingredients) {
-                //yea
+                str id = ingredient.item.id;
+                int count = ingredient.count;
+                //std::cout << "Checking for: "+id+" "+std::to_string(count)+"\n";
+
+                //Find item in input slots
+                bool found = false;
+                for(auto input_item : input.cells) {
+                    if(input_item.item_id == id) {
+                        found = true;
+                        if(input_item.count < count) {
+                            can_craft = false;
+                        }
+                    }
+                }
+                
+                if(!found) {
+                    can_craft = false;
+                    break;
+                }
+                
             }
 
             if(can_craft) {
-                std::string product_id = Recipe.result.id;
+                str product_id = Recipe.result.id;
+               //std::cout << "Crafting"+product_id+"\n";
                 Result result = put_item(Output, product_id, 1);
 
                 switch (result)
@@ -42,8 +66,7 @@ struct CraftingMachine : public BlockWithStorage
                     break;
                 case FULL:
                     //std::cout << "Slot full \n";
-
-
+                    
                     break;
             
                 default:

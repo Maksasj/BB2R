@@ -15,6 +15,7 @@
 #include "../Prototype/CraftingMachine.h"
 #include "../Prototype/Crop.h"
 #include "../Prototype/Loader.h"
+#include "../Prototype/Container.h"
 
 //Other
 #include "../Prototype/Recipe.h"
@@ -42,6 +43,17 @@ void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, 
                   if (place_direction == East) { tmp_conv->EntityState = "conveyor_block_right"; }
 
                   world->_World[{X,Y}]->blocks[px][py] = tmp_conv;
+                  world->_World[{X,Y}]->block_exist[px][py] = true;
+
+            } else if(prototype == "Container") {
+                  Container *tmp_container = CreateContainer(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
+                  tmp_container->prototype = "Container"; 
+
+                  tmp_container->input.count = 0;
+                  tmp_container->storage.count = 27;
+                  tmp_container->output.count = 0;
+
+                  world->_World[{X,Y}]->blocks[px][py] = tmp_container;
                   world->_World[{X,Y}]->block_exist[px][py] = true;
 
             } else if(prototype == "Drill") {
@@ -106,19 +118,23 @@ void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, 
 
                   CraftingMachine* craftingmachine = CreateCraftingMachine(world->worldgenerator->texturemanager, _block_id, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
                   
+                  craftingmachine->input.count = 27;
+                  craftingmachine->storage.count = 0;
+                  craftingmachine->output.count = 27;
+
                   for(auto item : _modloader->mods["base"]->RecipeData[recipe_str]["recipe"]["ingredients"]) {
                         ItemRecipe itemrecipe;
                         itemrecipe.item = { item["item"] };
                         itemrecipe.count = { item["quantity"] };
                         recipe.ingredients.push_back(itemrecipe);
                   }
-            
+
                   recipe.result.id = _modloader->mods["base"]->RecipeData[recipe_str]["recipe"]["result"]["item"];
 
                   craftingmachine->Recipe = recipe;
                   craftingmachine->Speed = (int)_modloader->mods["base"]->BlockData[_block_id]["crafting"]["crafting_speed"];
-                  craftingmachine->single_item = true;
-
+                  
+                  craftingmachine->single_item = false;
 
                   world->_World[{X,Y}]->blocks[px][py] = craftingmachine;
                   world->_World[{X,Y}]->block_exist[px][py] = true;

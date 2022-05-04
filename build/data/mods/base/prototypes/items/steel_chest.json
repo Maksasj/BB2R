@@ -1,0 +1,28 @@
+{
+    "id": "steel_chest",
+    "title": "Steel Chest",
+    "stack_size": 50,
+    "tags": {
+        "type": {
+            "id" :"building",
+            "title": "Building",
+            "color": [193, 193, 193]
+        },
+        "description": ""
+    },
+    "usage": {
+        "type": "place",
+        "place_result": "steel_chest_block"
+    },
+    "texture": {
+        "path": "assets/textures/block/steel_chest.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

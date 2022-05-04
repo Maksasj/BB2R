@@ -2,8 +2,8 @@
     "id": "steel_furnace_block",
     "prototype": "CraftingMachine",
     "crafting": {
-        "crafting_speed": 8000,
-        "fixed_recipe": "red_fish"
+        "crafting_speed": 80,
+        "fixed_recipe": "brick"
     },
     "texture": {
         "path": "assets/textures/block/steel_furnace.png",

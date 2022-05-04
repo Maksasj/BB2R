@@ -34,132 +34,89 @@ struct Loader : public Block
                 bws block = dynamic_cast<bws>(world->getBlock(x, y + 64));
 
                 if(block != NULL) {
-                    CellType cell_type = Null;
-                    std::string item_id;
-
-                    if(block->s_output.count == 1) {
-                        cell_type = Output;
-                        item_id = block->s_output.item_id;
-                    }
-                        
-                    if(block->s_storage.count == 1) {
-                        cell_type = Storage;
-                        item_id = block->s_storage.item_id;
-                    }
-
-                    if(cell_type != Null && world->checkBlock(x, y - 64)) {
+                    GetItemResult getitemresult = block->get_item();
+                    if(getitemresult.result != EMPTY && world->checkBlock(x, y - 64)) {
                         bws block1 = dynamic_cast<bws>(world->getBlock(x, y - 64));
 
                         if(block1 != NULL) {
-                            Result result = block1->put_item(Storage, item_id, 1);
-
-                            if(result == FULL)
-                                result = block1->put_item(Input, item_id, 1);
-
-                            if(result == SUCCESS)
-                                block->s_output.count = 0;
+                            CellType cell_type = block1->cell_priority(PUT);
+                            if(cell_type != Null) {
+                                Result result = block1->put_item(cell_type, getitemresult.item_id, 1);
+                                if(result == SUCCESS) {
+                                    //std::cout << "Succesfully putted item, in: " << cell_type;
+                                    //block->s_output.count = 0;
+                                }
+                            }
                         }
                     }
                 }
             }
             break;
         case West:
-            if(world->checkBlock(x + 64, y)) {
+            if(world->checkBlock(x + 64, y)) { 
                 bws block = dynamic_cast<bws>(world->getBlock(x + 64, y));
 
                 if(block != NULL) {
-                    CellType cell_type = Null;
-                    std::string item_id;
-
-                    if(block->s_output.count == 1) {
-                        cell_type = Output;
-                        item_id = block->s_output.item_id;
-                    }
-                        
-                    if(block->s_storage.count == 1) {
-                        cell_type = Storage;
-                        item_id = block->s_storage.item_id;
-                    }
-
-                    if(cell_type != Null && world->checkBlock(x - 64, y)) {
+                    GetItemResult getitemresult = block->get_item();
+                    if(getitemresult.result != EMPTY && world->checkBlock(x - 64, y)) {
                         bws block1 = dynamic_cast<bws>(world->getBlock(x - 64, y));
 
                         if(block1 != NULL) {
-                            Result result = block1->put_item(Storage, item_id, 1);
-
-                            if(result == FULL)
-                                result = block1->put_item(Input, item_id, 1);
-
-                            if(result == SUCCESS)
-                                block->s_output.count = 0;
+                            CellType cell_type = block1->cell_priority(PUT);
+                            if(cell_type != Null) {
+                                Result result = block1->put_item(cell_type, getitemresult.item_id, 1);
+                                if(result == SUCCESS) {
+                                    //std::cout << "Succesfully putted item, in: " << cell_type;
+                                    //block->s_output.count = 0;
+                                }
+                            }
                         }
                     }
                 }
             }
             break;
         case South:
-            if(world->checkBlock(x , y - 64)) { 
-                bws block = dynamic_cast<bws>(world->getBlock(x, y - 64));
+            if(world->checkBlock(x - 64, y)) { 
+                bws block = dynamic_cast<bws>(world->getBlock(x - 64, y));
 
                 if(block != NULL) {
-                    CellType cell_type = Null;
-                    std::string item_id;
-
-                    if(block->s_output.count == 1) {
-                        cell_type = Output;
-                        item_id = block->s_output.item_id;
-                    }
-                        
-                    if(block->s_storage.count == 1) {
-                        cell_type = Storage;
-                        item_id = block->s_storage.item_id;
-                    }
-
-                    if(cell_type != Null && world->checkBlock(x, y + 64)) {
-                        bws block1 = dynamic_cast<bws>(world->getBlock(x, y + 64));
+                    GetItemResult getitemresult = block->get_item();
+                    if(getitemresult.result != EMPTY && world->checkBlock(x + 64, y)) {
+                        bws block1 = dynamic_cast<bws>(world->getBlock(x + 64, y));
 
                         if(block1 != NULL) {
-                            Result result = block1->put_item(Storage, item_id, 1);
-
-                            if(result == FULL)
-                                result = block1->put_item(Input, item_id, 1);
-
-                            if(result == SUCCESS)
-                                block->s_output.count = 0;
+                            CellType cell_type = block1->cell_priority(PUT);
+                            if(cell_type != Null) {
+                                Result result = block1->put_item(cell_type, getitemresult.item_id, 1);
+                                if(result == SUCCESS) {
+                                    //std::cout << "Succesfully putted item, in: " << cell_type;
+                                    //block->s_output.count = 0;
+                                }
+                            }
                         }
                     }
                 }
             }
+            break;
         break;
         case East:
             if(world->checkBlock(x - 64, y)) { 
                 bws block = dynamic_cast<bws>(world->getBlock(x - 64, y));
 
                 if(block != NULL) {
-                    CellType cell_type = Null;
-                    std::string item_id;
-
-                    if(block->s_output.count == 1) {
-                        cell_type = Output;
-                        item_id = block->s_output.item_id;
-                    }
-                        
-                    if(block->s_storage.count == 1) {
-                        cell_type = Storage;
-                        item_id = block->s_storage.item_id;
-                    }
-                        
-                    if(cell_type != Null && world->checkBlock(x + 64, y)) {
+                    GetItemResult getitemresult = block->get_item();
+                    if(getitemresult.result != EMPTY && world->checkBlock(x + 64, y)) {
                         bws block1 = dynamic_cast<bws>(world->getBlock(x + 64, y));
 
                         if(block1 != NULL) {
-                            Result result = block1->put_item(Storage, item_id, 1);
-
-                            if(result == FULL)
-                                result = block1->put_item(Input, item_id, 1);
-
-                            if(result == SUCCESS)
-                                block->s_output.count = 0;
+                            CellType cell_type = block1->cell_priority(PUT);
+                            if(cell_type != Null) {
+                                Result result = block1->put_item(cell_type, getitemresult.item_id, 1);
+                                if(result == SUCCESS) {
+                                    //std::cout << "Succesfully putted item, in: " << cell_type;
+                                    //block->s_output.count = 0;
+                                }
+                            }
                         }
                     }
                 }

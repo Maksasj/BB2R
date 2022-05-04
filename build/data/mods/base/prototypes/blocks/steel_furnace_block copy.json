@@ -1,0 +1,15 @@
+{
+    "id": "steel_chest_block",
+    "prototype": "Container",
+    "texture": {
+        "path": "assets/textures/block/steel_chest.png",
+        "size": {
+            "width": 16,
+            "height": 16,
+            "frame_size": {
+                "width": 16,
+                "height": 16
+            }
+        }
+    }
+}

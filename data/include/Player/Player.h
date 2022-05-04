@@ -60,6 +60,7 @@ struct Player : public Entity
             inventory->AddItem("ground_grape", 500);
             inventory->AddItem("steel_furnace", 500);
             inventory->AddItem("loader", 500);
+            inventory->AddItem("steel_chest", 500);
 
             hotbar_item_list.push_back("pickaxe");
 

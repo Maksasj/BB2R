@@ -1,0 +1,17 @@
+{
+      "id": "brick",
+      "title": "Brick",
+      "category": "smelting",
+      "recipe": {
+            "ingredients": [
+                  {
+                        "item": "red_fish",
+                        "quantity": 5
+                  }
+            ],
+            "result": {
+                  "item": "lead_ingot",
+                  "quantity": 1
+            }
+      }
+  }
