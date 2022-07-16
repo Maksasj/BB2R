@@ -119,11 +119,13 @@ struct BlockWithStorage : public Block
             if(s_output.count > 0) {
                 return {SUCCESS, s_output.item_id};
             } else if(s_storage.count > 0) {
-                return {SUCCESS, s_output.item_id};
+                return {SUCCESS, s_storage.item_id};
             } else {
                 return {EMPTY, ""};
             }
         }
+
+        return {EMPTY, ""};
     }
 
     Result put_item(CellType cell_type, std::string id, int count) {
@@ -203,7 +205,6 @@ struct BlockWithStorage : public Block
 
                 if(storage.cells.size() == 0) {
                     storage.cells.push_back({id, count});
-                    storage.count++;
                     return SUCCESS;
                 }
 
@@ -211,10 +212,12 @@ struct BlockWithStorage : public Block
             } else {
 
                 if(count == 1 && s_storage.count != 1) {
+                    std::cout << "Trying \n";
                     s_storage.item_id = id;
                     s_storage.count = 1;
                     return SUCCESS;
                 }
+
                 return FULL;
             }
 

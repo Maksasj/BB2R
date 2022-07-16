@@ -35,6 +35,9 @@ void PlacePrototype(World* world, ModLoader *_modloader, std::string _block_id, 
                   ConveyorBelt *tmp_conv = CreateConveyorBelt(world->worldgenerator->texturemanager, _block_id, place_direction, CHUNK_SIZE*X + px*TILE_SIZE, CHUNK_SIZE*Y + py*TILE_SIZE);
                   tmp_conv->prototype = "Conveyor";
                   tmp_conv->single_item = true;
+
+                  tmp_conv->storage.count = 1;
+
                   tmp_conv->SetupWorld(world);
 
                   if (place_direction == North) { tmp_conv->EntityState = "conveyor_block_up"; } else 
